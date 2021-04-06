@@ -14,9 +14,14 @@ const CustomNavbar = ({ logoutAction, loggedIn }) => {
     const handleLogout = () => {
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
+        localStorage.removeItem('username');
         localStorage.removeItem('loggedIn');
         logoutAction();
         history.push('/login');
+    };
+
+    const handleCreate = () => {
+        history.push('/create_survey');
     };
 
     return (
@@ -26,7 +31,7 @@ const CustomNavbar = ({ logoutAction, loggedIn }) => {
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 {loggedIn ?
                     <Nav>
-                        <Button variant="outline-success" onClick={handleLogout} role="link" size="sm"
+                        <Button variant="outline-success" onClick={handleCreate} role="link" size="sm"
                                 className="mx-1">Create +</Button>
                         <Button variant="outline-primary" onClick={handleLogout} role="link" size="sm"
                                 className="mx-1">Logout</Button>

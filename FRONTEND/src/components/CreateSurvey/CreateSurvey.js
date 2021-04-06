@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import reducer from './reducer';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Form, Button, ButtonGroup } from 'react-bootstrap';
+import { sendQueryUsingTokens } from '../../utils/jwt';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -9,6 +10,9 @@ const MainWrapper = styled.div`
   max-width: 700px;
   margin: 30px auto;
   justify-content: center;  
+  border: 1px solid lightgrey;
+  padding: 5px;
+  border-radius: 5px;
 `;
 
 const TopBarWrapper = styled.div`
@@ -16,7 +20,7 @@ const TopBarWrapper = styled.div`
   justify-content: center;  
   max-width: inherit;  
   grid-template-columns: 80% 20% ;  
-  margin-top: 20px;  
+  margin-top: 5px;  
   font-size: 4px;
 `;
 
@@ -61,7 +65,10 @@ const CreateSurvey = () => {
     };
 
     const handleSave = () => {
-        console.log(state);
+        const username = localStorage.getItem('username');
+        sendQueryUsingTokens({ request: 'CREATE_SURVEY', username: username, data: state }).then(response => {
+            console.log(response);
+        }).catch(error => console.log(error));
     };
 
     const handleClear = () => {
@@ -83,7 +90,7 @@ const CreateSurvey = () => {
                 {state.questions.map((item, index) => {
                     return (
                         <Form.Group className="mt-3">
-                            <Form.Label>Question {index + 1}:</Form.Label>
+                            <Form.Label style={{ fontWeight: 'bold' }}>Question {index + 1}:</Form.Label>
                             <Form.Control type="text" value={item.value} name={index}
                                           onChange={(element) => handleChangeQuestion(element, index)}/>
                             <ButtonGroup className=" mt-1">

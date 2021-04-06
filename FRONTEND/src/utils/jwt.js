@@ -7,6 +7,7 @@ const login = (username, password) => {
         ).then(response => {
                 localStorage.setItem('access', response.data.access);
                 localStorage.setItem('refresh', response.data.refresh);
+                localStorage.setItem('username', username);
                 localStorage.setItem('loggedIn', true);
                 window.location.href = '/main';
             },

@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { sendQueryUsingTokens } from '../utils/jwt';
 
+
+// Get suerveys using API, if fail return to login
 const Main = () => {
-
     const handleClick = () => {
-        sendQueryUsingTokens({ quuery: 'test' }).then(response => console.log(response.data)).catch(error => console.log(error));
+        sendQueryUsingTokens({ query: 'test' }).then(response => console.log(response.data)).catch(error => console.log(error));
     };
-
 
     return (
         <Container className="text-center">

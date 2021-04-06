@@ -6,11 +6,13 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect, csrf_
 from django.views.decorators.csrf import csrf_exempt
 from django.db import IntegrityError, DatabaseError
 from django.utils.decorators import method_decorator
+from django.contrib.auth.models import User
 import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.core.serializers import serialize
+from .models import Survey
 
 from rest_framework.response import Response
 
@@ -19,14 +21,15 @@ class Index(TemplateView):
     template_name = "surveys_app/index.html"
 
 
-class UserLogout(View):
-    def post(self):
-        try:
-            logout(self.request)
-            return JsonResponse({"Logout": "OK"})
-        except Exception as e:
-            print(e)
-            return JsonResponse({"Logout": "FAIL"})
+def create_survey(username, data):
+    try:
+        survey_title, survey_data, survey_questions = data.get('title'), data.get('data'), data.get('questions')
+        user = User.objects.get(username=username)
+        surveys_count = Survey.objects.all().count()
+        survey_id = '#' + str(surveys_count).zfill(4)
+        Survey.objects.create(owner=user, survey_title=survey_title, survey_id=survey_id, data=survey_questions)
+    except Exception as e:
+        print(e)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -52,7 +55,11 @@ class AjaxGet(APIView):
 
     @staticmethod
     def post(request):
-        print(json.loads(request.body))
-        users = User.objects.all()
-        content = serialize('json', users)
-        return Response(content)
+        json_data = json.loads(request.body)
+        api_request = json_data.get('request')
+        if api_request == 'CREATE_SURVEY':
+            username, data = json_data.get('username'), json_data.get('data')
+            create_survey(username, data)
+            return Response({'request': 'CREATE_SURVEY_SUCCESS'})
+
+        return Response({'api': 'ok'})

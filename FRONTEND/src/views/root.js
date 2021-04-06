@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import CustomNavbar from '../components/Navbar/Navbar';
@@ -10,14 +10,12 @@ import Container from 'react-bootstrap/Container';
 import store from '../reducer/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Functions:
-// - Send username and password to receive tokens/save in localStorage,
-// - send refresh token and send request,
-// - if unable to refresh token then logout and clear localStorage
-
 const Root = () => {
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn'));
+
     useEffect(() => {
         document.title = 'quickSurvey';
+        setLoggedIn(localStorage.getItem('loggedIn'));
     });
 
     return (
@@ -32,12 +30,21 @@ const Root = () => {
                         <Route path="/registration">
                             <Registration/>
                         </Route>
-                        <Route path="/main">
-                            <Main/>
-                        </Route>
-                        <Route path="/">
-                            <CreateSurvey/>
-                        </Route>
+                        {loggedIn ?
+                            <>
+                                <Route path="/main">
+                                    <Main/>
+                                </Route>
+                                <Route path="/create_survey">
+                                    <CreateSurvey/>
+                                </Route>
+                            </>
+                            :
+                            <Route>
+                                <LoginPage/>
+                            </Route>
+                        }
+
                     </Switch>
                 </Container>
             </BrowserRouter>

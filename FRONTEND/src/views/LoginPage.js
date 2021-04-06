@@ -23,6 +23,7 @@ const LoginPage = () => {
     const [loginDetails, setLoginDetails] = useState({ username: '', password: '' });
     const [loginError, setLoginError] = useState(false);
 
+
     const handleChange = (element) => {
         const { name, value } = element;
         const currentDetails = loginDetails;

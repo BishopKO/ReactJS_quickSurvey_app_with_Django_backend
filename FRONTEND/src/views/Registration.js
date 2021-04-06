@@ -43,6 +43,9 @@ const Registration = () => {
 
         if (!email_validator.validate(username)) {
             setRegistrationError('Bad email address.');
+        } else if (password1.length < 6) {
+            setRegistrationError('Password too short.');
+
         } else if (password1 !== password2) {
             setRegistrationError('Password does not match.');
         } else {
@@ -56,7 +59,6 @@ const Registration = () => {
                 }, config,
             ).then(response => {
                 if (response.data.registration === 'ok') {
-                    console.log('SUCCESS');
                     history.push('/login');
                 } else {
                     console.log('FAIL');
