@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
+import { useHistory } from 'react-router';
 import reducer from './reducer';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import { sendQueryUsingTokens } from '../../utils/jwt';
 
@@ -32,7 +33,9 @@ const TopBarButtonsWrapper = styled.div`
 
 
 const CreateSurvey = () => {
-    const initState = { title: '', questions: [{ value: '' }] };
+    const history = useHistory();
+
+    const initState = { title: '', questions: [{ question: '' }] };
     const [state, dispatch] = useReducer(reducer, initState);
 
     const handleChangeTitle = (element) => {
@@ -66,8 +69,8 @@ const CreateSurvey = () => {
 
     const handleSave = () => {
         const username = localStorage.getItem('username');
-        sendQueryUsingTokens({ request: 'CREATE_SURVEY', username: username, data: state }).then(response => {
-            console.log(response);
+        sendQueryUsingTokens('create_survey', { data: state }).then(response => {
+            history.push('/list');
         }).catch(error => console.log(error));
     };
 
@@ -91,7 +94,7 @@ const CreateSurvey = () => {
                     return (
                         <Form.Group className="mt-3">
                             <Form.Label style={{ fontWeight: 'bold' }}>Question {index + 1}:</Form.Label>
-                            <Form.Control type="text" value={item.value} name={index}
+                            <Form.Control type="text" value={item.question} name={index}
                                           onChange={(element) => handleChangeQuestion(element, index)}/>
                             <ButtonGroup className=" mt-1">
                                 {item.hasOwnProperty('answers') ?

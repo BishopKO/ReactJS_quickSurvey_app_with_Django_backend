@@ -7,9 +7,8 @@ const login = (username, password) => {
         ).then(response => {
                 localStorage.setItem('access', response.data.access);
                 localStorage.setItem('refresh', response.data.refresh);
-                localStorage.setItem('username', username);
                 localStorage.setItem('loggedIn', true);
-                window.location.href = '/main';
+                window.location.href = '/list';
             },
         ).catch(error => {
             if (error) {
@@ -21,7 +20,7 @@ const login = (username, password) => {
     });
 };
 
-const sendQueryUsingTokens = (query) => {
+const sendQueryUsingTokens = (view, query) => {
     return new Promise((resolve, reject) => {
         let refreshToken = localStorage.getItem('refresh');
         axios.post('http://127.0.0.1:8000/api/token/refresh/', { refresh: refreshToken },
@@ -29,7 +28,7 @@ const sendQueryUsingTokens = (query) => {
                 localStorage.setItem('access', response.data.access);
                 let config = { headers: { Authorization: `Bearer ${response.data.access}` } };
                 console.log(config);
-                axios.post('http://127.0.0.1:8000/ajax_get', query, config).then(data => resolve(data)).catch(error => {
+                axios.post(`http://127.0.0.1:8000/${view}`, query, config).then(data => resolve(data)).catch(error => {
                     reject(error);
                 });
             },

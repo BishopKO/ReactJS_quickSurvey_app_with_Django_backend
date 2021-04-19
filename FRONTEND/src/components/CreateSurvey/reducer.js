@@ -3,7 +3,7 @@ const reducer = (state, action) => {
         case 'UPDATE_QUESTION': {
             let [index, value] = action.payload;
             let tmpState = [...state.questions];
-            tmpState[index].value = value;
+            tmpState[index].question = value;
 
             return {
                 ...state,
@@ -75,7 +75,7 @@ const reducer = (state, action) => {
         }
 
         case 'CLEAR': {
-            const initState = { title: '', questions: [{ value: '' }] };
+            const initState = { title: '', questions: [{ question: '' }] };
             return initState;
         }
 

@@ -6,6 +6,8 @@ import LoginPage from '../views/LoginPage';
 import Registration from '../views/Registration';
 import Main from '../views/Main';
 import CreateSurvey from '../components/CreateSurvey/CreateSurvey';
+import SurveysList from '../components/SurveysList/SurveysList';
+
 import Container from 'react-bootstrap/Container';
 import store from '../reducer/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -35,6 +37,9 @@ const Root = () => {
                                 <Route path="/main">
                                     <Main/>
                                 </Route>
+                                <Route path="/list">
+                                    <SurveysList/>
+                                </Route>
                                 <Route path="/create_survey">
                                     <CreateSurvey/>
                                 </Route>
@@ -44,7 +49,6 @@ const Root = () => {
                                 <LoginPage/>
                             </Route>
                         }
-
                     </Switch>
                 </Container>
             </BrowserRouter>

@@ -38,9 +38,10 @@ REST_FRAMEWORK = {
     ],
 }
 
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME' : timedelta(seconds=3)
-# }
+SIMPLE_JWT = {
+    # 'ACCESS_TOKEN_LIFETIME' : timedelta(seconds=3)
+    # 'JWT_ALGORITHM': 'HS256',
+}
 
 # Application definition
 
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'surveys_app',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [

@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
-from datetime import datetime
+import uuid
 
 
 class Survey(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    survey_id = models.CharField(max_length=5, primary_key=True)
+    survey_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     survey_title = models.SlugField(default='default')
     date = models.DateField(default=timezone.now)
     data = models.TextField()
@@ -15,7 +15,7 @@ class Survey(models.Model):
         verbose_name_plural = "Survey"
 
     def __str__(self):
-        return self.survey_title
+        return self.owner.username + '__' + self.survey_title
 
 
 class Answers(models.Model):

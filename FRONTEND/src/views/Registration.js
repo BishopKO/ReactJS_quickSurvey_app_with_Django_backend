@@ -58,7 +58,7 @@ const Registration = () => {
                     password: password1,
                 }, config,
             ).then(response => {
-                if (response.data.registration === 'ok') {
+                if (response.data.registration === 'SUCCESS') {
                     history.push('/login');
                 } else {
                     console.log('FAIL');

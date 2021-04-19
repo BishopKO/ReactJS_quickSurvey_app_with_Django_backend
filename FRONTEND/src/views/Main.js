@@ -6,7 +6,7 @@ import { sendQueryUsingTokens } from '../utils/jwt';
 // Get suerveys using API, if fail return to login
 const Main = () => {
     const handleClick = () => {
-        sendQueryUsingTokens({ query: 'test' }).then(response => console.log(response.data)).catch(error => console.log(error));
+        sendQueryUsingTokens({ query: 'jwt.test.js' }).then(response => console.log(response.data)).catch(error => console.log(error));
     };
 
     return (

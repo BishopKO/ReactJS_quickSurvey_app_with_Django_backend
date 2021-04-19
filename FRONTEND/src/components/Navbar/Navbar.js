@@ -6,6 +6,8 @@ import styled from 'styled-components';
 
 const StyledBrand = styled.span`
   font-family: Arimo;
+  font-style: italic;
+  text-shadow: 1px 1px green;
 `;
 
 const CustomNavbar = ({ logoutAction, loggedIn }) => {
