@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import { useHistory } from 'react-router';
-import reducer from './reducer';
+import createReducer from './createReducer';
 import styled from 'styled-components';
 import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import { sendQueryUsingTokens } from '../../utils/jwt';
@@ -36,7 +36,7 @@ const CreateSurvey = () => {
     const history = useHistory();
 
     const initState = { title: '', questions: [{ question: '' }] };
-    const [state, dispatch] = useReducer(reducer, initState);
+    const [state, dispatch] = useReducer(createReducer, initState);
 
     const handleChangeTitle = (element) => {
         const title = element.target.value;
@@ -68,8 +68,9 @@ const CreateSurvey = () => {
     };
 
     const handleSave = () => {
-        const username = localStorage.getItem('username');
-        sendQueryUsingTokens('create_survey', { data: state }).then(response => {
+        console.log(state);
+
+        sendQueryUsingTokens('create_survey', { data: state }).then(() => {
             history.push('/list');
         }).catch(error => console.log(error));
     };
@@ -92,7 +93,7 @@ const CreateSurvey = () => {
             <Form>
                 {state.questions.map((item, index) => {
                     return (
-                        <Form.Group className="mt-3">
+                        <Form.Group className="mt-3" key={`question_${index}`}>
                             <Form.Label style={{ fontWeight: 'bold' }}>Question {index + 1}:</Form.Label>
                             <Form.Control type="text" value={item.question} name={index}
                                           onChange={(element) => handleChangeQuestion(element, index)}/>

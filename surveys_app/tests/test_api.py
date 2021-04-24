@@ -20,9 +20,3 @@ class TestApi(TestCase):
     def test_get_api_tokens(self):
         self.assertIsNot(self.access, None)
         self.assertIsNot(self.refresh, None)
-
-    def test_create_surveys(self):
-        url = reverse(urls_names.get('create'))
-        answers = [f'answer_{x}' for x in range(5)]
-        headers = {'Authorization': f'Bearer {self.access}'}
-        self.client.post(url, headers=headers, data={'title': 'test_title', 'data': answers})

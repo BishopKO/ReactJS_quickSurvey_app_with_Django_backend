@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
+import store from '../../reducer/store';
 
 const StyledBrand = styled.span`
   font-family: Arimo;
@@ -10,15 +11,14 @@ const StyledBrand = styled.span`
   text-shadow: 1px 1px green;
 `;
 
-const CustomNavbar = ({ logoutAction, loggedIn }) => {
+const CustomNavbar = ({ loggedIn }) => {
     const history = useHistory();
 
     const handleLogout = () => {
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
-        localStorage.removeItem('username');
         localStorage.removeItem('loggedIn');
-        logoutAction();
+        store.dispatch({ type: 'LOGOUT', payload: 'SUCCESS' });
         history.push('/login');
     };
 
@@ -28,7 +28,7 @@ const CustomNavbar = ({ logoutAction, loggedIn }) => {
 
     return (
         <Navbar variant="dark" bg="dark" expand="sm" style={{ padding: '5px' }}>
-            <Navbar.Brand href="#home"><StyledBrand>quickSurvey</StyledBrand></Navbar.Brand>
+            <Navbar.Brand href="/list"><StyledBrand>quickSurvey</StyledBrand></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 {loggedIn ?
@@ -51,20 +51,14 @@ const CustomNavbar = ({ logoutAction, loggedIn }) => {
     );
 };
 
+const mapStateToProps = () => {
+    const localStorageLoggedIn = localStorage.loggedIn;
 
-const mapStateToProps = (state) => {
-    if (localStorage.getItem('loggedIn')) {
-        state.loggedIn = true;
-        return state;
+    if (localStorageLoggedIn) {
+        return { loggedIn: true };
     } else {
-        return state;
+        return { loggedIn: false };
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        logoutAction: () => dispatch({ type: 'LOGOUT', payload: 'SUCCESS' }),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CustomNavbar);
+export default connect(mapStateToProps, null)(CustomNavbar);

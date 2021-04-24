@@ -7,8 +7,10 @@ from rest_framework_simplejwt import views as jwt_views
 urlpatterns = [
     path('', Index.as_view(), name="index"),
     path('create_survey', CreateSurvey.as_view(), name="create-survey"),
+    path('edit_survey', SurveyEdit.as_view(), name="survey-edit"),
     path('surveys_list', SurveysList.as_view(), name="surveys-list"),
     path('user_register', UserRegister.as_view(), name="user-register"),
+
 ]
 
 urlpatterns += [

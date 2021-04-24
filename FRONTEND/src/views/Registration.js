@@ -83,7 +83,7 @@ const Registration = () => {
                     <Form.Control type="password" placeholder="Password" name="password1"
                                   onChange={(input) => handleChange(input.target)}/>
                 </Form.Group>
-                <Form.Group controlId="formBasicPassword" className="mt-3">
+                <Form.Group controlId="formBasicPasswordRepeat" className="mt-3">
                     <Form.Label>*Repeat password</Form.Label>
                     <Form.Control type="password" placeholder="Repeat password" name="password2"
                                   onChange={(input) => handleChange(input.target)}/>

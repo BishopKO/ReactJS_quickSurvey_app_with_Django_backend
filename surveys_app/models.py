@@ -5,10 +5,12 @@ import uuid
 
 
 class Survey(models.Model):
+    active = models.BooleanField(default=False)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     survey_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     survey_title = models.SlugField(default='default')
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(auto_now=True)
+
     data = models.TextField()
 
     class Meta:

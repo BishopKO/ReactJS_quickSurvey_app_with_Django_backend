@@ -5,22 +5,22 @@ const initState = {
 const rootReducer = (state = initState, action) => {
     console.log(action);
     switch (action.type) {
-        case "LOGIN":
-            if (action.payload === "SUCCESS") {
+        case 'LOGIN':
+            if (action.payload === 'SUCCESS') {
                 return {
                     ...state,
                     loggedIn: true,
-                }
+                };
+            } else {
+                return { ...state };
             }
-            break;
-        case "LOGOUT":
-            if (action.type === "SUCCESS"){
-                return {
-                    ...state,
-                    loggedIn: false,
-                }
-            }
-            break;
+
+        case 'LOGOUT': {
+            return {
+                ...state,
+                loggedIn: false,
+            };
+        }
         default:
             return state;
     }

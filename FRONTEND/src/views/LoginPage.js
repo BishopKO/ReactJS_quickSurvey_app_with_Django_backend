@@ -4,6 +4,8 @@ import { Form, Button } from 'react-bootstrap';
 import { login } from '../utils/jwt';
 import styled from 'styled-components';
 
+import store from '../reducer/store';
+
 const LoginDiv = styled.div`
     max-width: 400px; 
     border: 1px solid black;
@@ -23,6 +25,7 @@ const LoginPage = () => {
     const [loginDetails, setLoginDetails] = useState({ username: '', password: '' });
     const [loginError, setLoginError] = useState(false);
 
+    const history = useHistory();
 
     const handleChange = (element) => {
         const { name, value } = element;
@@ -32,9 +35,21 @@ const LoginPage = () => {
     };
 
     const handleClick = () => {
-        login(loginDetails.username, loginDetails.password).catch(error => {
-            setLoginError(true);
-        });
+        login(loginDetails.username, loginDetails.password)
+            .then(response => {
+                console.log(response);
+                if (response.login === 'SUCCESS') {
+                    const { refresh, access } = response.tokens;
+                    localStorage.setItem('access', access);
+                    localStorage.setItem('refresh', refresh);
+                    localStorage.setItem('loggedIn', 'true');
+                    store.dispatch({ type: 'LOGIN', payload: 'SUCCESS' });
+                    history.push('/list');
+                }
+            })
+            .catch(error => {
+                setLoginError(true);
+            });
     };
 
     return (
