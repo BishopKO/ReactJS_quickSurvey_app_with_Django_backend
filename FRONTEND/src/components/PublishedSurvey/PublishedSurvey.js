@@ -33,67 +33,87 @@ const AnswersWrapper = styled.div`
   margin-top: 5px;
 `;
 
-// TODO: USE REDUCER
-const PreviewSurvey = () => {
+const getCheckboxesValue = (element_id) => {
+    const checkboxes = document.querySelector(`#${element_id}`);
+    const inputs = checkboxes.querySelectorAll('input.form-check-input');
+    return Array.from(inputs).map((item) => {
+        return item.checked;
+    });
+};
+
+
+const PublishedSurvey = () => {
     const { id } = useParams();
-    const history = useHistory();
-
-    const reducer = (action) => {
-        console.log(action);
-    };
-
 
     const [surveyData, setSurveydata] = useState({});
-    const [state, dispatch] = useReducer(reducer, []);
 
+    const formReducer = (state, action) => {
+        const { type, payload } = action;
 
-    const [surveyAnswers, setSurveyAnswers] = useState([]);
-    const [checked, setChecked] = useState(false);
+        switch (type) {
+            case 'SET_INIT_STATE': {
+                return Array(payload).fill(null);
+            }
+            case 'QUESTION_SINGLE': {
+                const { question_number, selected } = payload;
+                const tmpState = state;
+                tmpState[question_number] = selected;
+                return { ...tmpState };
+            }
+            case 'QUESTION_MULTI': {
+                const { question_number, selected } = payload;
+                const tmpState = state;
+                tmpState[question_number] = selected;
+                return { ...tmpState };
+            }
+            case 'QUESTION_TEXT': {
+                let tmpState = state;
+                const { question_number, value } = payload;
+                tmpState[question_number] = value;
+                return { ...tmpState };
+            }
+            default:
+                return {
+                    ...state,
+                };
+        }
+    };
+
+    const [state, dispatch] = useReducer(formReducer, []);
+
 
     useEffect(() => {
         getPublishedSurveyData(id)
             .then(response => {
                 setSurveydata(response.data);
                 const dataLength = response.data.questions.length;
-                dispatch({ action: 'SET_INIT_STATE', payload: dataLength });
+                dispatch({ type: 'SET_INIT_STATE', payload: dataLength });
             })
             .catch(error => console.log(error));
     }, []);
 
 
-    const handleSelectAnswer = (value) => {
+    const handleSelectAnswerSingle = (value) => {
+        const { question_number, selected } = value;
+        dispatch({ type: 'QUESTION_SINGLE', payload: { question_number: question_number, selected: selected } });
+    };
 
-        console.log(value);
+    const handleSelectAnswerMulti = (question_number) => {
+        let values = getCheckboxesValue(`answers_multi_${question_number}`);
 
-        const { type } = value;
-        if (type === 'checkbox') {
-            console.log(surveyAnswers);
-            const { question_number, selected } = value;
-            const answer_type = surveyData.questions[question_number].type;
-
-            let tmpAnswers = surveyAnswers;
-            if (answer_type === 'single') {
-                tmpAnswers[question_number] = selected;
-                setSurveyAnswers(tmpAnswers);
-            } else {
-                if (tmpAnswers[question_number] === null) {
-                    let ans = {};
-                    ans[selected] = true;
-                    tmpAnswers[question_number] = ans;
-                    setSurveyAnswers(tmpAnswers);
-                } else {
-                    const current = tmpAnswers[question_number][selected];
-                    tmpAnswers[question_number][selected] = !current;
-                    setSurveyAnswers(tmpAnswers);
-                }
-            }
-        }
-        setChecked(!checked);
+        dispatch({ type: 'QUESTION_MULTI', payload: { question_number: question_number, selected: values } });
 
     };
 
+    const handleSelectAnswerText = (value) => {
+        const { question_number, answer } = value;
+        dispatch({ type: 'QUESTION_TEXT', payload: { question_number: question_number, value: answer } });
+
+    };
+
+
     const handleOnSubmit = () => {
-        console.log(surveyAnswers);
+        console.log(state);
     };
 
 
@@ -110,17 +130,16 @@ const PreviewSurvey = () => {
                                     <Form.Label style={{ fontWeight: 'bold' }}>{item.question}:</Form.Label>
                                     {item.hasOwnProperty('answers') &&
 
-                                    <AnswersWrapper>
+                                    <AnswersWrapper key={`answer_${index}`}>
                                         {item.type === 'single' &&
                                         <div>
                                             <small>(select one)</small>
                                             {item.answers.split('\n').map(function(item, index) {
                                                 return (
-                                                    <InputGroup>
+                                                    <InputGroup key={`answer_single_${index}`}>
                                                         <InputGroup.Checkbox
-                                                            checked={surveyAnswers[this.question_number] === index}
-                                                            onChange={() => handleSelectAnswer({
-                                                                type: 'checkbox',
+                                                            checked={index === state[this.question_number]}
+                                                            onChange={() => handleSelectAnswerSingle({
                                                                 question_number: this.question_number,
                                                                 selected: index,
                                                             })}
@@ -134,17 +153,13 @@ const PreviewSurvey = () => {
                                         }
 
                                         {item.type === 'multi' &&
-                                        <div>
+                                        <div id={`answers_multi_${index}`}>
                                             <small>(select multiple)</small>
                                             {item.answers.split('\n').map(function(item, index) {
                                                 return (
-                                                    <InputGroup>
+                                                    <InputGroup key={`answers_multi_${index}`}>
                                                         <InputGroup.Checkbox
-                                                            onChange={() => handleSelectAnswer({
-                                                                type: 'checkbox',
-                                                                question_number: this.question_number,
-                                                                selected: index,
-                                                            })}
+                                                            onChange={() => handleSelectAnswerMulti(this.question_number)}
                                                             aria-label="Checkbox for answer"/>
                                                         <Form.Control aria-label="Text input with checkbox" value={item}
                                                                       readOnly/>
@@ -159,8 +174,7 @@ const PreviewSurvey = () => {
 
                                     {!item.hasOwnProperty('answers') &&
                                     <InputGroup>
-                                        <Form.Control onChange={(element) => handleSelectAnswer({
-                                            type: 'text',
+                                        <Form.Control onChange={(element) => handleSelectAnswerText({
                                             question_number: index,
                                             answer: element.target.value,
                                         })} aria-label="Text input with checkbox"/>
@@ -179,9 +193,10 @@ const PreviewSurvey = () => {
     } else {
         return (
             <div>
+                {/*TODO: ADD ERROR PAGE*/}
                 ERROR
             </div>
         );
     }
 };
-export default PreviewSurvey;
+export default PublishedSurvey;

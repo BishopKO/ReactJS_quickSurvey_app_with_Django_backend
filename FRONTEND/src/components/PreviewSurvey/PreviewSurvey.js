@@ -68,9 +68,9 @@ const PreviewSurvey = () => {
                                 {item.hasOwnProperty('answers') &&
                                 <AnswersWrapper>
                                     <small>{item.type === 'single' ? '(select one)' : '(select multi)'}</small>
-                                    {item.answers.split('\n').map((item) => {
+                                    {item.answers.split('\n').map((item, index) => {
                                         return (
-                                            <InputGroup>
+                                            <InputGroup key={`answer_${index}`}>
                                                 <InputGroup.Checkbox
                                                     aria-label="Checkbox for answer"/>
                                                 <Form.Control aria-label="Text input with checkbox" value={item}
