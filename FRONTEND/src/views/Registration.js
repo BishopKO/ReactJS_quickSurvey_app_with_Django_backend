@@ -3,8 +3,6 @@ import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import email_validator from 'email-validator';
 import { useHistory } from 'react-router';
-
-import jscookie from 'js-cookie';
 import styled from 'styled-components';
 
 const LoginDiv = styled.div`
@@ -23,8 +21,6 @@ const ErrorMessage = styled.p`
 `;
 
 const Registration = () => {
-    axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
-    axios.defaults.xsrfCookieName = 'csrftoken';
 
     let history = useHistory();
 
@@ -50,13 +46,10 @@ const Registration = () => {
             setRegistrationError('Password does not match.');
         } else {
             setRegistrationError(false);
-            let config = {
-                headers: { 'X-CSRFToken': jscookie.get('csrftoken') },
-            };
             axios.post('http://127.0.0.1:8000/user_register', {
                     username: username,
                     password: password1,
-                }, config,
+                },
             ).then(response => {
                 if (response.data.registration === 'SUCCESS') {
                     history.push('/login');
@@ -89,7 +82,7 @@ const Registration = () => {
                                   onChange={(input) => handleChange(input.target)}/>
                 </Form.Group>
                 <Form.Group className="text-center">
-                    <Button variant="success" type="button" className="mt-3" onClick={handleClick}>
+                    <Button variant="success" type="button" className="mt-3" onClick={() => handleClick()}>
                         Sign Up
                     </Button>
                 </Form.Group>

@@ -1,9 +1,11 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import createReducer from './createReducer';
 import styled from 'styled-components';
 import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import { sendQueryUsingTokens } from '../../utils/jwt';
+import AnswerTypeButtons from '../Atoms/answerTypeButtons';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -14,6 +16,7 @@ const MainWrapper = styled.div`
   border: 1px solid lightgrey;
   padding: 5px;
   border-radius: 5px;
+  
 `;
 
 const TopBarWrapper = styled.div`
@@ -21,8 +24,10 @@ const TopBarWrapper = styled.div`
   justify-content: center;  
   max-width: inherit;  
   grid-template-columns: 80% 20% ;  
-  margin-top: 5px;  
-  font-size: 4px;
+  margin-top: 20px; 
+ padding-bottom: 5px; 
+ font-size: 4px;
+  border-bottom: 1px solid lightgrey;
 `;
 
 const TopBarButtonsWrapper = styled.div`
@@ -79,8 +84,19 @@ const CreateSurvey = () => {
         dispatch({ type: 'CLEAR' });
     };
 
+    const handleAnswerType = (index, type) => {
+        dispatch({ type: 'SET_ANSWER_TYPE', payload: { index: index, type: type } });
+    };
+
+    // TODO: ADD SINGLE/MULTI ANSWERS TYPE
+
     return (
         <MainWrapper>
+            <div>
+                <Button onClick={() => history.push('/list')} size="sm" variant="outline-secondary">
+                    <span>&larr;</span>Cancel and go back
+                </Button>
+            </div>
             <TopBarWrapper>
                 <Form.Control type="text" size="sm" placeholder="Title" style={{ width: '60%' }}
                               onChange={(element) => handleChangeTitle(element)} value={state.title}/>
@@ -110,11 +126,17 @@ const CreateSurvey = () => {
                                         onClick={() => handleRemove(index)}>Delete</Button>
                             </ButtonGroup>
                             {item.hasOwnProperty('answers') &&
+
+
                             <Form.Group className="mt-1">
+                                <AnswerTypeButtons index={index} select={'single'} action={handleAnswerType}/>
                                 <Form.Label>Possible answers:</Form.Label>
+
                                 <Form.Control as="textarea" rows={3} value={item.answers}
                                               onChange={(element) => handleChangeAnswers(element, index)}/>
                             </Form.Group>
+
+
                             }
                         </Form.Group>
 

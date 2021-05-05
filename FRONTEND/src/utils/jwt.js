@@ -43,11 +43,24 @@ const sendQueryUsingTokens = (view, query) => {
             ).catch(error => {
                 if (error) {
                     console.log('Refresh token error!');
+                    store.dispatch({ type: 'TOKEN_ERROR' });
                 }
             });
         }
     });
 };
 
+const getPublishedSurveyData = (id) => {
+    const query = { request: 'GET_PUBLISHED_SURVEY', survey_id: id };
 
-export { login, sendQueryUsingTokens };
+    return new Promise((resolve, reject) => {
+        axios.post(`http://127.0.0.1:8000/get_published_survey`, query)
+            .then(data => resolve(data))
+            .catch(error => {
+                reject(error);
+            });
+    });
+};
+
+
+export { login, sendQueryUsingTokens, getPublishedSurveyData };

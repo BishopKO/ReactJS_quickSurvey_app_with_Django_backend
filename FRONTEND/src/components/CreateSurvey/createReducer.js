@@ -1,4 +1,5 @@
 const createReducer = (state, action) => {
+
     switch (action.type) {
         case 'UPDATE_QUESTION': {
             let [index, value] = action.payload;
@@ -29,9 +30,9 @@ const createReducer = (state, action) => {
         }
         case 'ADD_ANSWERS': {
             let index = action.payload;
-            console.log(index);
             let tmpState = [...state.questions];
             tmpState[index].answers = '';
+            tmpState[index].type = 'single';
             console.log(tmpState[index].hasOwnProperty('answers'));
 
             return {
@@ -39,6 +40,15 @@ const createReducer = (state, action) => {
                 questions: tmpState,
             };
         }
+
+        case 'SET_ANSWER_TYPE': {
+            const { index, type } = action.payload;
+            let tmpState = state;
+            tmpState.questions[index].type = type;
+            console.log(index, type, state);
+            return tmpState;
+        }
+
         case 'REMOVE_ANSWERS': {
             let index = action.payload;
             console.log(index);

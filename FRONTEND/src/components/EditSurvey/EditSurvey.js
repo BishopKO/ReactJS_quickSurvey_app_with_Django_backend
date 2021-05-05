@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import editReducer from './editReducer';
 import styled from 'styled-components';
+import AnswerTypeButtons from '../Atoms/answerTypeButtons';
 import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import { sendQueryUsingTokens } from '../../utils/jwt';
 
@@ -13,7 +14,7 @@ const MainWrapper = styled.div`
   justify-content: center;  
   border: 1px solid lightgrey;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 5px;  
 `;
 
 const TopBarWrapper = styled.div`
@@ -21,8 +22,10 @@ const TopBarWrapper = styled.div`
   justify-content: center;  
   max-width: inherit;  
   grid-template-columns: 80% 20% ;  
-  margin-top: 5px;  
+  margin-top: 20px;  
   font-size: 4px;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 5px
 `;
 
 const TopBarButtonsWrapper = styled.div`
@@ -80,6 +83,10 @@ const EditSurvey = () => {
         }).catch(error => console.log(error));
     };
 
+    const handleAnswerType = (index, type) => {
+        dispatch({ type: 'SET_ANSWER_TYPE', payload: { index: index, type: type } });
+    };
+
     const handleClear = () => {
         dispatch({ type: 'CLEAR' });
     };
@@ -120,6 +127,7 @@ const EditSurvey = () => {
                             </ButtonGroup>
                             {item.hasOwnProperty('answers') &&
                             <Form.Group className="mt-1">
+                                <AnswerTypeButtons index={index} select={item.type} action={handleAnswerType}/>
                                 <Form.Label>Possible answers:</Form.Label>
 
 

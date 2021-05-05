@@ -3,11 +3,12 @@ import axios from 'axios';
 
 import { login, sendQueryUsingTokens } from './jwt';
 
-const existinguser = { username: '', password: '' };
+const existinguser = { username: 'bishop', password: 'ghost14' };
 
 describe('API_test', () => {
     test('login_and_get_tokens_success', async () => {
         await login(existinguser.username, existinguser.password).then(response => {
+                console.log(response);
                 expect(response.login).toEqual('SUCCESS');
             },
         );

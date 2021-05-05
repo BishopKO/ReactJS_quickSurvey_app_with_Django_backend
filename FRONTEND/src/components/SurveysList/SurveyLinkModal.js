@@ -1,12 +1,12 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const host = window.location.hostname.toString();
+const host = '127.0.0.1:3000';
 
 const SurveyLinkModal = ({ show, link, closeAction }) => {
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(`${host}${link}`);
+        navigator.clipboard.writeText(`http://${host}/survey/${link}`);
         closeAction();
     };
 
@@ -16,7 +16,7 @@ const SurveyLinkModal = ({ show, link, closeAction }) => {
                 <Modal.Dialog>
                     <Modal.Header closeButton> </Modal.Header>
                     <Modal.Body>
-                        {`http://${host}/${link}`}
+                        {`http://${host}/survey/${link}`}
                     </Modal.Body>
                     <Modal.Footer style={{ justifyContent: 'center' }}>
                         <Button onClick={() => handleCopy()} variant='secondary' size='sm'>Copy to
