@@ -42,6 +42,7 @@ const sendQueryUsingTokens = (view, query) => {
                 },
             ).catch(error => {
                 if (error) {
+                    reject({ token: 'error' });
                     console.log('Refresh token error!');
                     store.dispatch({ type: 'TOKEN_ERROR' });
                 }
