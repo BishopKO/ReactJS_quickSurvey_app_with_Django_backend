@@ -1,6 +1,5 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 import createReducer from './createReducer';
 import styled from 'styled-components';
 import { Form, Button, ButtonGroup } from 'react-bootstrap';

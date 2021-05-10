@@ -44,6 +44,7 @@ const sendQueryUsingTokens = (view, query) => {
                 if (error) {
                     reject({ token: 'error' });
                     console.log('Refresh token error!');
+                    localStorage.clear();
                     store.dispatch({ type: 'TOKEN_ERROR' });
                 }
             });
@@ -63,5 +64,17 @@ const getPublishedSurveyData = (id) => {
     });
 };
 
+const savePublishedSurveyData = (id, data) => {
+    const query = { request: 'SAVE_PUBLISHED_SURVEY', survey_id: id, survey_data: data };
 
-export { login, sendQueryUsingTokens, getPublishedSurveyData };
+    return new Promise((resolve, reject) => {
+        axios.post(`http://127.0.0.1:8000/save_published_survey`, query)
+            .then(data => resolve(data))
+            .catch(error => {
+                reject(error);
+            });
+    });
+};
+
+
+export { login, sendQueryUsingTokens, getPublishedSurveyData, savePublishedSurveyData };

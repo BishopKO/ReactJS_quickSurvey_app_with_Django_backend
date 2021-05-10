@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, Route, Switch, useParams, useHistory, Redirect } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import Registration from './Registration';
 import EditSurvey from '../components/EditSurvey/EditSurvey';
 import SurveysList from '../components/SurveysList/SurveysList';
 import PreviewSurvey from '../components/PreviewSurvey/PreviewSurvey';
 import PublishedSurvey from '../components/PublishedSurvey/PublishedSurvey';
+import SubmitSuccessPage from '../components/PublishedSurvey/SubmitSuccessPage';
+import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
-
 import NavbarTemplate from '../components/MainTemplate/NavbarTemplate';
-
 import CreateSurvey from '../components/CreateSurvey/CreateSurvey';
 
-// TODO: REDIRECT TO LIST VIEW AFTER CLOSED BROWSER
-const MainRoutingView = ({ loggedIn }) => {
 
+const MainRoutingView = ({ loggedIn }) => {
     const location_pathname = window.location.pathname;
 
     if (location_pathname.search('/survey') !== -1) {
@@ -23,52 +22,46 @@ const MainRoutingView = ({ loggedIn }) => {
                 <Switch>
                     <Route exact path="/survey/:id" component={PublishedSurvey}/>
                 </Switch>
+                <Switch>
+                    <Route exact path="/survey_success" component={SubmitSuccessPage}/>
+                </Switch>
             </BrowserRouter>
+
         );
     } else {
         return (
             <BrowserRouter>
-                <Switch>
-                    {loggedIn ?
-                        <>
-                            <Route exact path="/edit/:id">
-                                <NavbarTemplate>
+                <Container>
+                    <Switch>
+                        {loggedIn ?
+                            <NavbarTemplate>
+                                <Route exact path="/edit/:id">
                                     <EditSurvey/>
-                                </NavbarTemplate>
-                            </Route>
-                            <Route exact path="/survey_preview/">
-                                <NavbarTemplate>
+                                </Route>
+                                <Route exact path="/survey_preview/">
                                     <PreviewSurvey/>
-                                </NavbarTemplate>
-                            </Route>
-                            <Route exact path="/list">
-                                <NavbarTemplate>
+                                </Route>
+                                <Route exact path="/list">
                                     <SurveysList/>
-                                </NavbarTemplate>
-                            </Route>
-                            <Route exact path="/create_survey">
-                                <NavbarTemplate>
+                                </Route>
+                                <Route exact path="/create_survey">
                                     <CreateSurvey/>
-                                </NavbarTemplate>
-                            </Route>
-                        </>
-                        :
-                        <>
-                            <Route exact path="/login">
-                                <NavbarTemplate>
-                                    <LoginPage/>
-                                </NavbarTemplate>
-                            </Route>
-                            <Route exact path="/registration">
-                                <NavbarTemplate>
-                                    <Registration/>
-                                </NavbarTemplate>
-                            </Route>
-                        </>
-                    }
-                </Switch>
-                {loggedIn ? <Redirect to="/list"/> : <Redirect to="/login"/>}
 
+                                </Route>
+                            </NavbarTemplate>
+                            :
+                            <NavbarTemplate>
+                                <Route exact path="/login">
+                                    <LoginPage/>
+                                </Route>
+                                <Route exact path="/registration">
+                                    <Registration/>
+                                </Route>
+                            </NavbarTemplate>
+                        }
+                    </Switch>
+                    {loggedIn ? <Redirect to="/list"/> : <Redirect to="/login"/>}
+                </Container>
             </BrowserRouter>
         );
     }

@@ -35,7 +35,6 @@ width: 100%;
 
 const PreviewSurvey = () => {
     const location = useLocation();
-
     const [surveyData, setSurveyData] = useState({});
 
     // TODO: Preview from create and edit ??
@@ -44,11 +43,10 @@ const PreviewSurvey = () => {
         const survey_id = locationState.survey_id;
         sendQueryUsingTokens('edit_survey', { request: 'GET_SURVEY_DATA', survey_id: survey_id })
             .then(response => {
-                console.log(response.data);
                 setSurveyData(response.data);
             });
 
-    }, []);
+    }, [location.state]);
 
     if (surveyData.hasOwnProperty('questions')) {
         return (

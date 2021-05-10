@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Form, Button } from 'react-bootstrap';
 import { login } from '../utils/jwt';
@@ -21,11 +21,15 @@ const ErrorMessage = styled.p`
     font-size: 10px;
 `;
 
-const LoginPage = () => {
+const LoginPage = ({ context }) => {
     const [loginDetails, setLoginDetails] = useState({ username: '', password: '' });
     const [loginError, setLoginError] = useState(false);
 
     const history = useHistory();
+
+    useEffect(() => {
+        console.log(context);
+    });
 
     const handleChange = (element) => {
         const { name, value } = element;

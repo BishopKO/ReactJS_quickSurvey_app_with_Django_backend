@@ -1,37 +1,13 @@
 import React, { useEffect, useState, useReducer } from 'react';
-import { useHistory, useParams } from 'react-router';
-import { getPublishedSurveyData } from '../../utils/jwt';
-import styled from 'styled-components';
+import { useParams, useHistory } from 'react-router';
+import { getPublishedSurveyData, savePublishedSurveyData } from '../../utils/jwt';
+
 import { Button, Form, Alert, InputGroup } from 'react-bootstrap';
+import { RootWrapper, MainWrapper, AnswersWrapper } from './styles';
+import ConfirmSubmitModal from './ConfirmSubmitModal';
+import ErrorPage from './ErrorPage';
+import formReducer from './formReducer';
 
-const RootWrapper = styled.div`  
-  display: flex;
-  align-content: center;
-  flex-direction: column;
-  background-color: lightblue;
-  width: 100%;
-  height: 100vh;
-  
-`;
-
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-width: 700px;
-  margin: 10px auto;
-  justify-content: center;  
-  border: 1px solid lightgrey;
-  padding: 5px;
-  border-radius: 5px;  
-  background-color: white;
-`;
-
-const AnswersWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 5px;
-`;
 
 const getCheckboxesValue = (element_id) => {
     const checkboxes = document.querySelector(`#${element_id}`);
@@ -44,54 +20,20 @@ const getCheckboxesValue = (element_id) => {
 
 const PublishedSurvey = () => {
     const { id } = useParams();
-
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [surveyData, setSurveydata] = useState({});
+    const [state, dispatch] = useReducer(formReducer, {});
 
-    const formReducer = (state, action) => {
-        const { type, payload } = action;
 
-        switch (type) {
-            case 'SET_INIT_STATE': {
-                return Array(payload).fill(null);
-            }
-            case 'QUESTION_SINGLE': {
-                const { question_number, selected } = payload;
-                const tmpState = state;
-                tmpState[question_number] = selected;
-                return { ...tmpState };
-            }
-            case 'QUESTION_MULTI': {
-                const { question_number, selected } = payload;
-                const tmpState = state;
-                tmpState[question_number] = selected;
-                return { ...tmpState };
-            }
-            case 'QUESTION_TEXT': {
-                let tmpState = state;
-                const { question_number, value } = payload;
-                tmpState[question_number] = value;
-                return { ...tmpState };
-            }
-            default:
-                return {
-                    ...state,
-                };
-        }
-    };
-
-    const [state, dispatch] = useReducer(formReducer, []);
-
+    const history = useHistory();
 
     useEffect(() => {
         getPublishedSurveyData(id)
             .then(response => {
                 setSurveydata(response.data);
-                const dataLength = response.data.questions.length;
-                dispatch({ type: 'SET_INIT_STATE', payload: dataLength });
             })
             .catch(error => console.log(error));
-    }, []);
-
+    }, [id]);
 
     const handleSelectAnswerSingle = (value) => {
         const { question_number, selected } = value;
@@ -100,28 +42,43 @@ const PublishedSurvey = () => {
 
     const handleSelectAnswerMulti = (question_number) => {
         let values = getCheckboxesValue(`answers_multi_${question_number}`);
-
         dispatch({ type: 'QUESTION_MULTI', payload: { question_number: question_number, selected: values } });
-
     };
 
     const handleSelectAnswerText = (value) => {
         const { question_number, answer } = value;
         dispatch({ type: 'QUESTION_TEXT', payload: { question_number: question_number, value: answer } });
-
     };
 
+    const submitAnswers = () => {
+        savePublishedSurveyData(id, state)
+            .then(() => {
+                setShowConfirmModal(false);
+                history.push('/survey_success');
+            })
+            .catch(error => console.log(error));
+    };
 
-    const handleOnSubmit = () => {
-        console.log(state);
+    const handleSubmit = () => {
+        setShowConfirmModal(true);
+    };
+
+    const handleReadyToSubmit = () => {
+        return Object.keys(state).length === surveyData.questions.length;
     };
 
 
     if (surveyData.hasOwnProperty('questions')) {
         return (
             <RootWrapper>
+                <ConfirmSubmitModal show={showConfirmModal} closeAction={() => setShowConfirmModal(false)}
+                                    submitAction={() => submitAnswers()}/>
                 <MainWrapper>
-                    <Alert variant="dark" style={{ textAlign: 'center' }}>{surveyData.title}</Alert>
+                    <Alert variant="dark" style={{
+                        textAlign: 'center',
+                        fontWeight: 'bold',
+                        fontSize: '22px',
+                    }}>{surveyData.title}</Alert>
                     <Form>
                         {surveyData.questions.map((item, index) => {
                             return (
@@ -143,8 +100,8 @@ const PublishedSurvey = () => {
                                                                 question_number: this.question_number,
                                                                 selected: index,
                                                             })}
-                                                            aria-label="Checkbox for answer"/>
-                                                        <Form.Control aria-label="Text input with checkbox" value={item}
+                                                        />
+                                                        <Form.Control value={item}
                                                                       readOnly/>
                                                     </InputGroup>
                                                 );
@@ -160,14 +117,13 @@ const PublishedSurvey = () => {
                                                     <InputGroup key={`answers_multi_${index}`}>
                                                         <InputGroup.Checkbox
                                                             onChange={() => handleSelectAnswerMulti(this.question_number)}
-                                                            aria-label="Checkbox for answer"/>
-                                                        <Form.Control aria-label="Text input with checkbox" value={item}
+                                                        />
+                                                        <Form.Control value={item}
                                                                       readOnly/>
                                                     </InputGroup>
                                                 );
                                             }, { question_number: index })}
-                                        </div>
-                                        }
+                                        </div>}
 
 
                                     </AnswersWrapper>}
@@ -177,25 +133,30 @@ const PublishedSurvey = () => {
                                         <Form.Control onChange={(element) => handleSelectAnswerText({
                                             question_number: index,
                                             answer: element.target.value,
-                                        })} aria-label="Text input with checkbox"/>
+                                        })}/>
                                     </InputGroup>
                                     }
                                 </Form.Group>
-
                             );
                         })
                         }
                     </Form>
-                    <Button onClick={() => handleOnSubmit()} style={{ marginTop: '10px' }}>Submit</Button>
+                    {!handleReadyToSubmit() &&
+                    <Button
+                        style={{ marginTop: '10px' }}
+                        disabled={true}>Please answer all questions</Button>
+                    }
+                    {handleReadyToSubmit() &&
+                    <Button
+                        onClick={() => handleSubmit()}
+                        style={{ marginTop: '10px' }}>Submit</Button>
+                    }
                 </MainWrapper>
             </RootWrapper>
         );
     } else {
         return (
-            <div>
-                {/*TODO: ADD ERROR PAGE*/}
-                ERROR
-            </div>
+            <ErrorPage error_message={'Survey not found or is not active...'}/>
         );
     }
 };
