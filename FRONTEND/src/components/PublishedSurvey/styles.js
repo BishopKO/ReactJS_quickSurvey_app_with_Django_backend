@@ -6,7 +6,8 @@ const RootWrapper = styled.div`
   justify-content: center;
   background-color: lightblue;
   width: 100%;
-  height: 100%;  
+  min-height: 100vh;
+  height: fit-content; 
   border-radius: 5px;
 `;
 

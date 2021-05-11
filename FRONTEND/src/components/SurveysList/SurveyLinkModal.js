@@ -25,9 +25,7 @@ const SurveyLinkModal = ({ show, link, closeAction }) => {
                 </Modal.Dialog>
             </Modal>
         </>
-
     );
-
 };
 
 export default SurveyLinkModal;
