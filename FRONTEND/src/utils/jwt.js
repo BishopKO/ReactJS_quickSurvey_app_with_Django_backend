@@ -43,9 +43,9 @@ const sendQueryUsingTokens = (view, query) => {
             ).catch(error => {
                 if (error) {
                     reject({ token: 'error' });
-                    console.log('Refresh token error!');
                     localStorage.clear();
                     store.dispatch({ type: 'TOKEN_ERROR' });
+                    window.location.href = '/';
                 }
             });
         }

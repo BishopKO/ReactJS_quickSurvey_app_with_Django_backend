@@ -73,7 +73,7 @@ const PublishedSurvey = () => {
             <RootWrapper>
                 <ConfirmSubmitModal show={showConfirmModal} closeAction={() => setShowConfirmModal(false)}
                                     submitAction={() => submitAnswers()}/>
-                <MainWrapper>
+                <MainWrapper className="PublishedSurveyWrapper">
                     <Alert variant="dark" style={{
                         textAlign: 'center',
                         fontWeight: 'bold',
