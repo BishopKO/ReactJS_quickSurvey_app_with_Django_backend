@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import AnswerTypeButtons from '../Atoms/answerTypeButtons';
 import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import { sendQueryUsingTokens } from '../../utils/jwt';
+import BackButtonComponent from '../Atoms/BackButton';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -93,10 +94,7 @@ const EditSurvey = () => {
 
     return (
         <MainWrapper>
-            <div>
-                <Button onClick={() => history.push('/list')} size="sm" variant="outline-secondary">
-                    <span>&larr; </span>Cancel and go back</Button>
-            </div>
+            <BackButtonComponent text={'Cancel and Go Back'}/>
             <TopBarWrapper>
                 <Form.Control type="text" size="sm" placeholder="Title" style={{ width: '80%', fontWeight: 'bold' }}
                               onChange={(element) => handleChangeTitle(element)} value={state.title}/>

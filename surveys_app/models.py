@@ -14,7 +14,7 @@ class Survey(models.Model):
     data = models.TextField()
 
     class Meta:
-        verbose_name_plural = "Survey"
+        verbose_name_plural = "Surveys"
 
     def __str__(self):
         return self.owner.username + '__' + self.survey_title
@@ -29,4 +29,4 @@ class Answers(models.Model):
         verbose_name_plural = "Answers"
 
     def __str__(self):
-        return self.survey_id
+        return str(self.survey_id)

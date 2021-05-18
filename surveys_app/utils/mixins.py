@@ -2,11 +2,13 @@ from django.db import IntegrityError, DatabaseError
 from django.http import JsonResponse
 
 
+# TODO: ADD MORE EXCEPTIONS
 class ExceptionCatchAndJsonResponseMixin:
     @staticmethod
     def return_exception(exception):
-        print(exception)
         if isinstance(exception, IntegrityError):
-            return JsonResponse({'registration': 'INTEGRITY_ERROR'})
+            return JsonResponse({'error': 'INTEGRITY_ERROR'})
         elif isinstance(exception, DatabaseError):
-            return JsonResponse({'registration': 'DATABASE_ERROR'})
+            return JsonResponse({'error': 'DATABASE_ERROR'})
+        else:
+            return JsonResponse({'error': 'DATABASE_ERROR'})

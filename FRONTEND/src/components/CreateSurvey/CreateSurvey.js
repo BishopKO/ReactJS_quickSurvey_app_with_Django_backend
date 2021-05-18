@@ -87,7 +87,6 @@ const CreateSurvey = () => {
         dispatch({ type: 'SET_ANSWER_TYPE', payload: { index: index, type: type } });
     };
 
-    // TODO: ADD SINGLE/MULTI ANSWERS TYPE
 
     return (
         <MainWrapper>

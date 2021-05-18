@@ -7,6 +7,7 @@ import SurveysList from '../components/SurveysList/SurveysList';
 import PreviewSurvey from '../components/PreviewSurvey/PreviewSurvey';
 import PublishedSurvey from '../components/PublishedSurvey/PublishedSurvey';
 import SubmitSuccessPage from '../components/PublishedSurvey/SubmitSuccessPage';
+import Results from '../components/Results/Results';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import NavbarTemplate from '../components/MainTemplate/NavbarTemplate';
@@ -46,7 +47,9 @@ const MainRoutingView = ({ loggedIn }) => {
                                 </Route>
                                 <Route exact path="/create_survey">
                                     <CreateSurvey/>
-
+                                </Route>
+                                <Route exact path="/results">
+                                    <Results/>
                                 </Route>
                             </NavbarTemplate>
                             :
@@ -60,7 +63,7 @@ const MainRoutingView = ({ loggedIn }) => {
                             </NavbarTemplate>
                         }
                     </Switch>
-                    {loggedIn ? <Redirect to="/list"/> : <Redirect to="/login"/>}
+                    {!loggedIn && <Redirect to="/login"/>}
                 </Container>
             </BrowserRouter>
         );

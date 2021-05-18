@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.test import Client
 
-urls_names = {'tokens': 'token_obtain_pair', 'create': 'create-survey', 'list': 'surveys-list',
+urls_names = {'tokens': 'token_obtain_pair', 'create': 'create-survey', 'list': 'surveys-luist',
               'register': 'user-register'}
 
 

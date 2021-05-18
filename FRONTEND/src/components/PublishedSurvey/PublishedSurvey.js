@@ -124,10 +124,7 @@ const PublishedSurvey = () => {
                                                 );
                                             }, { question_number: index })}
                                         </div>}
-
-
                                     </AnswersWrapper>}
-
                                     {!item.hasOwnProperty('answers') &&
                                     <InputGroup>
                                         <Form.Control onChange={(element) => handleSelectAnswerText({

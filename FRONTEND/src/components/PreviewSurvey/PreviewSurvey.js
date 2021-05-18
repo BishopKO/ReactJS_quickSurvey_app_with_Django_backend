@@ -3,6 +3,7 @@ import { useLocation } from 'react-router';
 import { sendQueryUsingTokens } from '../../utils/jwt';
 import styled from 'styled-components';
 import { Button, Form, Alert, InputGroup } from 'react-bootstrap';
+import BackButtonComponent from '../Atoms/BackButton';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -38,6 +39,7 @@ const PreviewSurvey = () => {
     const [surveyData, setSurveyData] = useState({});
 
     // TODO: Preview from create and edit ??
+    // TODO: USE BACK BUTTON COMPONENT
     useEffect(() => {
         const locationState = location.state;
         const survey_id = locationState.survey_id;
@@ -51,10 +53,7 @@ const PreviewSurvey = () => {
     if (surveyData.hasOwnProperty('questions')) {
         return (
             <MainWrapper>
-                <TopWrapper>
-                    <Button onClick={() => window.history.back()} size="sm" variant="outline-secondary">
-                        <span>&larr; </span>Go back</Button>
-                </TopWrapper>
+                <BackButtonComponent/>
                 <Alert variant="dark" style={{ textAlign: 'center' }}>{surveyData.title}</Alert>
 
                 <Form>

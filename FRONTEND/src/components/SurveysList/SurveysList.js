@@ -107,13 +107,15 @@ const SurveysList = () => {
                                     </ListGroup>
                                     <ButttonsWrapper>
                                         <ButtonGroup>
-                                            <Button size="sm" variant="outline-success">Results</Button>
+                                            <Button as={Link}
+                                                    to={{ pathname: '/results', state: { survey_id: item.id } }} size='sm'
+                                                    variant='outline-success'>Results</Button>
                                             <Button as={Link}
                                                     to={{ pathname: '/survey_preview', state: { survey_id: item.id } }}
                                                     size="sm"
                                                     variant="outline-dark">Preview</Button>
-                                            <Button onClick={() => handleEdit(item.id)} size="sm"
-                                                    variant="outline-primary">Edit</Button>
+                                            <Button onClick={() => handleEdit(item.id)} size='sm'
+                                                    variant='outline-primary'>Edit</Button>
                                             <Button onClick={() => showLinkModal(item.id)} size="sm"
                                                     variant="outline-secondary">Link</Button>
                                         </ButtonGroup>
