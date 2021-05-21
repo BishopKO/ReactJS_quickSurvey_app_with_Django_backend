@@ -1,40 +1,12 @@
 import React, { useReducer } from 'react';
-import { useHistory } from 'react-router';
 import createReducer from './createReducer';
-import styled from 'styled-components';
 import BackButtonComponent from '../Atoms/BackButton';
-import { Form, Button, ButtonGroup } from 'react-bootstrap';
-import { sendQueryUsingTokens } from '../../utils/jwt';
 import AnswerTypeButtons from '../Atoms/answerTypeButtons';
-
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 700px;
-  margin: 30px auto;
-  justify-content: center;  
-  border: 1px solid lightgrey;
-  padding: 5px;
-  border-radius: 5px;
-  
-`;
-
-const TopBarWrapper = styled.div`
-  display: grid;
-  justify-content: center;  
-  max-width: inherit;  
-  grid-template-columns: 80% 20% ;  
-  margin-top: 20px; 
- padding-bottom: 5px; 
- font-size: 4px;
-  border-bottom: 1px solid lightgrey;
-`;
-
-const TopBarButtonsWrapper = styled.div`
-  display: flex;  
-  flex-direction: row;
-  justify-content: flex-end;  
-`;
+import { sendQueryUsingTokens } from '../../utils/jwt';
+import { useHistory } from 'react-router';
+import { Form, Button, ButtonGroup } from 'react-bootstrap';
+import { TopBarButtonsWrapper, TopBarWrapper, MainWrapper } from './styledComponents';
+import { FormLabelStyle, FormControlStyle } from './styles';
 
 
 const CreateSurvey = () => {
@@ -93,7 +65,7 @@ const CreateSurvey = () => {
         <MainWrapper>
             <BackButtonComponent text={'Cancel and Go Back'}/>
             <TopBarWrapper>
-                <Form.Control type="text" size="sm" placeholder="Title" style={{ width: '60%' }}
+                <Form.Control type="text" size="sm" placeholder="Title" style={FormControlStyle}
                               onChange={(element) => handleChangeTitle(element)} value={state.title}/>
                 <TopBarButtonsWrapper>
                     <Button variant="outline-success" size="sm" className="mx-1"
@@ -105,7 +77,7 @@ const CreateSurvey = () => {
                 {state.questions.map((item, index) => {
                     return (
                         <Form.Group className="mt-3" key={`question_${index}`}>
-                            <Form.Label style={{ fontWeight: 'bold' }}>Question {index + 1}:</Form.Label>
+                            <Form.Label style={FormLabelStyle}>Question {index + 1}:</Form.Label>
                             <Form.Control type="text" value={item.question} name={index}
                                           onChange={(element) => handleChangeQuestion(element, index)}/>
                             <ButtonGroup className=" mt-1">
@@ -130,15 +102,12 @@ const CreateSurvey = () => {
                                 <Form.Control as="textarea" rows={3} value={item.answers}
                                               onChange={(element) => handleChangeAnswers(element, index)}/>
                             </Form.Group>
-
-
                             }
                         </Form.Group>
 
                     );
                 })
                 }
-
             </Form>
             <Button variant="primary" className="mt-3" onClick={handleAddQuestion}>Add +</Button>
         </MainWrapper>

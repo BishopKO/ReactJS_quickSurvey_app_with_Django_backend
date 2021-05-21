@@ -1,35 +1,11 @@
-import styled from 'styled-components';
+const AlertStyle = {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: '22px',
+};
 
-const RootWrapper = styled.div`   
-  display: flex;
-  flex-direction: row; 
-  justify-content: center;
-  background-color: lightblue;
-  width: 100%;
-  min-height: 100vh;
-  height: fit-content; 
-  border-radius: 5px;
-`;
+const FormLabelStyle = { fontWeight: 'bold' };
 
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 800px;
-  margin-top: 10px;   
-  padding: 5px;
-  border-radius: 5px;  
-  background-color: white;
-  overflow: hidden;
-  height: fit-content;
-  margin-bottom: 100px;
-`;
+const ButtonStyle = { marginTop: '10px' };
 
-const AnswersWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 5px;
-`;
-
-
-export { RootWrapper, MainWrapper, AnswersWrapper };
+export { AlertStyle, FormLabelStyle, ButtonStyle };

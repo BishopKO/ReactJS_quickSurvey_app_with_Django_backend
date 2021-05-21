@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useReducer } from 'react';
-import { useParams, useHistory } from 'react-router';
-import { getPublishedSurveyData, savePublishedSurveyData } from '../../utils/jwt';
-
-import { Button, Form, Alert, InputGroup } from 'react-bootstrap';
-import { RootWrapper, MainWrapper, AnswersWrapper } from './styles';
+import formReducer from './formReducer';
 import ConfirmSubmitModal from './ConfirmSubmitModal';
 import ErrorPage from './ErrorPage';
-import formReducer from './formReducer';
+import { useParams, useHistory } from 'react-router';
+import { getPublishedSurveyData, savePublishedSurveyData } from '../../utils/jwt';
+import { Button, Form, Alert, InputGroup } from 'react-bootstrap';
+import { RootWrapper, MainWrapper, AnswersWrapper } from './styledComponents';
+import { AlertStyle, ButtonStyle, FormLabelStyle } from './styles';
 
 
 const getCheckboxesValue = (element_id) => {
@@ -74,17 +74,13 @@ const PublishedSurvey = () => {
                 <ConfirmSubmitModal show={showConfirmModal} closeAction={() => setShowConfirmModal(false)}
                                     submitAction={() => submitAnswers()}/>
                 <MainWrapper className="PublishedSurveyWrapper">
-                    <Alert variant="dark" style={{
-                        textAlign: 'center',
-                        fontWeight: 'bold',
-                        fontSize: '22px',
-                    }}>{surveyData.title}</Alert>
+                    <Alert variant="dark" style={AlertStyle}>{surveyData.title}</Alert>
                     <Form>
                         {surveyData.questions.map((item, index) => {
                             return (
                                 <Form.Group className={index === 0 ? 'mt-1' : 'mt-5'}
                                             key={`question_${index}`}>
-                                    <Form.Label style={{ fontWeight: 'bold' }}>{item.question}:</Form.Label>
+                                    <Form.Label style={FormLabelStyle}>{item.question}:</Form.Label>
                                     {item.hasOwnProperty('answers') &&
 
                                     <AnswersWrapper key={`answer_${index}`}>
@@ -141,13 +137,13 @@ const PublishedSurvey = () => {
                     </Form>
                     {!handleReadyToSubmit() &&
                     <Button
-                        style={{ marginTop: '10px' }}
+                        style={ButtonStyle}
                         disabled={true}>Please answer all questions</Button>
                     }
                     {handleReadyToSubmit() &&
                     <Button
                         onClick={() => handleSubmit()}
-                        style={{ marginTop: '10px' }}>Submit</Button>
+                        style={ButtonStyle}>Submit</Button>
                     }
                 </MainWrapper>
             </RootWrapper>

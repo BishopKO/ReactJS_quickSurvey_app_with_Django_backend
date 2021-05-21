@@ -1,40 +1,8 @@
 import React, { useReducer } from 'react';
-import styled from 'styled-components';
 import BackButtonComponent from '../Atoms/BackButton';
 import { ListGroup } from 'react-bootstrap';
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 20% 80%;
-  margin-top: 20px;
-`;
-
-const AnswersWrapper = styled.div`
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  margin-left: 10px;
-  padding: 5px
-`;
-
-const AnswerWrapper = styled.div`
-  margin-bottom: 10px;
-`;
-
-
-const QuestionStyle = {
-    fontWeight: 'bold',
-};
-
-const AnswerStyle = {
-    padding: 0,
-    margin: 0,
-};
-
-const ListGroupStyle = {
-    textAlign: 'center',
-    cursor: 'pointer',
-};
-
+import { Wrapper, AnswersWrapper, AnswerWrapper } from './styledComponents';
+import { ListGroupStyle, AnswerStyle, QuestionStyle } from './stylesDesktop';
 
 const DesktopView = ({ surveyAnswers }) => {
     const reducer = (state, activeAnswers) => {

@@ -1,35 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import BackButtonComponent from '../Atoms/BackButton';
 import { useLocation } from 'react-router';
 import { sendQueryUsingTokens } from '../../utils/jwt';
-import styled from 'styled-components';
+import { MainWrapper, AnswersWrapper } from './styledComponents';
+import { AlertStyle, ButtonStyle, FormLabelStyle } from './styles';
 import { Button, Form, Alert, InputGroup } from 'react-bootstrap';
-import BackButtonComponent from '../Atoms/BackButton';
-
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 700px;
-  margin: 30px auto;
-  justify-content: center;  
-  border: 1px solid lightgrey;
-  padding: 5px;
-  border-radius: 5px;
-`;
-
-const AnswersWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 5px;
-`;
 
 
 const PreviewSurvey = () => {
     const location = useLocation();
     const [surveyData, setSurveyData] = useState({});
 
-    // TODO: Preview from create and edit ??
-    // TODO: USE BACK BUTTON COMPONENT
     useEffect(() => {
         const locationState = location.state;
         const survey_id = locationState.survey_id;
@@ -37,30 +18,27 @@ const PreviewSurvey = () => {
             .then(response => {
                 setSurveyData(response.data);
             });
-
-    }, [location.state]);
+    }, []);
 
     if (surveyData.hasOwnProperty('questions')) {
         return (
             <MainWrapper>
                 <BackButtonComponent/>
-                <Alert variant="dark" style={{ textAlign: 'center' }}>{surveyData.title}</Alert>
-
+                <Alert variant="dark" style={AlertStyle}>{surveyData.title}</Alert>
                 <Form>
                     {surveyData.questions.map((item, index) => {
                         return (
                             <Form.Group className={index === 0 ? 'mt-1' : 'mt-5'}
                                         key={`question_${index}`}>
-                                <Form.Label style={{ fontWeight: 'bold' }}>{item.question}:</Form.Label>
+                                <Form.Label style={FormLabelStyle}>{item.question}:</Form.Label>
                                 {item.hasOwnProperty('answers') &&
                                 <AnswersWrapper>
                                     <small>{item.type === 'single' ? '(select one)' : '(select multi)'}</small>
                                     {item.answers.split('\n').map((item, index) => {
                                         return (
                                             <InputGroup key={`answer_${index}`}>
-                                                <InputGroup.Checkbox
-                                                    aria-label="Checkbox for answer"/>
-                                                <Form.Control aria-label="Text input with checkbox" value={item}
+                                                <InputGroup.Checkbox/>
+                                                <Form.Control value={item}
                                                               readOnly/>
                                             </InputGroup>
                                         );
@@ -69,16 +47,15 @@ const PreviewSurvey = () => {
                                 }
                                 {!item.hasOwnProperty('answers') &&
                                 <InputGroup>
-                                    <Form.Control aria-label="Text input with checkbox"/>
+                                    <Form.Control/>
                                 </InputGroup>
                                 }
                             </Form.Group>
-
                         );
                     })
                     }
                 </Form>
-                <Button style={{ marginTop: '10px' }}>Submit</Button>
+                <Button style={ButtonStyle}>Submit</Button>
             </MainWrapper>
         );
     } else {

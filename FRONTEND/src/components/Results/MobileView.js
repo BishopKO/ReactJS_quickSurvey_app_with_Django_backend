@@ -1,24 +1,6 @@
 import React, { useEffect } from 'react';
 import { Accordion, Card, Button } from 'react-bootstrap';
-
-const CardStyle = {
-    // padding: '2px',
-    margin: 0,
-};
-
-const CardHeaderStyle = {
-    textAlign: 'center',
-    justifyContent: 'center',
-};
-
-const QuestionStyle = {
-    fontWeight: 'bold',
-};
-
-const AnswerStyle = {
-    padding: 0,
-    margin: 0,
-};
+import { AnswerStyle, QuestionStyle, CardHeaderStyle, CardStyle } from './stylesMobile';
 
 const MobileView = ({ surveyAnswers }) => {
 
