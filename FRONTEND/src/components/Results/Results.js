@@ -1,35 +1,15 @@
-import React, { useEffect, useState, useReducer } from 'react';
-import { ListGroup } from 'react-bootstrap';
-import styled from 'styled-components';
-import BackButtonComponent from '../Atoms/BackButton';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { sendQueryUsingTokens } from '../../utils/jwt';
-
-const Wrapper = styled.div`
-//TODO: CREATe mobile version
-  display: grid;
-  grid-template-columns: 20% 80%;
-  margin-top: 20px;
-`;
-
-const AnswersWrapper = styled.div`
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  margin-left: 10px;
-  padding: 5px
-`;
-
-// TODO: move all styles to variables
-
-const ListGroupStyle = {
-    textAlign: 'center',
-    cursor: 'pointer',
-};
+import DesktopView from './DesktopView';
+import MobileView from './MobileView';
 
 const Results = () => {
     const location = useLocation();
     const survey_id = location.state.survey_id;
     const [surveyAnswers, setSurveyAnswers] = useState([]);
+    const [view] = useState(window.innerWidth >= 550 ? 'desktop' : 'mobile');
+
 
     useEffect(() => {
         sendQueryUsingTokens('get_results', { survey_id: survey_id }).then(resp => {
@@ -37,56 +17,17 @@ const Results = () => {
         }).catch(err => console.log(err));
     }, [survey_id]);
 
-    const reducer = (state, number) => {
-        return {
-            ...state,
-            number,
-        };
-    };
 
-    const [state, dispatch] = useReducer(reducer, { number: null });
-
-    const handleSelectAnswer = (number) => {
-        dispatch(number);
-    };
-
-    if (surveyAnswers) {
+    if (surveyAnswers.length > 0) {
         return (
             <div>
-                <BackButtonComponent/>
-                <Wrapper>
-                    <ListGroup style={ListGroupStyle}>
-                        {surveyAnswers.map((item, index) => {
-                            return (
-                                // TODO: change to button
-                                <ListGroup.Item
-                                    onClick={() => handleSelectAnswer(index)}>{`Answer ${index + 1}`}</ListGroup.Item>
-                            );
-                        })}
-                    </ListGroup>
-
-                    {/*TODO: move to separate compnent*/}
-                    <AnswersWrapper>
-                        {state.number !== null &&
-                        surveyAnswers[state.number].map((item, index) => {
-                            return (
-                                <div>
-                                    <p style={{ fontWeight: 'bold' }}>{item.question}</p>
-                                    {item.answer.split('\n').map(item => {
-                                        return (
-                                            <p>{item}</p>
-                                        );
-                                    })}
-                                </div>
-                            );
-                        })
-                        }
-                    </AnswersWrapper>
-                </Wrapper>
+                {view === 'mobile' && <MobileView surveyAnswers={surveyAnswers}/>}
+                {view === 'desktop' && <DesktopView surveyAnswers={surveyAnswers}/>
+                }
             </div>
         );
     } else {
-        return (<></>);
+        return (<>Error Page</>);
     }
 };
 

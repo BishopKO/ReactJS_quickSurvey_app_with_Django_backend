@@ -12,6 +12,7 @@ const formReducer = (state, action) => {
         }
         case 'QUESTION_MULTI': {
             const { question_number, selected } = payload;
+            console.log(selected);
             const tmpState = state;
             tmpState[question_number] = selected;
             return { ...tmpState };

@@ -2,10 +2,12 @@ import axios from 'axios';
 import store from '../reducer/store';
 import jwt_decode from 'jwt-decode';
 
+const host = 'http://127.0.0.1:8000';
+
 
 const login = (username, password) => {
     return new Promise((resolve, reject) => {
-        axios.post('http://127.0.0.1:8000/api/token/', { username: username, password: password },
+        axios.post(`${host}/api/token/`, { username: username, password: password },
         ).then(response => {
                 resolve({ login: 'SUCCESS', tokens: response.data });
             },
@@ -18,6 +20,16 @@ const login = (username, password) => {
     });
 };
 
+const user_register = (username, password) => {
+    return new Promise((resolve, reject) => {
+        axios.post(`${host}/user_register`, {
+            username: username,
+            password: password,
+        }).then(() => resolve({ 'USER_REGISTER': 'SUCCESS' }))
+            .catch(() => reject({ 'USER_REGISTER': 'FAIL' }));
+    });
+};
+
 const sendQueryUsingTokens = (view, query) => {
     return new Promise((resolve, reject) => {
         const accessToken = localStorage.getItem('access');
@@ -27,11 +39,11 @@ const sendQueryUsingTokens = (view, query) => {
         const leftAccessTime = Math.floor(accessExp - (Date.now() / 1000));
         if (leftAccessTime > 0) {
             let config = { headers: { Authorization: `Bearer ${accessToken}` } };
-            axios.post(`http://127.0.0.1:8000/${view}`, query, config).then(data => resolve(data)).catch(error => {
+            axios.post(`${host}/${view}`, query, config).then(data => resolve(data)).catch(error => {
                 reject(error);
             });
         } else {
-            axios.post('http://127.0.0.1:8000/api/token/refresh/', { refresh: refreshToken },
+            axios.post(`${host}/api/token/refresh/`, { refresh: refreshToken },
             ).then(response => {
                     const accessToken = response.data.access;
                     localStorage.setItem('access', accessToken);
@@ -55,7 +67,7 @@ const getPublishedSurveyData = (id) => {
     const query = { request: 'GET_PUBLISHED_SURVEY', survey_id: id };
 
     return new Promise((resolve, reject) => {
-        axios.post(`http://127.0.0.1:8000/get_published_survey`, query)
+        axios.post(`${host}/get_published_survey`, query)
             .then(data => resolve(data))
             .catch(error => {
                 reject(error);
@@ -67,7 +79,7 @@ const savePublishedSurveyData = (id, data) => {
     const query = { request: 'SAVE_PUBLISHED_SURVEY', survey_id: id, survey_data: data };
 
     return new Promise((resolve, reject) => {
-        axios.post(`http://127.0.0.1:8000/save_published_survey`, query)
+        axios.post(`${host}/save_published_survey`, query)
             .then(data => resolve(data))
             .catch(error => {
                 reject(error);
@@ -76,4 +88,4 @@ const savePublishedSurveyData = (id, data) => {
 };
 
 
-export { login, sendQueryUsingTokens, getPublishedSurveyData, savePublishedSurveyData };
+export { login, user_register, sendQueryUsingTokens, getPublishedSurveyData, savePublishedSurveyData };

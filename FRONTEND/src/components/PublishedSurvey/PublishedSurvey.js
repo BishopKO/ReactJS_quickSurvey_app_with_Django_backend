@@ -11,7 +11,7 @@ import formReducer from './formReducer';
 
 const getCheckboxesValue = (element_id) => {
     const checkboxes = document.querySelector(`#${element_id}`);
-    const inputs = checkboxes.querySelectorAll('input.form-check-input');
+    const inputs = checkboxes.querySelectorAll('input[type=checkbox]');
     return Array.from(inputs).map((item) => {
         return item.checked;
     });
@@ -114,9 +114,10 @@ const PublishedSurvey = () => {
                                             <small>(select multiple)</small>
                                             {item.answers.split('\n').map(function(item, index) {
                                                 return (
-                                                    <InputGroup key={`answers_multi_${index}`}>
-                                                        <InputGroup.Checkbox
-                                                            onChange={() => handleSelectAnswerMulti(this.question_number)}
+                                                    <InputGroup key={`answers_multi_${index}`}
+                                                                id={`answers_multi_${this.question_number}`}>
+                                                        <InputGroup.Checkbox key={`checkbox_${index}`}
+                                                                             onChange={() => handleSelectAnswerMulti(this.question_number)}
                                                         />
                                                         <Form.Control value={item}
                                                                       readOnly/>

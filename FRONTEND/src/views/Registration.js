@@ -4,6 +4,7 @@ import axios from 'axios';
 import email_validator from 'email-validator';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
+import { user_register } from '../utils/jwt';
 
 const LoginDiv = styled.div`
     max-width: 400px; 
@@ -41,24 +42,18 @@ const Registration = () => {
             setRegistrationError('Bad email address.');
         } else if (password1.length < 6) {
             setRegistrationError('Password too short.');
-
         } else if (password1 !== password2) {
             setRegistrationError('Password does not match.');
         } else {
             setRegistrationError(false);
-            axios.post('http://127.0.0.1:8000/user_register', {
-                    username: username,
-                    password: password1,
-                },
-            ).then(response => {
-                if (response.data.registration === 'SUCCESS') {
+            user_register(username, password1).then(response => {
+                if (response.USER_REGISTER === 'SUCCESS') {
                     history.push('/login');
                 } else {
                     console.log('FAIL');
                 }
             });
         }
-
     };
 
     return (

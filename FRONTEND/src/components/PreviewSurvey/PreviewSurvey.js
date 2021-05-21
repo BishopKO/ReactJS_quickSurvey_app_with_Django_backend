@@ -16,18 +16,8 @@ const MainWrapper = styled.div`
   border-radius: 5px;
 `;
 
-const TopWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;  
-  max-width: inherit;   
-  margin-bottom: 25px;  
-  font-size: 4px;
-  border-bottom: 1px solid lightgrey;
-  padding: 5px
-`;
-
 const AnswersWrapper = styled.div`
-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 5px;

@@ -21,15 +21,11 @@ const ErrorMessage = styled.p`
     font-size: 10px;
 `;
 
-const LoginPage = ({ context }) => {
+const LoginPage = () => {
     const [loginDetails, setLoginDetails] = useState({ username: '', password: '' });
     const [loginError, setLoginError] = useState(false);
 
     const history = useHistory();
-
-    useEffect(() => {
-        console.log(context);
-    });
 
     const handleChange = (element) => {
         const { name, value } = element;
@@ -41,14 +37,13 @@ const LoginPage = ({ context }) => {
     const handleClick = () => {
         login(loginDetails.username, loginDetails.password)
             .then(response => {
-                console.log(response);
                 if (response.login === 'SUCCESS') {
                     const { refresh, access } = response.tokens;
                     localStorage.setItem('access', access);
                     localStorage.setItem('refresh', refresh);
                     localStorage.setItem('loggedIn', 'true');
-                    store.dispatch({ type: 'LOGIN', payload: 'SUCCESS' });
                     history.push('/list');
+                    store.dispatch({ type: 'LOGIN', payload: 'SUCCESS' });
                 }
             })
             .catch(error => {

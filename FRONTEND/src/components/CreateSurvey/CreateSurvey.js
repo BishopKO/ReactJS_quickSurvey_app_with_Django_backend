@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import { useHistory } from 'react-router';
 import createReducer from './createReducer';
 import styled from 'styled-components';
+import BackButtonComponent from '../Atoms/BackButton';
 import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import { sendQueryUsingTokens } from '../../utils/jwt';
 import AnswerTypeButtons from '../Atoms/answerTypeButtons';
@@ -90,11 +91,7 @@ const CreateSurvey = () => {
 
     return (
         <MainWrapper>
-            <div>
-                <Button onClick={() => history.push('/list')} size="sm" variant="outline-secondary">
-                    <span>&larr;</span>Cancel and go back
-                </Button>
-            </div>
+            <BackButtonComponent text={'Cancel and Go Back'}/>
             <TopBarWrapper>
                 <Form.Control type="text" size="sm" placeholder="Title" style={{ width: '60%' }}
                               onChange={(element) => handleChangeTitle(element)} value={state.title}/>

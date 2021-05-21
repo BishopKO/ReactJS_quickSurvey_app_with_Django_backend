@@ -33,6 +33,8 @@ const CustomNavbar = ({ loggedIn }) => {
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 {loggedIn ?
                     <Nav>
+                        <Button variant="outline-secondary" onClick={() => history.push('/list')}
+                                size="sm" className="mx-1">Main View</Button>
                         <Button variant="outline-success" onClick={handleCreate} role="link" size="sm"
                                 className="mx-1">Create +</Button>
                         <Button variant="outline-primary" onClick={handleLogout} role="link" size="sm"
@@ -40,6 +42,7 @@ const CustomNavbar = ({ loggedIn }) => {
                     </Nav>
                     :
                     <Nav>
+
                         <Button variant="outline-warning" onClick={() => history.push('/registration')}
                                 size="sm" className="mx-1">Register</Button>
                         <Button variant='outline-success' onClick={() => history.push('/login')}
