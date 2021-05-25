@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Accordion, Card, Button } from 'react-bootstrap';
-import { AnswerStyle, QuestionStyle, CardHeaderStyle, CardStyle } from './stylesMobile';
+import { AnswerStyle, QuestionStyle, CardHeaderStyle, CardStyle, CardBodyStyle } from './stylesMobile';
 
-const MobileView = ({ surveyAnswers }) => {
-
-    useEffect(() => {
-        console.log(surveyAnswers);
-    });
+const MobileView = ({ textResults, chartResults }) => {
 
     return (
-        <Accordion>
-            {surveyAnswers.map((answers, index) => {
+        <Accordion defaultActiveKey={0}>
+            {textResults.map((answers, index) => {
                 return (
                     <Card style={CardStyle}>
                         <Card.Header style={CardHeaderStyle}>
@@ -21,7 +17,7 @@ const MobileView = ({ surveyAnswers }) => {
                         {answers.map((item) => {
                             return (
                                 <Accordion.Collapse eventKey={index + 1}>
-                                    <Card.Body>
+                                    <Card.Body style={CardBodyStyle}>
                                         <span style={QuestionStyle}>{item.question}</span>
                                         {item.answer.split('\n').map(item => {
                                             return (

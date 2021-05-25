@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Survey, Answers
 from surveys_app.utils.mixins import ExceptionCatchAndJsonResponseMixin
-from surveys_app.utils.prepareResults import prepare_results
+from surveys_app.utils.prepare_results import prepare_text_results, prepare_chart_results
 
 
 class Index(TemplateView):
@@ -124,12 +124,9 @@ class SurveyResults(ExceptionCatchAndJsonResponseMixin, APIView):
             user = User.objects.get(id=decoded_token.get('user_id'))
             survey_data = Survey.objects.get(owner=user, survey_id=survey_id)
             answers_data = Answers.objects.filter(survey_id__owner=user, survey_id=survey_id).values()
-            results = prepare_results(survey_data.data, list(answers_data))
-
-            return JsonResponse({'survey_results': results})
-
-            # return JsonResponse(
-            #     {'survey_questions': json.loads(survey_data), 'survey_results': answers_data})
+            text_results = prepare_text_results(survey_data.data, list(answers_data))
+            chart_results = prepare_chart_results(survey_data.data, list(answers_data))
+            return JsonResponse({'text_results': text_results, 'chart_results': chart_results})
         except Exception as e:
             print(e)
             return self.return_exception(e)

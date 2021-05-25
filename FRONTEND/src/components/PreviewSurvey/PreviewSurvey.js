@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BackButtonComponent from '../Atoms/BackButton';
-import { useLocation } from 'react-router';
+import { useParams } from 'react-router';
 import { sendQueryUsingTokens } from '../../utils/jwt';
 import { MainWrapper, AnswersWrapper } from './styledComponents';
 import { AlertStyle, ButtonStyle, FormLabelStyle } from './styles';
@@ -8,17 +8,16 @@ import { Button, Form, Alert, InputGroup } from 'react-bootstrap';
 
 
 const PreviewSurvey = () => {
-    const location = useLocation();
+    const { id } = useParams();
     const [surveyData, setSurveyData] = useState({});
 
     useEffect(() => {
-        const locationState = location.state;
-        const survey_id = locationState.survey_id;
-        sendQueryUsingTokens('edit_survey', { request: 'GET_SURVEY_DATA', survey_id: survey_id })
+        sendQueryUsingTokens('edit_survey', { request: 'GET_SURVEY_DATA', survey_id: id })
             .then(response => {
+                console.log(response.data);
                 setSurveyData(response.data);
             });
-    }, []);
+    }, [id]);
 
     if (surveyData.hasOwnProperty('questions')) {
         return (

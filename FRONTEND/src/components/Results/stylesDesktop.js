@@ -8,8 +8,16 @@ const AnswerStyle = {
 };
 
 const ListGroupStyle = {
+    height: '50vh',
     textAlign: 'center',
     cursor: 'pointer',
+    overflowY: 'auto',
 };
 
-export { QuestionStyle, AnswerStyle, ListGroupStyle };
+const ListGroupItemStyle = {};
+
+const ListGroupItemActiveStyle = {
+    backgroundColor: 'lightgrey',
+};
+
+export { QuestionStyle, AnswerStyle, ListGroupStyle, ListGroupItemStyle, ListGroupItemActiveStyle };

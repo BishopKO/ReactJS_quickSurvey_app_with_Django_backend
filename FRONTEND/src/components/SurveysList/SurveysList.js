@@ -3,9 +3,9 @@ import SurveyLinkModal from './SurveyLinkModal';
 import DeleteSurveyModal from './DeleteSurveyModal';
 import { sendQueryUsingTokens } from '../../utils/jwt';
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 import { ListGroup, Button, ButtonGroup, Form } from 'react-bootstrap';
 import { MainWrapper, TestWrapper, TopWrapper, ButttonsWrapper } from './styledComponents';
+import { DateStyle } from './styles';
 
 const SurveysList = () => {
     const [surveysList, setSurveysList] = useState([]);
@@ -15,6 +15,7 @@ const SurveysList = () => {
 
     useEffect(() => {
         sendQueryUsingTokens('surveys_list', {
+            // TODO: ADD SORT FUNCTIONALITY
             order: '-date',
         }).then(response => {
             setSurveysList(response.data);
@@ -25,10 +26,6 @@ const SurveysList = () => {
     const handleSetActive = (id) => {
         sendQueryUsingTokens('edit_survey', { request: 'SET_ACTIVE', survey_id: id })
             .then(() => window.location.reload());
-    };
-
-    const handleEdit = (id) => {
-        history.push(`/edit/${id}`);
     };
 
     const handleDeleteSurveyAction = (id) => {
@@ -53,6 +50,21 @@ const SurveysList = () => {
         setShowModalDelete(false);
     };
 
+    const handleRedirect = (view, id) => {
+        switch (view) {
+            case 'results':
+                history.push(`/results/${id}`);
+                break;
+            case 'preview':
+                history.push(`/preview/${id}`);
+                break;
+            case 'edit':
+                history.push(`/edit/${id}`);
+                break;
+        }
+    };
+
+
     if (surveysList.length > 0) {
         return (
             <>
@@ -66,7 +78,7 @@ const SurveysList = () => {
                         return (
                             <TestWrapper key={`survey_${index}`}>
                                 <TopWrapper>
-                                    <span style={{ textAlign: 'center', fontWeight: 'bold' }}>{item.date}</span>
+                                    <span style={DateStyle}>{item.date}</span>
                                     <Form.Check type="checkbox" onChange={() => handleSetActive(item.id)}
                                                 label="active" checked={item.active}/>
                                 </TopWrapper>
@@ -75,14 +87,12 @@ const SurveysList = () => {
                                 </ListGroup>
                                 <ButttonsWrapper>
                                     <ButtonGroup>
-                                        <Button as={Link}
-                                                to={{ pathname: '/results', state: { survey_id: item.id } }} size='sm'
+                                        <Button onClick={() => handleRedirect('results', item.id)} size='sm'
                                                 variant='outline-success'>Results</Button>
-                                        <Button as={Link}
-                                                to={{ pathname: '/survey_preview', state: { survey_id: item.id } }}
+                                        <Button onClick={() => handleRedirect('preview', item.id)}
                                                 size="sm"
                                                 variant="outline-dark">Preview</Button>
-                                        <Button onClick={() => handleEdit(item.id)} size='sm'
+                                        <Button onClick={() => handleRedirect('edit', item.id)} size='sm'
                                                 variant='outline-primary'>Edit</Button>
                                         <Button onClick={() => showLinkModal(item.id)} size="sm"
                                                 variant="outline-secondary">Link</Button>

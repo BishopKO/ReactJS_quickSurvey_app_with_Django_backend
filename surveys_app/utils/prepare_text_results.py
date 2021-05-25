@@ -1,7 +1,7 @@
 import json
 
 
-def prepare_results(questions_data, answers_data):
+def prepare_text_results(questions_data, answers_data):
     survey_results = []
     tmp_answers = {}
     questions_data = json.loads(questions_data)

@@ -7,6 +7,10 @@ const CardHeaderStyle = {
     justifyContent: 'center',
 };
 
+const CardBodyStyle = {
+    padding: '10px',
+};
+
 const QuestionStyle = {
     fontWeight: 'bold',
 };
@@ -16,4 +20,4 @@ const AnswerStyle = {
     margin: 0,
 };
 
-export { CardStyle, CardHeaderStyle, QuestionStyle, AnswerStyle };
+export { CardStyle, CardHeaderStyle, CardBodyStyle, QuestionStyle, AnswerStyle };
