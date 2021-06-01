@@ -16,6 +16,7 @@ import CreateSurvey from '../components/CreateSurvey/CreateSurvey';
 
 const MainRoutingView = ({ loggedIn }) => {
     const location_pathname = window.location.pathname;
+    
 
     if (location_pathname.slice(0, 7) === '/survey') {
         return (

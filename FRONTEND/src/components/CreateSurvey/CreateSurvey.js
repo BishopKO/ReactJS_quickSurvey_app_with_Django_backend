@@ -1,64 +1,66 @@
-import React, { useReducer } from 'react';
-import createReducer from './createReducer';
-import BackButtonComponent from '../Atoms/BackButton';
-import AnswerTypeButtons from '../Atoms/answerTypeButtons';
-import { sendQueryUsingTokens } from '../../utils/jwt';
-import { useHistory } from 'react-router';
-import { Form, Button, ButtonGroup } from 'react-bootstrap';
-import { TopBarButtonsWrapper, TopBarWrapper, MainWrapper } from './styledComponents';
-import { FormLabelStyle, FormControlStyle } from './styles';
+import React, { useReducer } from 'react'
+import createReducer from './createReducer'
+import BackButtonComponent from '../Atoms/BackButton'
+import AnswerTypeButtons from '../Atoms/answerTypeButtons'
+import { sendQueryUsingTokens } from '../../utils/jwt'
+import { useHistory } from 'react-router'
+import { Form, Button, ButtonGroup } from 'react-bootstrap'
+import { TopBarButtonsWrapper, TopBarWrapper, MainWrapper } from './styledComponents'
+import { FormLabelStyle, FormControlStyle } from './styles'
 
+
+// TODO: Add button on the top
 
 const CreateSurvey = () => {
-    const history = useHistory();
+    const history = useHistory()
 
-    const initState = { title: '', questions: [{ question: '' }] };
-    const [state, dispatch] = useReducer(createReducer, initState);
+    const initState = { title: '', questions: [{ question: '' }] }
+    const [state, dispatch] = useReducer(createReducer, initState)
 
     const handleChangeTitle = (element) => {
-        const title = element.target.value;
-        dispatch({ type: 'UPDATE_TITLE', payload: title });
-    };
+        const title = element.target.value
+        dispatch({ type: 'UPDATE_TITLE', payload: title })
+    }
 
     const handleAddQuestion = () => {
-        dispatch({ type: 'ADD_QUESTION' });
-    };
+        dispatch({ type: 'ADD_QUESTION' })
+    }
 
     const handleRemove = (number) => {
-        dispatch({ type: 'REMOVE_QUESTION', payload: number });
-    };
+        dispatch({ type: 'REMOVE_QUESTION', payload: number })
+    }
 
     const handleChangeQuestion = (element, index) => {
-        dispatch({ type: 'UPDATE_QUESTION', payload: [index, element.target.value] });
-    };
+        dispatch({ type: 'UPDATE_QUESTION', payload: [index, element.target.value] })
+    }
 
     const handleChangeAnswers = (element, index) => {
-        dispatch({ type: 'UPDATE_ANSWERS', payload: [index, element.target.value] });
-    };
+        dispatch({ type: 'UPDATE_ANSWERS', payload: [index, element.target.value] })
+    }
 
     const handleAddAnswers = (index) => {
-        dispatch({ type: 'ADD_ANSWERS', payload: index });
-    };
+        dispatch({ type: 'ADD_ANSWERS', payload: index })
+    }
 
     const handleRemoveAnswers = (index) => {
-        dispatch({ type: 'REMOVE_ANSWERS', payload: index });
-    };
+        dispatch({ type: 'REMOVE_ANSWERS', payload: index })
+    }
 
     const handleSave = () => {
-        console.log(state);
+        console.log(state)
 
         sendQueryUsingTokens('create_survey', { data: state }).then(() => {
-            history.push('/list');
-        }).catch(error => console.log(error));
-    };
+            history.push('/list')
+        }).catch(error => console.log(error))
+    }
 
     const handleClear = () => {
-        dispatch({ type: 'CLEAR' });
-    };
+        dispatch({ type: 'CLEAR' })
+    }
 
     const handleAnswerType = (index, type) => {
-        dispatch({ type: 'SET_ANSWER_TYPE', payload: { index: index, type: type } });
-    };
+        dispatch({ type: 'SET_ANSWER_TYPE', payload: { index: index, type: type } })
+    }
 
 
     return (
@@ -105,13 +107,13 @@ const CreateSurvey = () => {
                             }
                         </Form.Group>
 
-                    );
+                    )
                 })
                 }
             </Form>
             <Button variant="primary" className="mt-3" onClick={handleAddQuestion}>Add +</Button>
         </MainWrapper>
-    );
-};
+    )
+}
 
-export default CreateSurvey;
+export default CreateSurvey

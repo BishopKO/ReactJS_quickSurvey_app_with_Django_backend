@@ -1,37 +1,32 @@
-import React, { useReducer, useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-import BackButtonChart from '../Atoms/BackButtonWithLinkToChart';
-import { ListGroup } from 'react-bootstrap';
-import { Wrapper, AnswersWrapper, AnswerWrapper } from './styledComponents';
+import React, { useState } from 'react'
+import { ListGroup } from 'react-bootstrap'
+import { Wrapper, AnswersWrapper, AnswerWrapper } from './styledComponents'
 import {
     ListGroupStyle,
     ListGroupItemActiveStyle,
     ListGroupItemStyle,
     AnswerStyle,
     QuestionStyle,
-} from './stylesDesktop';
+} from './stylesDesktop'
+import BackButtonChart from '../Atoms/BackButtonWithLinkToChart'
+import ChartDesktopView from './ChartDesktopView'
 
 const DesktopView = ({ textResults, chartResults }) => {
-    const { id } = useParams();
-    const [view, setView] = useState('text');
-    const [activeItem, setActiveItem] = useState(null);
-
-    useEffect(() => {
-        console.log('chart', chartResults);
-    }, [view]);
+    const [view, setView] = useState('text')
+    const [activeItem, setActiveItem] = useState(null)
 
 
     const handleSelectAnswer = (index) => {
-        setActiveItem(index);
-    };
+        setActiveItem(index)
+    }
 
     const handleChangeView = () => {
         if (view === 'text') {
-            setView('chart');
+            setView('chart')
         } else if (view === 'chart') {
-            setView('text');
+            setView('text')
         }
-    };
+    }
 
     return (
         <div>
@@ -45,7 +40,7 @@ const DesktopView = ({ textResults, chartResults }) => {
                                 style={activeItem === index ? ListGroupItemActiveStyle : ListGroupItemStyle}
                                 onClick={() => handleSelectAnswer(index)}>{`Answers ${index + 1}`}
                             </ListGroup.Item>
-                        );
+                        )
                     })}
                 </ListGroup>
 
@@ -58,26 +53,23 @@ const DesktopView = ({ textResults, chartResults }) => {
                                 {item.answer.split('\n').map(item => {
                                     return (
                                         <p style={AnswerStyle}>{item}</p>
-                                    );
+                                    )
                                 })}
                             </AnswerWrapper>
-                        );
+                        )
                     })
                     }
                 </AnswersWrapper>
             </Wrapper>
             }
-            {view === 'chart' && <div>
-                {Object.values(chartResults).map(item => {
-                    return (
-                        <p>{item.question}</p>
-                    );
-                })}
-            </div>}
+            {view === 'chart' &&
+            <ChartDesktopView chartResults={chartResults}/>
+            }
         </div>
-    );
+
+    )
 
 
-};
+}
 
-export default DesktopView;
+export default DesktopView

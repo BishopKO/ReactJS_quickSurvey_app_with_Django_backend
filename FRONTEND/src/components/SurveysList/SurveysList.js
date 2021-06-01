@@ -1,68 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import SurveyLinkModal from './SurveyLinkModal';
-import DeleteSurveyModal from './DeleteSurveyModal';
-import { sendQueryUsingTokens } from '../../utils/jwt';
-import { useHistory } from 'react-router';
-import { ListGroup, Button, ButtonGroup, Form } from 'react-bootstrap';
-import { MainWrapper, TestWrapper, TopWrapper, ButttonsWrapper } from './styledComponents';
-import { DateStyle } from './styles';
+import React, { useEffect, useState } from 'react'
+import SurveyLinkModal from './SurveyLinkModal'
+import DeleteSurveyModal from './DeleteSurveyModal'
+import { sendQueryUsingTokens } from '../../utils/jwt'
+import { useHistory } from 'react-router'
+import { ListGroup, Button, ButtonGroup, Form } from 'react-bootstrap'
+import { MainWrapper, TestWrapper, TopWrapper, ButttonsWrapper } from './styledComponents'
+import { DateStyle } from './styles'
 
 const SurveysList = () => {
-    const [surveysList, setSurveysList] = useState([]);
-    const [showModalLink, setShowModalLink] = useState({ show: false, link: '' });
-    const [showModalDelete, setShowModalDelete] = useState({ show: false, id: '' });
-    const history = useHistory();
+    const [surveysList, setSurveysList] = useState([])
+    const [showModalLink, setShowModalLink] = useState({ show: false, link: '' })
+    const [showModalDelete, setShowModalDelete] = useState({ show: false, id: '' })
+    const history = useHistory()
 
     useEffect(() => {
         sendQueryUsingTokens('surveys_list', {
             // TODO: ADD SORT FUNCTIONALITY
             order: '-date',
         }).then(response => {
-            setSurveysList(response.data);
+            setSurveysList(response.data['surveys_list'])
 
-        }).catch(error => console.log(error));
-    }, []);
+        }).catch(error => console.log(error))
+    }, [])
 
     const handleSetActive = (id) => {
         sendQueryUsingTokens('edit_survey', { request: 'SET_ACTIVE', survey_id: id })
-            .then(() => window.location.reload());
-    };
+            .then(() => window.location.reload())
+    }
 
     const handleDeleteSurveyAction = (id) => {
         sendQueryUsingTokens('edit_survey', { request: 'DELETE_SURVEY', survey_id: id }).then(() => {
-            window.location.reload();
-        });
-    };
+            window.location.reload()
+        })
+    }
 
     const showLinkModal = (id) => {
-        setShowModalLink({ show: true, link: id });
-    };
+        setShowModalLink({ show: true, link: id })
+    }
 
     const handleCloseLinkModal = () => {
-        setShowModalLink(showModalLink.show = false);
-    };
+        setShowModalLink(showModalLink.show = false)
+    }
 
     const handleShowDeleteModal = (id) => {
-        setShowModalDelete({ show: true, id: id });
-    };
+        setShowModalDelete({ show: true, id: id })
+    }
 
     const handleCloseDeleteModal = () => {
-        setShowModalDelete(false);
-    };
+        setShowModalDelete(false)
+    }
 
     const handleRedirect = (view, id) => {
         switch (view) {
             case 'results':
-                history.push(`/results/${id}`);
-                break;
+                history.push(`/results/${id}`)
+                break
             case 'preview':
-                history.push(`/preview/${id}`);
-                break;
+                history.push(`/preview/${id}`)
+                break
             case 'edit':
-                history.push(`/edit/${id}`);
-                break;
+                history.push(`/edit/${id}`)
+                break
         }
-    };
+    }
 
 
     if (surveysList.length > 0) {
@@ -101,18 +101,18 @@ const SurveysList = () => {
                                             variant="outline-danger">Delete</Button>
                                 </ButttonsWrapper>
                             </TestWrapper>
-                        );
+                        )
                     })}
                 </MainWrapper>
             </>
-        );
+        )
     } else {
         return (
             <MainWrapper>
                 <Button onClick={() => history.push('/create_survey')} variant="success">Create new</Button>
             </MainWrapper>
-        );
+        )
     }
-};
+}
 
-export default SurveysList;
+export default SurveysList
