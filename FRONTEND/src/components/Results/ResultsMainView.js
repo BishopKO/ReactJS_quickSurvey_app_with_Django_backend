@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { sendQueryUsingTokens } from '../../utils/jwt'
-import DesktopView from './DesktopView'
-import MobileView from './MobileView'
+import DesktopView from './Desktop/DesktopView'
+import MobileView from './Mobile/MobileView'
 
 const ResultsMainView = () => {
     const { id } = useParams()
@@ -28,8 +28,10 @@ const ResultsMainView = () => {
     if (!error) {
         return (
             <div>
-                {view === 'desktop' && <DesktopView textResults={textAnswers} chartResults={chartAnswers}/>}
-                {view === 'mobile' && <MobileView textResults={textAnswers} chartResults={chartAnswers}/>}
+                {view === 'desktop' &&
+                <DesktopView textResults={textAnswers} chartResults={chartAnswers}/>}
+                {view === 'mobile' &&
+                <MobileView textResults={textAnswers} chartResults={chartAnswers}/>}
             </div>
         )
     } else {

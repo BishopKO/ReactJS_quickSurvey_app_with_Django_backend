@@ -1,32 +1,13 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
 import { Bar } from 'react-chartjs-2'
+import {
+    MainWrapperChart,
+    MainQuestionWrapperChart,
+    ChartWrapper,
+    AnswersWrapperChart,
+    CounterWrapperChart,
+} from './styledComponents'
 
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid grey;
-  border-radius: 5px;
-  padding: 20px;
-`
-
-const MainQuestionWrapper = styled.div`
-width: 100%;
-display: flex;
-flex-direction: column;
-margin-bottom: 20px;
-`
-
-const AnswersWrapper = styled.div`
-display: flex;
-flex-direction: column;
-`
-
-const ChartWrapper = styled.div`    
-  width: 50%;
-  margin-left: 50px;
-`
 
 const backgroundChartColors = [
     'rgba(255, 99, 132, 0.2)',
@@ -57,7 +38,7 @@ const borderColors = [
 
 const prepare_data = (data) => {
     return {
-        labels: data.map(() => ''),
+        labels: data.map((item, index) => index + 1),
         datasets: [
             {
                 data: data,
@@ -69,42 +50,48 @@ const prepare_data = (data) => {
     }
 }
 
-// TODO: ADD ALL ANSWERS COUNT ON THE PAGE TOP
-// TODO: ADD FLOAT PRECISION
-const ChartDesktopView = ({ chartResults }) => {
+const options = {
+    plugins: {
+        legend: { display: false },
+    },
+}
+
+const ChartDesktopView = ({ chartResults, count }) => {
     useEffect(() => {
-        console.log(chartResults)
+        console.log(count)
     })
 
     return (
-        <MainWrapper>
+        <MainWrapperChart>
+            <CounterWrapperChart>All answers: {count}</CounterWrapperChart>
             {Object.values(chartResults).map((item) => {
                 return (
-                    <MainQuestionWrapper>
-                        <AnswersWrapper>
+                    <MainQuestionWrapperChart>
+                        <AnswersWrapperChart>
                             <span style={{ fontWeight: 'bold' }}>{item.question}</span>
                             {item.answers && item.answers.map(function(answer, index) {
                                 return (
                                     <div>
                                         <span
                                             style={{ color: questionsColors[index] }}>
-                                            {answer} - {((item.counter[index] * 100) / this).toFixed(2)}%
+                                            {answer} - {((item.counter[index] * 100) / this).toFixed(3)}%
                                         </span>
                                     </div>
                                 )
                             }, [item.counter.reduce((acc, item) => acc + item)])}
-                        </AnswersWrapper>
+                        </AnswersWrapperChart>
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
                             <ChartWrapper>
-                                <Bar data={item.counter && prepare_data(item.counter)}/>
+                                <Bar data={item.counter && prepare_data(item.counter)}
+                                     options={options}/>
                             </ChartWrapper>
                         </div>
 
-                    </MainQuestionWrapper>
+                    </MainQuestionWrapperChart>
 
                 )
             })}
-        </MainWrapper>
+        </MainWrapperChart>
 
     )
 

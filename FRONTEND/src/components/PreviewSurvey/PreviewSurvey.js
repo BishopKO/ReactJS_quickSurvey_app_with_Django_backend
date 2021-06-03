@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import BackButtonComponent from '../Atoms/BackButton';
-import { useParams } from 'react-router';
-import { sendQueryUsingTokens } from '../../utils/jwt';
-import { MainWrapper, AnswersWrapper } from './styledComponents';
-import { AlertStyle, ButtonStyle, FormLabelStyle } from './styles';
-import { Button, Form, Alert, InputGroup } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react'
+import BackButtonComponent from '../Atoms/BackButton'
+import { useParams } from 'react-router'
+import { sendQueryUsingTokens } from '../../utils/jwt'
+import { MainWrapper, AnswersWrapper } from './styledComponents'
+import { AlertStyle, ButtonStyle, FormLabelStyle } from './styles'
+import { Button, Form, Alert, InputGroup } from 'react-bootstrap'
 
 
 const PreviewSurvey = () => {
-    const { id } = useParams();
-    const [surveyData, setSurveyData] = useState({});
+    const { id } = useParams()
+    const [surveyData, setSurveyData] = useState({})
 
     useEffect(() => {
         sendQueryUsingTokens('edit_survey', { request: 'GET_SURVEY_DATA', survey_id: id })
             .then(response => {
-                console.log(response.data);
-                setSurveyData(response.data);
-            });
-    }, [id]);
+                console.log(response.data)
+                setSurveyData(response.data)
+            })
+    }, [id])
 
     if (surveyData.hasOwnProperty('questions')) {
         return (
@@ -40,7 +40,7 @@ const PreviewSurvey = () => {
                                                 <Form.Control value={item}
                                                               readOnly/>
                                             </InputGroup>
-                                        );
+                                        )
                                     })}
                                 </AnswersWrapper>
                                 }
@@ -50,18 +50,18 @@ const PreviewSurvey = () => {
                                 </InputGroup>
                                 }
                             </Form.Group>
-                        );
+                        )
                     })
                     }
                 </Form>
                 <Button style={ButtonStyle}>Submit</Button>
             </MainWrapper>
-        );
+        )
     } else {
         return (
             <div>
             </div>
-        );
+        )
     }
-};
-export default PreviewSurvey;
+}
+export default PreviewSurvey

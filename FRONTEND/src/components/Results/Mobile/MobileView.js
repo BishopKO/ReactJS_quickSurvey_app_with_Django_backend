@@ -1,6 +1,6 @@
-import React from 'react';
-import { Accordion, Card, Button } from 'react-bootstrap';
-import { AnswerStyle, QuestionStyle, CardHeaderStyle, CardStyle, CardBodyStyle } from './stylesMobile';
+import React from 'react'
+import { Accordion, Card, Button } from 'react-bootstrap'
+import { AnswerStyle, QuestionStyle, CardHeaderStyle, CardStyle, CardBodyStyle } from './stylesMobile'
 
 const MobileView = ({ textResults, chartResults }) => {
 
@@ -22,21 +22,21 @@ const MobileView = ({ textResults, chartResults }) => {
                                         {item.answer.split('\n').map(item => {
                                             return (
                                                 <p style={AnswerStyle}>{item}</p>
-                                            );
+                                            )
                                         })}
                                     </Card.Body>
                                 </Accordion.Collapse>
-                            );
+                            )
                         })}
                     </Card>
-                );
+                )
             })}
         </Accordion>
 
 
-    );
-};
+    )
+}
 
-export default MobileView;
+export default MobileView
 
 

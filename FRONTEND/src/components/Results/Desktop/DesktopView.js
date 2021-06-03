@@ -8,7 +8,7 @@ import {
     AnswerStyle,
     QuestionStyle,
 } from './stylesDesktop'
-import BackButtonChart from '../Atoms/BackButtonWithLinkToChart'
+import BackButtonChart from '../../Atoms/BackButtonWithLinkToChart'
 import ChartDesktopView from './ChartDesktopView'
 
 const DesktopView = ({ textResults, chartResults }) => {
@@ -63,7 +63,7 @@ const DesktopView = ({ textResults, chartResults }) => {
             </Wrapper>
             }
             {view === 'chart' &&
-            <ChartDesktopView chartResults={chartResults}/>
+            <ChartDesktopView chartResults={chartResults} count={textResults.length}/>
             }
         </div>
 
