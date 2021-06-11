@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { sendQueryUsingTokens } from '../../utils/jwt'
+import { sendQueryUsingTokens } from '../../../utils/jwt'
 import DesktopView from './Desktop/DesktopView'
 import MobileView from './Mobile/MobileView'
 

@@ -1,20 +1,17 @@
 from django.views.generic import TemplateView, View
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.contrib.auth import logout
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect, csrf_exempt
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
-import json
-import jwt
 from django.conf import settings
 from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Survey, Answers
 from surveys_app.utils.mixins import ExceptionCatchAndJsonResponseMixin
 from surveys_app.utils.prepare_results import prepare_text_results, prepare_chart_results
+import json
+import jwt
 
 
 class Index(TemplateView):
@@ -63,7 +60,7 @@ class SurveysList(ExceptionCatchAndJsonResponseMixin, APIView):
                 response.append({'id': survey.survey_id, 'active': survey.active, 'title': survey.survey_title,
                                  'date': survey.date})
 
-            return Response(response)
+            return JsonResponse({'surveys_list': response})
         except Exception as e:
             return self.return_exception(e)
 

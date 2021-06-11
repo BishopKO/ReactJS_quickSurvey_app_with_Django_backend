@@ -37,9 +37,12 @@ def create_chart_results_template(questions):
     results = {}
     indexes = []
 
+    print(questions)
+
     for number, question in enumerate(json.loads(questions)):
-        tmp_results = {'question': question.get('question'), 'counter': None}
         if question.get('answers'):
+            tmp_results = {'question': question.get('question'), 'answers': question.get('answers').split('\n'),
+                           'counter': None, }
             answers_qty = len(question.get('answers').split('\n'))
             tmp_results['counter'] = [0] * answers_qty
             results['question_' + str(number)] = tmp_results
@@ -66,48 +69,48 @@ def prepare_chart_results(questions_data, answers_data):
                         tmp_counter[ans_number] += 1
                 answers_template['question_' + str(number)]['counter'] = tmp_counter
 
-    answers_template['answers_qty'] = len(answers_data)
+    # answers_template['answers_qty'] = len(answers_data)
     return answers_template
 
-
-# TODO: MOVE ALL FUNTIONALITY TO CLASS
-class ChartResults:
-    def __init__(self, questions_data, answers_data):
-        self.questions_data = questions_data
-        self.answers_data = answers_data
-        self.template = None
-
-    def create_chart_results_template(self):
-        results = {}
-        indexes = []
-
-        for number, question in enumerate(json.loads(self.questions_data)):
-            tmp_results = {'question': question.get('question'), 'counter': None}
-            if question.get('answers'):
-                answers_qty = len(question.get('answers').split('\n'))
-                tmp_results['counter'] = [0] * answers_qty
-                results['question_' + str(number)] = tmp_results
-                indexes.append(number)
-        return results, indexes
-
-    def prepare_chart_results(self):
-        answers_template, indexes = self.create_chart_results_template()
-
-        for answer in self.answers_data:
-            answer = json.loads(answer.get('data'))
-
-            for number in indexes:
-                current_answer = answer.get(str(number))
-                if isinstance(current_answer, int):
-                    tmp_counter = answers_template.get('question_' + str(number))['counter']
-                    tmp_counter[current_answer] += 1
-                    answers_template['question_' + str(number)]['counter'] = tmp_counter
-                if isinstance(current_answer, list):
-                    tmp_counter = answers_template.get('question_' + str(number))['counter']
-                    for ans_number, ans in enumerate(current_answer):
-                        if ans:
-                            tmp_counter[ans_number] += 1
-                    answers_template['question_' + str(number)]['counter'] = tmp_counter
-
-        answers_template['answers_qty'] = len(self.answers_data)
-        return answers_template
+#
+# # TODO: MOVE ALL FUNTIONALITY TO CLASS
+# class ChartResults:
+#     def __init__(self, questions_data, answers_data):
+#         self.questions_data = questions_data
+#         self.answers_data = answers_data
+#         self.template = None
+#
+#     def create_chart_results_template(self):
+#         results = {}
+#         indexes = []
+#
+#         for number, question in enumerate(json.loads(self.questions_data)):
+#             tmp_results = {'question': question.get('question'), 'counter': None}
+#             if question.get('answers'):
+#                 answers_qty = len(question.get('answers').split('\n'))
+#                 tmp_results['counter'] = [0] * answers_qty
+#                 results['question_' + str(number)] = tmp_results
+#                 indexes.append(number)
+#         return results, indexes
+#
+#     def prepare_chart_results(self):
+#         answers_template, indexes = self.create_chart_results_template()
+#
+#         for answer in self.answers_data:
+#             answer = json.loads(answer.get('data'))
+#
+#             for number in indexes:
+#                 current_answer = answer.get(str(number))
+#                 if isinstance(current_answer, int):
+#                     tmp_counter = answers_template.get('question_' + str(number))['counter']
+#                     tmp_counter[current_answer] += 1
+#                     answers_template['question_' + str(number)]['counter'] = tmp_counter
+#                 if isinstance(current_answer, list):
+#                     tmp_counter = answers_template.get('question_' + str(number))['counter']
+#                     for ans_number, ans in enumerate(current_answer):
+#                         if ans:
+#                             tmp_counter[ans_number] += 1
+#                     answers_template['question_' + str(number)]['counter'] = tmp_counter
+#
+#         answers_template['answers_qty'] = len(self.answers_data)
+#         return answers_template

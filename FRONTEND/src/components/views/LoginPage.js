@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
-import { Form, Button } from 'react-bootstrap';
-import { login } from '../utils/jwt';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router'
+import { Form, Button } from 'react-bootstrap'
+import { login } from '../../utils/jwt'
+import styled from 'styled-components'
 
-import store from '../reducer/store';
+import store from '../../reducer/store'
 
 const LoginDiv = styled.div`
     max-width: 400px; 
@@ -12,47 +12,48 @@ const LoginDiv = styled.div`
     border-radius: 5px;
     padding: 10px;
     margin: 50px auto;    
-`;
+`
 
 const ErrorMessage = styled.p`
     width: 100%;
     text-align: center;
     color: red;
     font-size: 10px;
-`;
+`
 
 const LoginPage = () => {
-    const [loginDetails, setLoginDetails] = useState({ username: '', password: '' });
-    const [loginError, setLoginError] = useState(false);
+    const [loginDetails, setLoginDetails] = useState({ username: '', password: '' })
+    const [loginError, setLoginError] = useState(false)
 
-    const history = useHistory();
+    const history = useHistory()
 
     const handleChange = (element) => {
-        const { name, value } = element;
-        const currentDetails = loginDetails;
-        currentDetails[name] = value;
-        setLoginDetails(currentDetails);
-    };
+        const { name, value } = element
+        const currentDetails = loginDetails
+        currentDetails[name] = value
+        setLoginDetails(currentDetails)
+    }
 
     const handleClick = () => {
         login(loginDetails.username, loginDetails.password)
             .then(response => {
                 if (response.login === 'SUCCESS') {
-                    const { refresh, access } = response.tokens;
-                    localStorage.setItem('access', access);
-                    localStorage.setItem('refresh', refresh);
-                    localStorage.setItem('loggedIn', 'true');
-                    history.push('/list');
-                    store.dispatch({ type: 'LOGIN', payload: 'SUCCESS' });
+                    const { refresh, access } = response.tokens
+                    localStorage.setItem('access', access)
+                    localStorage.setItem('refresh', refresh)
+                    localStorage.setItem('loggedIn', 'true')
+                    history.push('/list')
+                    store.dispatch({ type: 'LOGIN', payload: 'SUCCESS' })
                 }
             })
             .catch(error => {
-                setLoginError(true);
-            });
-    };
+                setLoginError(true)
+            })
+    }
 
     return (
         <LoginDiv>
+
             {loginError && <ErrorMessage>Wrong username or password.</ErrorMessage>
             }
             <Form>
@@ -73,7 +74,7 @@ const LoginPage = () => {
                 </Form.Group>
             </Form>
         </LoginDiv>
-    );
-};
+    )
+}
 
-export default LoginPage;
+export default LoginPage

@@ -8,7 +8,7 @@ import {
     AnswerStyle,
     QuestionStyle,
 } from './stylesDesktop'
-import BackButtonChart from '../../Atoms/BackButtonWithLinkToChart'
+import BackButtonChart from '../../../Atoms/BackButtonWithLinkToChart'
 import ChartDesktopView from './ChartDesktopView'
 
 const DesktopView = ({ textResults, chartResults }) => {

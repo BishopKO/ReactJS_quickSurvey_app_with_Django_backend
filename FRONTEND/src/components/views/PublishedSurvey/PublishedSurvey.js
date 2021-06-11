@@ -1,71 +1,71 @@
-import React, { useEffect, useState, useReducer } from 'react';
-import formReducer from './formReducer';
-import ConfirmSubmitModal from './ConfirmSubmitModal';
-import ErrorPage from './ErrorPage';
-import { useParams, useHistory } from 'react-router';
-import { getPublishedSurveyData, savePublishedSurveyData } from '../../utils/jwt';
-import { Button, Form, Alert, InputGroup } from 'react-bootstrap';
-import { RootWrapper, MainWrapper, AnswersWrapper } from './styledComponents';
-import { AlertStyle, ButtonStyle, FormLabelStyle } from './styles';
+import React, { useEffect, useState, useReducer } from 'react'
+import formReducer from './formReducer'
+import ConfirmSubmitModal from './ConfirmSubmitModal'
+import ErrorPage from './ErrorPage'
+import { useParams, useHistory } from 'react-router'
+import { getPublishedSurveyData, savePublishedSurveyData } from '../../../utils/jwt'
+import { Button, Form, Alert, InputGroup } from 'react-bootstrap'
+import { RootWrapper, MainWrapper, AnswersWrapper } from './styledComponents'
+import { AlertStyle, ButtonStyle, FormLabelStyle } from './styles'
 
 
 const getCheckboxesValue = (element_id) => {
-    const checkboxes = document.querySelector(`#${element_id}`);
-    const inputs = checkboxes.querySelectorAll('input[type=checkbox]');
+    const checkboxes = document.querySelector(`#${element_id}`)
+    const inputs = checkboxes.querySelectorAll('input[type=checkbox]')
     return Array.from(inputs).map((item) => {
-        return item.checked;
-    });
-};
+        return item.checked
+    })
+}
 
 
 const PublishedSurvey = () => {
-    const { id } = useParams();
-    const [showConfirmModal, setShowConfirmModal] = useState(false);
-    const [surveyData, setSurveydata] = useState({});
-    const [state, dispatch] = useReducer(formReducer, {});
+    const { id } = useParams()
+    const [showConfirmModal, setShowConfirmModal] = useState(false)
+    const [surveyData, setSurveydata] = useState({})
+    const [state, dispatch] = useReducer(formReducer, {})
 
 
-    const history = useHistory();
+    const history = useHistory()
 
     useEffect(() => {
         getPublishedSurveyData(id)
             .then(response => {
-                setSurveydata(response.data);
+                setSurveydata(response.data)
             })
-            .catch(error => console.log(error));
-    }, [id]);
+            .catch(error => console.log(error))
+    }, [id])
 
     const handleSelectAnswerSingle = (value) => {
-        const { question_number, selected } = value;
-        dispatch({ type: 'QUESTION_SINGLE', payload: { question_number: question_number, selected: selected } });
-    };
+        const { question_number, selected } = value
+        dispatch({ type: 'QUESTION_SINGLE', payload: { question_number: question_number, selected: selected } })
+    }
 
     const handleSelectAnswerMulti = (question_number) => {
-        let values = getCheckboxesValue(`answers_multi_${question_number}`);
-        dispatch({ type: 'QUESTION_MULTI', payload: { question_number: question_number, selected: values } });
-    };
+        let values = getCheckboxesValue(`answers_multi_${question_number}`)
+        dispatch({ type: 'QUESTION_MULTI', payload: { question_number: question_number, selected: values } })
+    }
 
     const handleSelectAnswerText = (value) => {
-        const { question_number, answer } = value;
-        dispatch({ type: 'QUESTION_TEXT', payload: { question_number: question_number, value: answer } });
-    };
+        const { question_number, answer } = value
+        dispatch({ type: 'QUESTION_TEXT', payload: { question_number: question_number, value: answer } })
+    }
 
     const submitAnswers = () => {
         savePublishedSurveyData(id, state)
             .then(() => {
-                setShowConfirmModal(false);
-                history.push('/survey_success');
+                setShowConfirmModal(false)
+                history.push('/survey_success')
             })
-            .catch(error => console.log(error));
-    };
+            .catch(error => console.log(error))
+    }
 
     const handleSubmit = () => {
-        setShowConfirmModal(true);
-    };
+        setShowConfirmModal(true)
+    }
 
     const handleReadyToSubmit = () => {
-        return Object.keys(state).length === surveyData.questions.length;
-    };
+        return Object.keys(state).length === surveyData.questions.length
+    }
 
 
     if (surveyData.hasOwnProperty('questions')) {
@@ -100,7 +100,7 @@ const PublishedSurvey = () => {
                                                         <Form.Control value={item}
                                                                       readOnly/>
                                                     </InputGroup>
-                                                );
+                                                )
                                             }, { question_number: index })}
                                         </div>
                                         }
@@ -118,7 +118,7 @@ const PublishedSurvey = () => {
                                                         <Form.Control value={item}
                                                                       readOnly/>
                                                     </InputGroup>
-                                                );
+                                                )
                                             }, { question_number: index })}
                                         </div>}
                                     </AnswersWrapper>}
@@ -131,7 +131,7 @@ const PublishedSurvey = () => {
                                     </InputGroup>
                                     }
                                 </Form.Group>
-                            );
+                            )
                         })
                         }
                     </Form>
@@ -147,11 +147,11 @@ const PublishedSurvey = () => {
                     }
                 </MainWrapper>
             </RootWrapper>
-        );
+        )
     } else {
         return (
             <ErrorPage error_message={'Survey not found or is not active...'}/>
-        );
+        )
     }
-};
-export default PublishedSurvey;
+}
+export default PublishedSurvey

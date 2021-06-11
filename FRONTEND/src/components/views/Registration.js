@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import axios from 'axios';
-import email_validator from 'email-validator';
-import { useHistory } from 'react-router';
-import styled from 'styled-components';
-import { user_register } from '../utils/jwt';
+import React, { useState } from 'react'
+import { Form, Button } from 'react-bootstrap'
+import axios from 'axios'
+import email_validator from 'email-validator'
+import { useHistory } from 'react-router'
+import styled from 'styled-components'
+import { user_register } from '../../utils/jwt'
 
 const LoginDiv = styled.div`
     max-width: 400px; 
@@ -12,49 +12,49 @@ const LoginDiv = styled.div`
     border-radius: 5px;
     padding: 10px;
     margin: 50px auto;    
-`;
+`
 
 const ErrorMessage = styled.p`
     width: 100%;
     text-align: center;
     color: red;
     font-size: 10px;
-`;
+`
 
 const Registration = () => {
 
-    let history = useHistory();
+    let history = useHistory()
 
-    const [registrationDetails, setRegistrationDetails] = useState({ username: '', password1: '', password2: '' });
-    const [registrationError, setRegistrationError] = useState(false);
+    const [registrationDetails, setRegistrationDetails] = useState({ username: '', password1: '', password2: '' })
+    const [registrationError, setRegistrationError] = useState(false)
 
     const handleChange = (element) => {
-        const { name, value } = element;
-        const currentDetails = registrationDetails;
-        currentDetails[name] = value;
-        setRegistrationDetails(currentDetails);
-    };
+        const { name, value } = element
+        const currentDetails = registrationDetails
+        currentDetails[name] = value
+        setRegistrationDetails(currentDetails)
+    }
 
     const handleClick = () => {
-        const { username, password1, password2 } = registrationDetails;
+        const { username, password1, password2 } = registrationDetails
 
         if (!email_validator.validate(username)) {
-            setRegistrationError('Bad email address.');
+            setRegistrationError('Bad email address.')
         } else if (password1.length < 6) {
-            setRegistrationError('Password too short.');
+            setRegistrationError('Password too short.')
         } else if (password1 !== password2) {
-            setRegistrationError('Password does not match.');
+            setRegistrationError('Password does not match.')
         } else {
-            setRegistrationError(false);
+            setRegistrationError(false)
             user_register(username, password1).then(response => {
                 if (response.USER_REGISTER === 'SUCCESS') {
-                    history.push('/login');
+                    history.push('/login')
                 } else {
-                    console.log('FAIL');
+                    console.log('FAIL')
                 }
-            });
+            })
         }
-    };
+    }
 
     return (
         <LoginDiv>
@@ -83,7 +83,7 @@ const Registration = () => {
                 </Form.Group>
             </Form>
         </LoginDiv>
-    );
-};
+    )
+}
 
-export default Registration;
+export default Registration

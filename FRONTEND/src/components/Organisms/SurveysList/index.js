@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SurveyLinkModal from './SurveyLinkModal'
 import DeleteSurveyModal from './DeleteSurveyModal'
-import { sendQueryUsingTokens } from '../../utils/jwt'
+import { sendQueryUsingTokens } from '../../../utils/jwt'
 import { useHistory } from 'react-router'
 import { ListGroup, Button, ButtonGroup, Form } from 'react-bootstrap'
 import { MainWrapper, TestWrapper, TopWrapper, ButttonsWrapper } from './styledComponents'
@@ -15,7 +15,6 @@ const SurveysList = () => {
 
     useEffect(() => {
         sendQueryUsingTokens('surveys_list', {
-            // TODO: ADD SORT FUNCTIONALITY
             order: '-date',
         }).then(response => {
             setSurveysList(response.data['surveys_list'])

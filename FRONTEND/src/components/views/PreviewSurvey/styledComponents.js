@@ -10,6 +10,22 @@ const MainWrapper = styled.div`
   padding: 5px;
   border-radius: 5px;
   word-break: break-all;
+  
+
+  @media (min-width:360px){
+    font-size: 10px;    
+    }
+    
+  @media (min-width:500px){
+    font-size: 13px;    
+    }
+    
+  @media (min-width:768px){
+    font-size: 14px;    
+    }
+    
+}  
+
 `
 
 const AnswersWrapper = styled.div`

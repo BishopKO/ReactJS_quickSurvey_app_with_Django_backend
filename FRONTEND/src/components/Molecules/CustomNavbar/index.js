@@ -1,30 +1,30 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Navbar, Nav, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import store from '../../reducer/store';
+import React from 'react'
+import { connect } from 'react-redux'
+import { Navbar, Nav, Button } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
+import store from '../../../reducer/store'
 
 const StyledBrand = styled.span`
   font-family: Arimo;
   font-style: italic;
   text-shadow: 1px 1px green;
-`;
+`
 
 const CustomNavbar = ({ loggedIn }) => {
-    const history = useHistory();
+    const history = useHistory()
 
     const handleLogout = () => {
-        localStorage.removeItem('access');
-        localStorage.removeItem('refresh');
-        localStorage.removeItem('loggedIn');
-        store.dispatch({ type: 'LOGOUT', payload: 'SUCCESS' });
-        history.push('/login');
-    };
+        localStorage.removeItem('access')
+        localStorage.removeItem('refresh')
+        localStorage.removeItem('loggedIn')
+        store.dispatch({ type: 'LOGOUT', payload: 'SUCCESS' })
+        history.push('/login')
+    }
 
     const handleCreate = () => {
-        history.push('/create_survey');
-    };
+        history.push('/create_survey')
+    }
 
     return (
         <Navbar variant="dark" bg="dark" expand="sm" style={{ padding: '5px' }}>
@@ -51,17 +51,17 @@ const CustomNavbar = ({ loggedIn }) => {
                 }
             </Navbar.Collapse>
         </Navbar>
-    );
-};
+    )
+}
 
 const mapStateToProps = () => {
-    const localStorageLoggedIn = localStorage.loggedIn;
+    const localStorageLoggedIn = localStorage.loggedIn
 
     if (localStorageLoggedIn) {
-        return { loggedIn: true };
+        return { loggedIn: true }
     } else {
-        return { loggedIn: false };
+        return { loggedIn: false }
     }
-};
+}
 
-export default connect(mapStateToProps, null)(CustomNavbar);
+export default connect(mapStateToProps, null)(CustomNavbar)

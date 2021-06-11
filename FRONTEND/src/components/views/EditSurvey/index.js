@@ -1,8 +1,8 @@
 import React, { useReducer, useEffect } from 'react'
 import editReducer from './editReducer'
-import AnswerTypeButtons from '../Atoms/answerTypeButtons'
-import BackButtonComponent from '../Atoms/BackButton'
-import { sendQueryUsingTokens } from '../../utils/jwt'
+import AnswerTypeButtons from '../../Atoms/answerTypeButtons'
+import BackButtonComponent from '../../Atoms/BackButton'
+import { sendQueryUsingTokens } from '../../../utils/jwt'
 import { useHistory, useParams } from 'react-router'
 import { MainWrapper, TopBarButtonsWrapper, TopBarWrapper } from './styledComponents'
 import { FormControlStyle, FormLabelStyle } from './styles'
@@ -11,7 +11,7 @@ import { Form, Button, ButtonGroup } from 'react-bootstrap'
 // TODO: EDITED SURVEY SAVED AS NEW ONE
 
 
-const EditSurvey = () => {
+const Index = () => {
     const [state, dispatch] = useReducer(editReducer, { title: '', questions: [] })
     const { id } = useParams()
 
@@ -118,4 +118,4 @@ const EditSurvey = () => {
     )
 }
 
-export default EditSurvey
+export default Index

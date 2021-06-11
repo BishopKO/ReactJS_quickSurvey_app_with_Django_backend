@@ -1,8 +1,8 @@
 import React, { useReducer } from 'react'
 import createReducer from './createReducer'
-import BackButtonComponent from '../Atoms/BackButton'
-import AnswerTypeButtons from '../Atoms/answerTypeButtons'
-import { sendQueryUsingTokens } from '../../utils/jwt'
+import BackButtonComponent from '../../Atoms/BackButton'
+import AnswerTypeButtons from '../../Atoms/answerTypeButtons'
+import { sendQueryUsingTokens } from '../../../utils/jwt'
 import { useHistory } from 'react-router'
 import { Form, Button, ButtonGroup } from 'react-bootstrap'
 import { TopBarButtonsWrapper, TopBarWrapper, MainWrapper } from './styledComponents'
@@ -11,7 +11,7 @@ import { FormLabelStyle, FormControlStyle } from './styles'
 
 // TODO: Add button on the top
 
-const CreateSurvey = () => {
+const Index = () => {
     const history = useHistory()
 
     const initState = { title: '', questions: [{ question: '' }] }
@@ -116,4 +116,4 @@ const CreateSurvey = () => {
     )
 }
 
-export default CreateSurvey
+export default Index

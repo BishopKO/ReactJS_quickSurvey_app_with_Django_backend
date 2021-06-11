@@ -16,7 +16,7 @@ class TestApi(TestCase):
         url = reverse(urls_names.get('tokens'))
         resp = self.client.post(url, data={'username': 'test_user', 'password': 'test_password'})
         self.access, self.refresh = resp.data.get('access'), resp.data.get('refresh')
-
+      
     def test_get_api_tokens(self):
         self.assertIsNot(self.access, None)
         self.assertIsNot(self.refresh, None)
