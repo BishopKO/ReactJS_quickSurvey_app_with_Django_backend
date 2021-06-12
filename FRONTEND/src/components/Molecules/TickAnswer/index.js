@@ -33,17 +33,18 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledAnswerWrapper = styled.div`
-  padding: 10px;  
-`;
+  padding: 7px;  
+  font-size: 1em;
+ `;
 
 const StyledCheckbox = styled.input`
   font-size: inherit;
   appearance: none;   
-  background-color: #fafafa;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05); 
   width: 1.5em;  
   height: 1.5em;
   margin-top: .5em;
+  justify-self: center;
   border-radius: 5px; 
   position: relative;
   transition: all .1s;     
@@ -58,11 +59,11 @@ const StyledCheckbox = styled.input`
   }
   
   :checked:after{
-      content: '\\2714';
+      content: '\\2713';
       font-size: 2em;
       position: absolute;
       top: -0.5em;
-      left: 0;
+      left: 0em;
       color: green;      
       animation: ${AnimationShrinkBounce};
       animation-duration: .3s;

@@ -1,30 +1,28 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Navbar, Nav, Button } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
-import store from '../../../reducer/store'
+import React from 'react';
+import { Navbar, Nav, Button } from 'react-bootstrap';
+import { useHistory, Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 
 const StyledBrand = styled.span`
   font-family: Arimo;
   font-style: italic;
   text-shadow: 1px 1px green;
-`
+`;
 
 const CustomNavbar = ({ loggedIn }) => {
-    const history = useHistory()
+    const history = useHistory();
 
     const handleLogout = () => {
-        localStorage.removeItem('access')
-        localStorage.removeItem('refresh')
-        localStorage.removeItem('loggedIn')
-        store.dispatch({ type: 'LOGOUT', payload: 'SUCCESS' })
-        history.push('/login')
-    }
+        localStorage.removeItem('access');
+        localStorage.removeItem('refresh');
+        localStorage.removeItem('loggedIn');
+        history.push('/login');
+    };
 
     const handleCreate = () => {
-        history.push('/create_survey')
-    }
+        history.push('/create_survey');
+    };
 
     return (
         <Navbar variant="dark" bg="dark" expand="sm" style={{ padding: '5px' }}>
@@ -33,7 +31,7 @@ const CustomNavbar = ({ loggedIn }) => {
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 {loggedIn ?
                     <Nav>
-                        <Button variant="outline-secondary" onClick={() => history.push('/list')}
+                        <Button as={Link} variant="outline-secondary" to="/list"
                                 size="sm" className="mx-1">Main View</Button>
                         <Button variant="outline-success" onClick={handleCreate} role="link" size="sm"
                                 className="mx-1">Create +</Button>
@@ -51,17 +49,7 @@ const CustomNavbar = ({ loggedIn }) => {
                 }
             </Navbar.Collapse>
         </Navbar>
-    )
-}
+    );
+};
 
-const mapStateToProps = () => {
-    const localStorageLoggedIn = localStorage.loggedIn
-
-    if (localStorageLoggedIn) {
-        return { loggedIn: true }
-    } else {
-        return { loggedIn: false }
-    }
-}
-
-export default connect(mapStateToProps, null)(CustomNavbar)
+export default CustomNavbar;

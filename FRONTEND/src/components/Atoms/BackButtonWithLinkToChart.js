@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 const ButtonWrapper = styled.div`

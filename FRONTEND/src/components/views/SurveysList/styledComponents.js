@@ -15,7 +15,7 @@ const ButttonsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 2px;   
+  margin-top: 5px;   
 `;
 
 const TopWrapper = styled.div`

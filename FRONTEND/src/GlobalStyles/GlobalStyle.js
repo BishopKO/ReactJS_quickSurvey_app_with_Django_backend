@@ -4,13 +4,15 @@ const GlobalStyle = createGlobalStyle`
   *,*::before, *::after{
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
-  }
+  } 
+
   
   #root{
     width: 100vw;   
     display: flex;    
     flex-direction: column;       
     align-items: center;
+    font-family: Inter;
   }
   
    //TODO: MOVE STYLES TO MODAL

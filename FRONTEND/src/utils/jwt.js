@@ -1,24 +1,23 @@
-import axios from 'axios'
-import store from '../reducer/store'
-import jwt_decode from 'jwt-decode'
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
-const host = 'http://127.0.0.1:8000'
+const host = 'http://127.0.0.1:8000';
 
 
 const login = (username, password) => {
+
     return new Promise((resolve, reject) => {
         axios.post(`${host}/api/token/`, { username: username, password: password },
         ).then(response => {
-                resolve({ login: 'SUCCESS', tokens: response.data })
+                resolve({ login: 'SUCCESS', tokens: response.data });
             },
         ).catch(error => {
             if (error) {
-                store.dispatch({ type: 'LOGIN', payload: 'FAILED' })
-                reject({ login: 'FAILED' })
+                reject({ login: 'FAILED' });
             }
-        })
-    })
-}
+        });
+    });
+};
 
 const user_register = (username, password) => {
     return new Promise((resolve, reject) => {
@@ -26,66 +25,66 @@ const user_register = (username, password) => {
             username: username,
             password: password,
         }).then(() => resolve({ 'USER_REGISTER': 'SUCCESS' }))
-            .catch(() => reject({ 'USER_REGISTER': 'FAIL' }))
-    })
-}
+            .catch(() => reject({ 'USER_REGISTER': 'FAIL' }));
+    });
+};
 
 const sendQueryUsingTokens = (view, query) => {
     return new Promise((resolve, reject) => {
-        const accessToken = localStorage.getItem('access')
-        const refreshToken = localStorage.getItem('refresh')
-        const accessExp = jwt_decode(accessToken).exp
+        const accessToken = localStorage.getItem('access');
+        const refreshToken = localStorage.getItem('refresh');
+        const accessExp = jwt_decode(accessToken).exp;
 
-        const leftAccessTime = Math.floor(accessExp - (Date.now() / 1000))
+        const leftAccessTime = Math.floor(accessExp - (Date.now() / 1000));
         if (leftAccessTime > 0) {
-            let config = { headers: { Authorization: `Bearer ${accessToken}` } }
+            let config = { headers: { Authorization: `Bearer ${accessToken}` } };
             axios.post(`${host}/${view}`, query, config).then(data => resolve(data)).catch(error => {
-                reject(error)
-            })
+                reject(error);
+            });
         } else {
             axios.post(`${host}/api/token/refresh/`, { refresh: refreshToken },
             ).then(response => {
-                    const accessToken = response.data.access
-                    localStorage.setItem('access', accessToken)
-                    const config = { headers: { Authorization: `Bearer ${accessToken}` } }
+                    const accessToken = response.data.access;
+                    localStorage.setItem('access', accessToken);
+                    const config = { headers: { Authorization: `Bearer ${accessToken}` } };
                     axios.post(`http://127.0.0.1:8000/${view}`, query, config).then(data => resolve(data)).catch(error => {
-                        reject(error)
-                    })
+                        reject(error);
+                    });
                 },
             ).catch(error => {
                 if (error) {
-                    reject({ token: 'error' })
-                    localStorage.clear()
-                    window.location.href = '/'
+                    reject({ token: 'error' });
+                    localStorage.clear();
+                    window.location.href = '/';
                 }
-            })
+            });
         }
-    })
-}
+    });
+};
 
 const getPublishedSurveyData = (id) => {
-    const query = { request: 'GET_PUBLISHED_SURVEY', survey_id: id }
+    const query = { request: 'GET_PUBLISHED_SURVEY', survey_id: id };
 
     return new Promise((resolve, reject) => {
         axios.post(`${host}/get_published_survey`, query)
             .then(data => resolve(data))
             .catch(error => {
-                reject(error)
-            })
-    })
-}
+                reject(error);
+            });
+    });
+};
 
 const savePublishedSurveyData = (id, data) => {
-    const query = { request: 'SAVE_PUBLISHED_SURVEY', survey_id: id, survey_data: data }
+    const query = { request: 'SAVE_PUBLISHED_SURVEY', survey_id: id, survey_data: data };
 
     return new Promise((resolve, reject) => {
         axios.post(`${host}/save_published_survey`, query)
             .then(data => resolve(data))
             .catch(error => {
-                reject(error)
-            })
-    })
-}
+                reject(error);
+            });
+    });
+};
 
 
-export { login, user_register, sendQueryUsingTokens, getPublishedSurveyData, savePublishedSurveyData }
+export { login, user_register, sendQueryUsingTokens, getPublishedSurveyData, savePublishedSurveyData };
