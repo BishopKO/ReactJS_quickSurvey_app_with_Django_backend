@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
@@ -34,13 +34,18 @@ const StyledInput = styled.textarea`
   }
 `;
 
-const InputTextareaWithText = ({ text }) => {
+const InputTextareaWithText = ({ text, number, actionOnChange }) => {
+
+    const handleOnChange = (element) => {
+        actionOnChange({ number: number, state: element.target.value });
+    };
+
     return (
         <StyledWrapper>
             <StyledParagraph>
                 {text}
             </StyledParagraph>
-            <StyledInput type="textarea" rows={2}/>
+            <StyledInput type="textarea" rows={2} onChange={(element) => handleOnChange(element)}/>
         </StyledWrapper>
     );
 };

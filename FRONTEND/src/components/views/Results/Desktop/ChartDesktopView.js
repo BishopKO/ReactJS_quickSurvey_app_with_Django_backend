@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import { Bar } from 'react-chartjs-2'
+import React, { useEffect } from 'react';
+import { Bar } from 'react-chartjs-2';
 import {
     MainWrapperChart,
     MainQuestionWrapperChart,
     ChartWrapper,
     AnswersWrapperChart,
     CounterWrapperChart,
-} from './styledComponents'
+} from './styledComponents';
 
 
 const backgroundChartColors = [
@@ -16,7 +16,7 @@ const backgroundChartColors = [
     'rgba(75, 192, 192, 0.2)',
     'rgba(153, 102, 255, 0.2)',
     'rgba(255, 159, 64, 0.2)',
-]
+];
 
 const questionsColors = [
     'rgba(255, 99, 132)',
@@ -25,7 +25,7 @@ const questionsColors = [
     'rgba(75, 192, 192)',
     'rgba(153, 102, 255)',
     'rgba(255, 159, 64)',
-]
+];
 
 const borderColors = [
     'rgba(255, 99, 132)',
@@ -34,7 +34,7 @@ const borderColors = [
     'rgba(75, 192, 192)',
     'rgba(153, 102, 255)',
     'rgba(255, 159, 64)',
-]
+];
 
 const prepare_data = (data) => {
     return {
@@ -47,19 +47,20 @@ const prepare_data = (data) => {
                 borderWidth: 2,
             },
         ],
-    }
-}
+    };
+};
 
 const options = {
     plugins: {
         legend: { display: false },
     },
-}
+};
 
-const ChartDesktopView = ({ chartResults, count }) => {
+const ChartDesktopView = ({ chartResults }) => {
+    const count = Object.values(chartResults).length;
     useEffect(() => {
-        console.log(count)
-    })
+        console.log(count);
+    });
 
     return (
         <MainWrapperChart>
@@ -77,7 +78,7 @@ const ChartDesktopView = ({ chartResults, count }) => {
                                             {answer} - {((item.counter[index] * 100) / this).toFixed(3)}%
                                         </span>
                                     </div>
-                                )
+                                );
                             }, [item.counter.reduce((acc, item) => acc + item)])}
                         </AnswersWrapperChart>
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -89,12 +90,12 @@ const ChartDesktopView = ({ chartResults, count }) => {
 
                     </MainQuestionWrapperChart>
 
-                )
+                );
             })}
         </MainWrapperChart>
 
-    )
+    );
 
-}
+};
 
-export default ChartDesktopView
+export default ChartDesktopView;

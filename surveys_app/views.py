@@ -138,7 +138,7 @@ class UserRegister(ExceptionCatchAndJsonResponseMixin, View):
             user = User.objects.create(username=username)
             user.set_password(password)
             user.save()
-            return JsonResponse({'registration': 'SUCCESS'})
+            return JsonResponse({'REGISTRATION': 'SUCCESS'})
         except Exception as e:
             return self.return_exception(e)
 

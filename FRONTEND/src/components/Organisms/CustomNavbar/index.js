@@ -1,13 +1,43 @@
 import React from 'react';
-import { Navbar, Nav, Button } from 'react-bootstrap';
-import { useHistory, Link } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import Button from '../../Atoms/Button';
 import styled from 'styled-components';
 
 
 const StyledBrand = styled.span`
-  font-family: Arimo;
+  font-family: 'Rajdhani', sans-serif;
   font-style: italic;
-  text-shadow: 1px 1px green;
+  font-size: 25px;
+  color: ${({ theme }) => theme.yellow};
+`;
+
+const StyledNav = styled.nav`
+  display: flex; 
+  width: 100%;
+  
+  @media (min-width: 300px){
+    flex-direction: column;
+    
+    button{     
+     width: 100%;
+     background-color: transparent;
+     margin-top: 5px;
+    }
+  }  
+  
+  @media (min-width: 576px){  
+   flex-direction: row;  
+   justify-content: flex-end;
+   
+   button{   
+    width: fit-content;
+    background-color: transparent;
+    margin-right: 5px;   
+   }
+  }
+  
+
 `;
 
 const CustomNavbar = ({ loggedIn }) => {
@@ -24,28 +54,28 @@ const CustomNavbar = ({ loggedIn }) => {
         history.push('/create_survey');
     };
 
+    const mainView = () => {
+        history.push('/');
+    };
+
     return (
-        <Navbar variant="dark" bg="dark" expand="sm" style={{ padding: '5px' }}>
-            <Navbar.Brand href="/list"><StyledBrand>quickSurvey</StyledBrand></Navbar.Brand>
+        <Navbar variant="dark" bg="dark" expand="sm" style={{ padding: 3 }}>
+            <Navbar.Brand href="/"><StyledBrand>quickSurvey</StyledBrand></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 {loggedIn ?
-                    <Nav>
-                        <Button as={Link} variant="outline-secondary" to="/list"
-                                size="sm" className="mx-1">Main View</Button>
-                        <Button variant="outline-success" onClick={handleCreate} role="link" size="sm"
-                                className="mx-1">Create +</Button>
-                        <Button variant="outline-primary" onClick={handleLogout} role="link" size="sm"
-                                className="mx-1">Logout</Button>
-                    </Nav>
+                    <StyledNav>
+                        <Button text="Main View" color="green" type="outline" action={mainView}/>
+                        <Button text="Create New" color="yellow" type="outline" action={handleCreate}/>
+                        <Button text="Logout" color="blue" type="outline" action={handleLogout}/>
+                    </StyledNav>
                     :
-                    <Nav>
-
-                        <Button variant="outline-warning" onClick={() => history.push('/registration')}
-                                size="sm" className="mx-1">Register</Button>
+                    <StyledNav>
+                        <Button variant=" outline-warning" onClick={() => history.push('/registration')}
+                                size=" sm" className=" mx-1">Register</Button>
                         <Button variant='outline-success' onClick={() => history.push('/login')}
-                                size="sm" className="mx-1">Login</Button>
-                    </Nav>
+                                size=" sm" className=" mx-1">Login</Button>
+                    </StyledNav>
                 }
             </Navbar.Collapse>
         </Navbar>

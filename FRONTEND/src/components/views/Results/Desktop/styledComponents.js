@@ -1,21 +1,21 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
+  width: 100%;  
   display: grid;
-  grid-template-columns: 20% 80%;
-  margin-top: 20px;
-`
+  grid-template-columns: 20% 80%;   
+`;
 
 const AnswersWrapper = styled.div`
   border: 1px solid lightgrey;
   border-radius: 5px;
   margin-left: 10px;
   padding: 5px
-`
+`;
 
 const AnswerWrapper = styled.div`
-  margin-bottom: 10px;
-`
+  margin-bottom: 20px;
+`;
 
 const MainWrapperChart = styled.div`
   display: flex;
@@ -24,34 +24,37 @@ const MainWrapperChart = styled.div`
   border: 1px solid grey;
   border-radius: 5px;
   padding: 20px;
- word-break: break-all;
-`
+  word-break: break-all;
+  width: 100%;
+  align-self: center;
+`;
 
 const MainQuestionWrapperChart = styled.div`
 width: 100%;
 display: flex;
 flex-direction: column;
 margin-bottom: 20px;
-`
+`;
 
 const AnswersWrapperChart = styled.div`
-display: flex;
-flex-direction: column;
-`
+  display: flex;
+  flex-direction: column;
+`;
 
 const ChartWrapper = styled.div`    
-  width: 50%;
+  width: 25%;
+  min-width: 300px;
   margin-left: 50px;
-`
+`;
 
 const CounterWrapperChart = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-`
+`;
 
 export {
-    Wrapper,
+    StyledWrapper,
     AnswersWrapper,
     AnswerWrapper,
     AnswersWrapperChart,
@@ -59,4 +62,4 @@ export {
     MainQuestionWrapperChart,
     MainWrapperChart,
     CounterWrapperChart,
-}
+};

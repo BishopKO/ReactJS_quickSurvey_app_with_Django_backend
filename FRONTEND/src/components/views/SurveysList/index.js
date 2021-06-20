@@ -6,7 +6,7 @@ import { sendQueryUsingTokens } from '../../../utils/jwt';
 import { useHistory } from 'react-router';
 
 import { ListGroup, Button, ButtonGroup, Form } from 'react-bootstrap';
-import { MainWrapper, TestWrapper, TopWrapper, ButttonsWrapper } from './styledComponents';
+import { SurveyWrapper, TopWrapper, ButtonsWrapper } from './styledComponents';
 import { DateStyle } from './styles';
 
 const SurveysList = () => {
@@ -73,10 +73,10 @@ const SurveysList = () => {
                 <DeleteSurveyModal show={showModalDelete.show} surveyId={showModalDelete.id}
                                    closeAction={handleCloseDeleteModal}
                                    deleteAction={() => handleDeleteSurveyAction(showModalDelete.id)}/>
-                <MainWrapper>
+                <>
                     {surveysList.map((item, index) => {
                         return (
-                            <TestWrapper key={`survey_${index}`}>
+                            <SurveyWrapper key={`survey_${index}`}>
                                 <TopWrapper>
                                     <span style={DateStyle}>{item.date}</span>
                                     <Form.Check type="checkbox" onChange={() => handleSetActive(item.id)}
@@ -85,7 +85,7 @@ const SurveysList = () => {
                                 <ListGroup>
                                     <ListGroup.Item variant="secondary">{item.title}</ListGroup.Item>
                                 </ListGroup>
-                                <ButttonsWrapper>
+                                <ButtonsWrapper>
                                     <ButtonGroup>
                                         <Button onClick={() => handleRedirect('results', item.id)} size='sm'
                                                 variant='outline-success'>Results</Button>
@@ -99,18 +99,18 @@ const SurveysList = () => {
                                     </ButtonGroup>
                                     <Button onClick={() => handleShowDeleteModal(item.id)} size="sm"
                                             variant="outline-danger">Delete</Button>
-                                </ButttonsWrapper>
-                            </TestWrapper>
+                                </ButtonsWrapper>
+                            </SurveyWrapper>
                         );
                     })}
-                </MainWrapper>
+                </>
             </>
         );
     } else {
         return (
-            <MainWrapper>
+            <>
                 <Button onClick={() => history.push('/create_survey')} variant="success">Create new</Button>
-            </MainWrapper>
+            </>
         );
     }
 };

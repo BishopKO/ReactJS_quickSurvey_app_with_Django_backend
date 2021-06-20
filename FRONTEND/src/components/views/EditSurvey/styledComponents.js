@@ -2,22 +2,22 @@ import styled from 'styled-components';
 
 const MainWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  max-width: 700px;
-  margin: 30px auto;
+  flex-direction: column;   
   justify-content: center;  
-  border: 1px solid lightgrey;
+  width: 100%;
   padding: 5px;
-  border-radius: 5px;  
+  border-radius: 5px; 
+  border: 1px solid lightgrey;
+  textarea{
+  resize: none;
+  } 
 `;
 
 const TopBarWrapper = styled.div`
   display: grid;
   justify-content: center;  
   max-width: inherit;  
-  grid-template-columns: 80% 20% ;  
-  margin-top: 20px;  
-  font-size: 4px;
+  grid-template-columns: 1fr 180px ; 
   border-bottom: 1px solid lightgrey;
   padding-bottom: 5px
 `;

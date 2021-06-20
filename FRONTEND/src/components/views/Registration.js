@@ -1,63 +1,70 @@
-import React, { useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
-import axios from 'axios'
-import email_validator from 'email-validator'
-import { useHistory } from 'react-router'
-import styled from 'styled-components'
-import { user_register } from '../../utils/jwt'
+import React, { useState } from 'react';
+import { Form } from 'react-bootstrap';
+import email_validator from 'email-validator';
+import styled from 'styled-components';
+import Button from '../Atoms/Button';
+import { useHistory } from 'react-router';
+import { user_register } from '../../utils/jwt';
 
-const LoginDiv = styled.div`
+const StyledWrapper = styled.div`
+    width: 100%;
     max-width: 400px; 
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
-    margin: 50px auto;    
-`
+    margin: 50px auto;
+    button{
+      width: 100%;
+    }    
+`;
 
 const ErrorMessage = styled.p`
     width: 100%;
+    background-color: ${({ theme }) => theme.red};
+    border-radius: 5px;    
     text-align: center;
-    color: red;
-    font-size: 10px;
-`
-
+    color: ${({ theme }) => theme.lightRed};
+    font-size: 14px;
+    font-weight: bold;    
+`;
 const Registration = () => {
 
-    let history = useHistory()
+    let history = useHistory();
 
-    const [registrationDetails, setRegistrationDetails] = useState({ username: '', password1: '', password2: '' })
-    const [registrationError, setRegistrationError] = useState(false)
+    const [registrationDetails, setRegistrationDetails] = useState({ username: '', password1: '', password2: '' });
+    const [registrationError, setRegistrationError] = useState(false);
 
     const handleChange = (element) => {
-        const { name, value } = element
-        const currentDetails = registrationDetails
-        currentDetails[name] = value
-        setRegistrationDetails(currentDetails)
-    }
+        const { name, value } = element;
+        const currentDetails = registrationDetails;
+        currentDetails[name] = value;
+        setRegistrationDetails(currentDetails);
+    };
 
     const handleClick = () => {
-        const { username, password1, password2 } = registrationDetails
+        const { username, password1, password2 } = registrationDetails;
 
         if (!email_validator.validate(username)) {
-            setRegistrationError('Bad email address.')
+            setRegistrationError('Incorrect email address.');
         } else if (password1.length < 6) {
-            setRegistrationError('Password too short.')
+            setRegistrationError('Password too short.');
         } else if (password1 !== password2) {
-            setRegistrationError('Password does not match.')
+            setRegistrationError('Password does not match.');
         } else {
-            setRegistrationError(false)
+            setRegistrationError(false);
             user_register(username, password1).then(response => {
-                if (response.USER_REGISTER === 'SUCCESS') {
-                    history.push('/login')
-                } else {
-                    console.log('FAIL')
+                console.log(response);
+                if (response.REGISTRATION === 'SUCCESS') {
+                    history.push('/login');
+                } else if (response.ERROR === 'INTEGRITY_ERROR') {
+                    setRegistrationError('User already registered.');
                 }
-            })
+            }).catch(error => console.log(error));
         }
-    }
+    };
 
     return (
-        <LoginDiv>
+        <StyledWrapper>
             {registrationError && <ErrorMessage>{registrationError}</ErrorMessage>
             }
             <Form>
@@ -77,13 +84,14 @@ const Registration = () => {
                                   onChange={(input) => handleChange(input.target)}/>
                 </Form.Group>
                 <Form.Group className="text-center">
-                    <Button variant="success" type="button" className="mt-3" onClick={() => handleClick()}>
-                        Sign Up
-                    </Button>
+
                 </Form.Group>
             </Form>
-        </LoginDiv>
-    )
-}
+            <Button color="green" text="Sign Up" action={handleClick}>
+                Sign Up
+            </Button>
+        </StyledWrapper>
+    );
+};
 
-export default Registration
+export default Registration;

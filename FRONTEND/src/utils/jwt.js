@@ -5,7 +5,6 @@ const host = 'http://127.0.0.1:8000';
 
 
 const login = (username, password) => {
-
     return new Promise((resolve, reject) => {
         axios.post(`${host}/api/token/`, { username: username, password: password },
         ).then(response => {
@@ -24,8 +23,9 @@ const user_register = (username, password) => {
         axios.post(`${host}/user_register`, {
             username: username,
             password: password,
-        }).then(() => resolve({ 'USER_REGISTER': 'SUCCESS' }))
-            .catch(() => reject({ 'USER_REGISTER': 'FAIL' }));
+        })
+            .then((response) => resolve(response.data))
+            .catch((error) => reject({ ERROR: error.message }));
     });
 };
 

@@ -7,8 +7,8 @@ class ExceptionCatchAndJsonResponseMixin:
     @staticmethod
     def return_exception(exception):
         if isinstance(exception, IntegrityError):
-            return JsonResponse({'error': 'INTEGRITY_ERROR'})
+            return JsonResponse({'ERROR': 'INTEGRITY_ERROR'})
         elif isinstance(exception, DatabaseError):
-            return JsonResponse({'error': 'DATABASE_ERROR'})
+            return JsonResponse({'ERROR': 'DATABASE_ERROR'})
         else:
-            return JsonResponse({'error': 'DATABASE_ERROR'})
+            return JsonResponse({'ERROR': 'DATABASE_ERROR'})

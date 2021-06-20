@@ -2,6 +2,7 @@
   <dictionary name="Bishop">
     <words>
       <w>navbar</w>
+      <w>topbar</w>
     </words>
   </dictionary>
 </component>

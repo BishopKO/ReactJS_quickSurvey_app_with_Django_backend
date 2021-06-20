@@ -2,52 +2,59 @@ import styled, { css } from 'styled-components';
 import React from 'react';
 
 const StyledWrapper = styled.div` 
-  font-size: 14px;
+  min-width: fit-content;
 `;
 
 const StyledButton = styled.button` 
-  ${({ type }) => type === 'normal' && css`
-      padding: 4px 8px 4px 8px;
-      border-radius: 5px;
-      border: 1px solid rgb(108,117,125);
-      cursor: pointer;
-      color: rgb(108,117,125);
-      font-size: inherit;  
-      font-weight: bold; 
-        :hover{
-          color: white;
-          background: rgb(108,117,125);
-        }
-  `}
+   padding: 2px 6px 2px 6px;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: inherit;  
+   font-family: inherit;  
+   opacity: 0.85;   
+   border: ${({ theme, color }) => `1px solid ${theme[color]}`};
+   color: white;
+   background-color: ${({ theme, color }) => theme[color]};
+   :hover{
+    opacity: 1;
+   }
 
-
+   
+  ${({ type }) => type === 'outline' && css`   
+   opacity: 1;
+   border: ${({ theme, color }) => `1px solid ${theme[color]}`};
+   color: ${({ theme, color }) => theme[color]};  
+   background-color:white;
+   :hover{
+      color: white;
+      background-color: ${({ theme, color }) => theme[color]};
+   }
+   `}
+   
+   
   ${({ type }) => type === 'submit' && css`
-    width: 100%;
+    width: 100%;    
     color: white;
     border: none;
     outline: none;
-    
-    background-color: rgb(0,142,255);
-    padding: 5px;   
+    border-radius: 0;
+    background-color: ${({ theme, color }) => theme[color]};
+    padding: 10px;   
     font-weight: bold;
     
     :hover{      
-      background: rgb(0,122,225);
+    opacity: 1;
+      //background: ${({ theme, color }) => theme[color]};
     }
   `}
-   
-   
-    
-  
 `;
 
-const Button = ({ text, action, type }) => {
+const Button = ({ text, action, type, color }) => {
     return (
         <StyledWrapper>
             <StyledButton onClick={action}
                           type={type}
-                          size="sm"
-                          variant="outline-secondary">
+                          color={color}>
                 <span>{text}</span>
             </StyledButton>
         </StyledWrapper>

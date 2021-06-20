@@ -1,5 +1,5 @@
 const FormControlStyle = {
-    width: '80%', fontWeight: 'bold',
+    width: '100%', fontWeight: 'bold',
 };
 
 const FormLabelStyle = {
