@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bcd7ca7-9b60-4599-8144-2fc0e657f49d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -123,56 +122,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="102" column="83" selection-start-line="102" selection-start-column="83" selection-end-line="102" selection-end-column="83" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-                <element signature="e#4#104#0" />
-                <element signature="e#74#102#0" />
-                <element signature="e#954#1190#0" />
-                <element signature="e#1001#1040#0" />
-                <element signature="e#1055#1147#0" />
-                <element signature="e#1234#1378#0" />
-                <element signature="e#1426#1585#0" />
-                <element signature="e#1528#1577#0" />
-                <element signature="e#1622#1681#0" />
-                <element signature="e#1723#1784#0" />
-                <element signature="e#1829#1888#0" />
-                <element signature="e#1932#1974#0" />
-                <element signature="e#2018#2350#0" />
-                <element signature="e#2028#2344#0" />
-                <element signature="e#2056#2142#0" />
-                <element signature="e#2155#2241#0" />
-                <element signature="e#2254#2334#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/PublishedSurvey/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="85" column="27" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/Atoms/StyledTitle.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
@@ -446,6 +395,40 @@
               <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
               <item name="Surveys" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
+              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
+              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
+              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
+              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Atoms" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
+              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Molecules" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -498,7 +481,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="Django server.Surveys">
     <configuration name="Surveys" type="Python.DjangoServer" factoryName="Django server">
       <module name="Surveys" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -643,7 +626,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="490017000" />
+    <option name="totallyTimeSpent" value="490586000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -655,14 +638,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1379" height="1407" extended-state="0" />
-    <editor active="true" />
+    <frame x="-5" y="0" width="1380" height="1165" extended-state="0" />
     <layout>
       <window_info anchor="top" auto_hide="true" id="Favorites" order="0" sideWeight="0.5135975" side_tool="true" weight="0.29082048" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.85862786" side_tool="true" visible="true" weight="0.22482967" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.85862786" side_tool="true" visible="true" weight="0.22844176" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" x="28" y="492" width="1309" height="422" id="Find" order="1" weight="0.32737613" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29048008" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29019213" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -671,7 +653,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32972974" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" weight="0.32972974" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32955405" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.25507718" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.25379172" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32818848" />
       <window_info anchor="bottom" id="TypeScript" order="13" show_stripe_button="false" weight="0.32895753" />
       <window_info anchor="bottom" x="695" y="53" width="588" height="1295" id="Structure" order="14" sideWeight="0.14137214" weight="0.23070674" />
