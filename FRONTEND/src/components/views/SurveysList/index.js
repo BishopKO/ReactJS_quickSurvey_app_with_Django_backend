@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import SurveyLinkModal from './SurveyLinkModal';
 import DeleteSurveyModal from './DeleteSurveyModal';
 
 import { sendQueryUsingTokens } from '../../../utils/jwt';
 import { useHistory } from 'react-router';
+import Button from '../../Atoms/Button';
 
-import { ListGroup, Button, ButtonGroup, Form } from 'react-bootstrap';
+import { ListGroup, ButtonGroup, Form } from 'react-bootstrap';
 import { SurveyWrapper, TopWrapper, ButtonsWrapper } from './styledComponents';
 import { DateStyle } from './styles';
+
+const StyledButtonsGroup = styled.div`
+  display: flex;
+  width: fit-content;
+  //border: 1px solid grey;
+  
+  overflow: hidden;
+  button{
+    margin-right: 3px;
+  }
+
+`;
 
 const SurveysList = () => {
     const [surveysList, setSurveysList] = useState([]);
@@ -18,8 +32,8 @@ const SurveysList = () => {
     useEffect(() => {
         sendQueryUsingTokens('surveys_list', {
             order: '-date',
-        }).then(response => {
-            setSurveysList(response.data['surveys_list']);
+        }).then(data => {
+            setSurveysList(data['surveys_list']);
         }).catch(error => console.log(error));
     }, []);
 
@@ -83,22 +97,23 @@ const SurveysList = () => {
                                                 label="active" checked={item.active}/>
                                 </TopWrapper>
                                 <ListGroup>
-                                    <ListGroup.Item variant="secondary">{item.title}</ListGroup.Item>
+                                    <ListGroup.Item variant="secondary"
+                                                    style={{ fontWeight: 'bold' }}>{item.title}</ListGroup.Item>
                                 </ListGroup>
                                 <ButtonsWrapper>
-                                    <ButtonGroup>
-                                        <Button onClick={() => handleRedirect('results', item.id)} size='sm'
-                                                variant='outline-success'>Results</Button>
-                                        <Button onClick={() => handleRedirect('preview', item.id)}
-                                                size="sm"
-                                                variant="outline-dark">Preview</Button>
-                                        <Button onClick={() => handleRedirect('edit', item.id)} size='sm'
-                                                variant='outline-primary'>Edit</Button>
-                                        <Button onClick={() => showLinkModal(item.id)} size="sm"
-                                                variant="outline-secondary">Link</Button>
-                                    </ButtonGroup>
-                                    <Button onClick={() => handleShowDeleteModal(item.id)} size="sm"
-                                            variant="outline-danger">Delete</Button>
+                                    <StyledButtonsGroup>
+                                        <Button text="Results" color="green" type="outline"
+                                                action={() => handleRedirect('results', item.id)}/>
+                                        <Button text="Preview" color="yellow" type="outline"
+                                                action={() => handleRedirect('preview', item.id)}/>
+                                        <Button text="Edit" color="blue" type="outline"
+                                                action={() => handleRedirect('edit', item.id)}/>
+                                        <Button text="Link" color="grey" type="outline"
+                                                action={() => showLinkModal(item.id)}/>
+                                    </StyledButtonsGroup>
+                                    <Button text="Delete" color="red" type="outline"
+                                            action={() => handleShowDeleteModal(item.id)}/>
+
                                 </ButtonsWrapper>
                             </SurveyWrapper>
                         );

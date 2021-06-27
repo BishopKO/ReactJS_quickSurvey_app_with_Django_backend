@@ -8,7 +8,7 @@ import ConfirmSubmitModal from '../../Molecules/ConfirmSubmitModal';
 import ErrorPage from '../ErrorPage';
 import { useHistory } from 'react-router';
 import { useParams } from 'react-router';
-import { getPublishedSurveyData, savePublishedSurveyData } from '../../../utils/jwt';
+import { savePublishedSurveyData, getPreviewSurveyData } from '../../../utils/jwt';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -26,7 +26,7 @@ const InnerWrapper = styled.div`
   padding: 5px;
 `;
 
-const PreviewSurvey = ({ preview }) => {
+const Survey = ({ preview }) => {
     const { id } = useParams();
     const history = useHistory();
     const [surveyData, setSurveyData] = useState({});
@@ -35,10 +35,10 @@ const PreviewSurvey = ({ preview }) => {
     const [readyToSubmit, setReadyToSubmit] = useState(false);
 
     useEffect(() => {
-        console.log(preview);
-        getPublishedSurveyData(id)
+        getPreviewSurveyData(id)
             .then(response => {
                 setSurveyData(response.data);
+                console.log(response);
             })
             .catch(error => console.log(error));
     }, [id]);
@@ -96,10 +96,10 @@ const PreviewSurvey = ({ preview }) => {
                         }
                     </InnerWrapper>
                     {readyToSubmit &&
-                    <Button type="submit" text="Submit" action={() => setShowConfirmModal(true)}/>
+                    <Button variant="submit" text="Submit" color="green" action={() => setShowConfirmModal(true)}/>
                     }
                     {!readyToSubmit &&
-                    <Button type="submit" text="Please answer all questions."/>
+                    <Button variant="submit" text="Please answer all questions." color="green"/>
                     }
                 </StyledWrapper>
 
@@ -113,4 +113,4 @@ const PreviewSurvey = ({ preview }) => {
         );
     }
 };
-export default PreviewSurvey;
+export default Survey;

@@ -2,25 +2,32 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 const ButtonsWrapper = styled.div`
-display: flex;
-  width: 100px;
-  height: 20px;
+  display: flex; 
+  height: 1em;  
   border-radius: 5px;  
   overflow: hidden;  
   padding: 0;
   margin-bottom: 5px;
+  button:nth-child(1){
+    border-bottom-left-radius: 5px;
+  }
+  button:nth-child(2){
+    border-top-right-radius: 5px;
+  }
+
 `;
 
 const Button = styled.button`
-  width: 50%; 
-  height: 100%;
-  font-size: 10px;
+  font-size: 0.8em;
+  padding: 2px 5px 2px 5px;
   border: none; 
-  background-color: lightgrey;
+  background-color: ${({ theme }) => theme.grey};
+  color: white;
   overflow: hidden;
   
+  
   ${({ active }) => active && css`
-    background-color: green;
+    background-color: ${({ theme }) => theme.green};
     color: white
   `}
 `;
@@ -28,9 +35,6 @@ const Button = styled.button`
 
 const AnswerTypeButtons = ({ select, index, action }) => {
     const [active, setActive] = useState(select);
-    useEffect(() => {
-
-    });
 
     const handleSingle = () => {
         setActive('single');

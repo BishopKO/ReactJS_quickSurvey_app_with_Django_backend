@@ -29,11 +29,11 @@ const editReducer = (state, action) => {
         }
         case 'ADD_ANSWERS': {
             let index = action.payload;
-            console.log(index);
+
             let tmpState = [...state.questions];
             tmpState[index].answers = '';
             tmpState[index].type = 'single';
-           
+
 
             return {
                 ...state,
@@ -44,13 +44,12 @@ const editReducer = (state, action) => {
             const { index, type } = action.payload;
             let tmpState = state;
             tmpState.questions[index].type = type;
-            console.log(index, type, state);
             return tmpState;
         }
 
         case 'REMOVE_ANSWERS': {
             let index = action.payload;
-            console.log(index);
+
             let tmpState = [...state.questions];
             delete tmpState[index].answers;
 

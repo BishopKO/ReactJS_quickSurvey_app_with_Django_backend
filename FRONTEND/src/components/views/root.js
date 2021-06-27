@@ -59,7 +59,6 @@ const Root = () => {
                     <MainTemplateRoutesWrapper exact path="/login" component={LoginPage}/>
                     <MainTemplateRoutesWrapper exact path="/registration" component={Registration}/>
 
-
                     <PublishedSurveyRoutesTemplateWrapper exact path="/survey/:id" component={Survey}/>
                     <PublishedSurveyRoutesTemplateWrapper path="/survey_success" component={SubmitSuccessPage}/>
                 </Switch>

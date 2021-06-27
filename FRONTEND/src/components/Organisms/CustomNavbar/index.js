@@ -65,16 +65,15 @@ const CustomNavbar = ({ loggedIn }) => {
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 {loggedIn ?
                     <StyledNav>
-                        <Button text="Main View" color="green" type="outline" action={mainView}/>
-                        <Button text="Create New" color="yellow" type="outline" action={handleCreate}/>
-                        <Button text="Logout" color="blue" type="outline" action={handleLogout}/>
+                        <Button text="Main View" color="green" variant="outline" action={mainView}/>
+                        <Button text="Create New" color="yellow" variant="outline" action={handleCreate}/>
+                        <Button text="Logout" color="blue" variant="outline" action={handleLogout}/>
                     </StyledNav>
                     :
                     <StyledNav>
-                        <Button variant=" outline-warning" onClick={() => history.push('/registration')}
-                                size=" sm" className=" mx-1">Register</Button>
-                        <Button variant='outline-success' onClick={() => history.push('/login')}
-                                size=" sm" className=" mx-1">Login</Button>
+                        <Button color="blue" variant="outline" action={() => history.push('/registration')}
+                                text="Register"/>
+                        <Button color="green" variant="outline" action={() => history.push('/login')} text="Login"/>
                     </StyledNav>
                 }
             </Navbar.Collapse>

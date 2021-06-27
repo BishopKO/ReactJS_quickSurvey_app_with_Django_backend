@@ -5,8 +5,7 @@ import theme from '../themes/theme';
 import { ThemeProvider } from 'styled-components';
 
 const StyledWrapper = styled.div`
-  width:100%;
-  max-width: 1920px;
+  width:100%; 
   min-height: 100vh; 
   background-color: lightblue;
   

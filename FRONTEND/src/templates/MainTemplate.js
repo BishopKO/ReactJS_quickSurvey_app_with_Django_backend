@@ -17,7 +17,7 @@ const StyledWrapper = styled.div`
   ${({ published }) => published && css`
     background-color: lightblue;
     min-height: 100vh;
-    min-width: 100vw;
+    width: 100vw; 
   `} 
 `;
 

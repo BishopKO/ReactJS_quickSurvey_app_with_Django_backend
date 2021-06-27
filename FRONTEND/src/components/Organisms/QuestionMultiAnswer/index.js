@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useState from 'react-usestateref';
 import TickAnswer from '../../Molecules/TickAnswer';
 import styled from 'styled-components';

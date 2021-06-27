@@ -26,9 +26,6 @@ const DesktopView = ({ textResults, chartResults }) => {
     const [activeItem, setActiveItem] = useState(null);
     const [view, setView] = useState('text');
 
-    useEffect(() => {
-        console.log(chartResults);
-    });
 
     const handleSelectAnswer = (index) => {
         setActiveItem(index);
@@ -81,7 +78,7 @@ const DesktopView = ({ textResults, chartResults }) => {
 
                     </>
                 </StyledTopbar>
-                <ChartDesktopView chartResults={chartResults}/>
+                <ChartDesktopView chartResults={chartResults} counter={textResults.length}/>
             </>);
     }
 };

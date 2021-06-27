@@ -23,10 +23,21 @@ const GlobalStyle = createGlobalStyle`
      width: 100%;
      text-align: center;
   }
+  textarea{
+    :focus{
+      outline: none;
+    }
   
-  .btn-outline-dark{
-    opacity: 0.9;
-  }
+    ::-webkit-scrollbar {
+      width: 1em;     
+    } 
+    
+    ::-webkit-scrollbar-thumb {
+      background: grey;        
+    }
+    }
+    
+  
   
 `;
 

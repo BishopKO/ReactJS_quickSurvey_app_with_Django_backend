@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
     MainWrapperChart,
@@ -56,15 +56,12 @@ const options = {
     },
 };
 
-const ChartDesktopView = ({ chartResults }) => {
-    const count = Object.values(chartResults).length;
-    useEffect(() => {
-        console.log(count);
-    });
+const ChartDesktopView = ({ chartResults, counter }) => {
+    ;
 
     return (
         <MainWrapperChart>
-            <CounterWrapperChart>All answers: {count}</CounterWrapperChart>
+            <CounterWrapperChart>All answers: {counter}</CounterWrapperChart>
             {Object.values(chartResults).map((item) => {
                 return (
                     <MainQuestionWrapperChart>

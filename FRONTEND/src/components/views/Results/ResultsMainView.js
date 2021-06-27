@@ -15,30 +15,23 @@ const ResultsMainView = () => {
 
     useEffect(() => {
         console.log(id);
-        sendQueryUsingTokens('get_results', { survey_id: id }).then(resp => {
-            console.log(resp.data);
-            if (Object(resp.data).hasOwnProperty('error')) {
-                setError(resp.data.error);
-            } else {
-                setTextAnswers(resp.data['text_results']);
-                setChartAnswers(resp.data['chart_results']);
-            }
+        sendQueryUsingTokens('get_results', { survey_id: id }).then(data => {
+            console.log(data);
+            setTextAnswers(data['text_results']);
+            setChartAnswers(data['chart_results']);
         }).catch(err => console.log(err));
     }, [id]);
 
 
-    if (!error) {
-        return (
-            <>
-                {view === 'desktop' &&
-                <DesktopView textResults={textAnswers} chartResults={chartAnswers}/>}
-                {view === 'mobile' &&
-                <MobileView textResults={textAnswers} chartResults={chartAnswers}/>}
-            </>
-        );
-    } else {
-        return (<>{error}</>);
-    }
+    return (
+        <>
+            {/*{view === 'desktop' &&*/}
+            {/*<DesktopView textResults={textAnswers} chartResults={chartAnswers}/>}*/}
+            {/*{view === 'mobile' &&*/}
+            {/*<MobileView textResults={textAnswers} chartResults={chartAnswers}/>}*/}
+        </>
+    );
+
 };
 
 export default ResultsMainView;

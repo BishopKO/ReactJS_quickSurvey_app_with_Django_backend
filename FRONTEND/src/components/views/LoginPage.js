@@ -78,9 +78,8 @@ const LoginPage = () => {
                                   onChange={(input) => handleChange(input.target)}/>
                 </Form.Group>
             </Form>
-            <Button color="green" action={handleClick} text="Login">
-                Login
-            </Button>
+            <Button color="green" action={handleClick} text="Login"/>
+
         </StyledWrapper>
     );
 };

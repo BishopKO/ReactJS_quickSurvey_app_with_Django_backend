@@ -18,9 +18,13 @@ const StyledButton = styled.button`
    :hover{
     opacity: 1;
    }
+   
+   ${({ size }) => size === 'small' && css`
+    font-size: 0.8rem;
+  `}
 
    
-  ${({ type }) => type === 'outline' && css`   
+  ${({ variant }) => variant === 'outline' && css`   
    opacity: 1;
    border: ${({ theme, color }) => `1px solid ${theme[color]}`};
    color: ${({ theme, color }) => theme[color]};  
@@ -32,7 +36,7 @@ const StyledButton = styled.button`
    `}
    
    
-  ${({ type }) => type === 'submit' && css`
+  ${({ variant }) => variant === 'submit' && css`
     width: 100%;    
     color: white;
     border: none;
@@ -49,13 +53,17 @@ const StyledButton = styled.button`
   `}
 `;
 
-const Button = ({ text, action, type, color }) => {
+const Button = ({ children, text, action, variant, color, size }) => {
     return (
         <StyledWrapper>
             <StyledButton onClick={action}
-                          type={type}
-                          color={color}>
+                          type="button"
+                          variant={variant}
+                          color={color}
+                          size={size}>
+
                 <span>{text}</span>
+                {children}
             </StyledButton>
         </StyledWrapper>
     );

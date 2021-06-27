@@ -1,26 +1,93 @@
 import React, { useReducer, useEffect } from 'react';
+import styled from 'styled-components';
 import editReducer from './editReducer';
 import AnswerTypeButtons from '../../Atoms/answerTypeButtons';
+import Button from '../../Atoms/Button';
+import StyledInput from '../../Atoms/StyledInput';
 import { sendQueryUsingTokens } from '../../../utils/jwt';
 import { useHistory, useParams } from 'react-router';
-import { MainWrapper, TopBarButtonsWrapper, TopBarWrapper } from './styledComponents';
-import { FormControlStyle, FormLabelStyle } from './styles';
-import { Form, Button, ButtonGroup } from 'react-bootstrap';
 
+// TODO: ADD MODAL, SAVE AS NEW
 
-// TODO: EDITED SURVEY SAVED AS NEW ONE
+const StyledWrapper = styled.div`
+      display: flex;
+      flex-direction: column;   
+      justify-content: center;  
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px; 
+      border: ${({ theme }) => `1px solid ${theme.lightGrey}`};
+      textarea{
+        resize: none;
+      } 
+  `;
 
+const TopBarWrapper = styled.div`
+      display: grid;
+      justify-content: center;  
+      max-width: inherit;  
+      grid-template-columns: 1fr 150px; 
+      border-bottom: 1px solid lightgrey;
+      padding-bottom: 5px
+    `;
 
-const Index = () => {
+const TopBarButtonsWrapper = styled.div`
+      display: flex;  
+      flex-direction: row;
+      justify-content: flex-end;  
+      button{
+        margin-right: 5px;
+      } 
+    `;
+
+const StyledAnswersBar = styled.div`
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;     
+  `;
+
+const StyledQuestionWrapper = styled.div`
+  display: grid;
+  grid-template-rows: 40px 40px fit-content;
+  border: ${({ theme }) => `2px solid ${theme.lightGrey}`};
+  box-shadow: -1px 1px 5px black ;
+  box-shadow: 1px -1px 5px black ;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  
+  div:nth-child(1){
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 2em;       
+  }
+  `;
+
+const StyledTextarea = styled.textarea`
+  width: 100%;
+  height: 5em;
+  border: ${({ theme }) => `1px solid ${theme.lightGrey}`};
+  border-radius: 5px;
+  :focus{
+    outline: none;
+  }
+  
+`;
+
+const EditSurvey = () => {
     const [state, dispatch] = useReducer(editReducer, { title: '', questions: [] });
     const { id } = useParams();
 
     useEffect(() => {
-        sendQueryUsingTokens('edit_survey', { request: 'GET_SURVEY_DATA', survey_id: id }).then(response => {
-            const surveyData = response.data;
-            dispatch({ type: 'UPDATE_DATA', payload: surveyData });
-        });
-    }, [id]);
+        console.log(id);
+        sendQueryUsingTokens('edit_survey', { request: 'GET_SURVEY_DATA', survey_id: id })
+            .then(data => {
+                dispatch({ type: 'UPDATE_DATA', payload: data });
+            });
+    }, []);
 
     const history = useHistory();
 
@@ -55,7 +122,7 @@ const Index = () => {
 
     const handleSave = () => {
         sendQueryUsingTokens('edit_survey', { request: 'SAVE_SURVEY', survey_id: id, data: state }).then(() => {
-            history.push('/list');
+            history.push('/');
         }).catch(error => console.log(error));
     };
 
@@ -69,52 +136,61 @@ const Index = () => {
 
 
     return (
-        <MainWrapper>
+        <StyledWrapper>
             <TopBarWrapper>
-                <Form.Control type="text" size="sm" placeholder="Title" style={FormControlStyle}
-                              onChange={(element) => handleChangeTitle(element)} value={state.title}/>
+                <StyledInput onChange={(element) => handleChangeTitle(element)} value={state.title}
+                             placeholder="Survey title..."/>
                 <TopBarButtonsWrapper>
-                    <Button variant="outline-success" size="sm" className="mx-1"
-                            onClick={() => handleSave()}>Save</Button>
-                    <Button variant="outline-danger" size="sm" onClick={() => handleClear()}>Clear</Button>
+                    <Button color="green" text="Save"
+                            action={handleSave}/>
+                    <Button color="yellow" text="Clear" action={handleClear}/>
                 </TopBarButtonsWrapper>
             </TopBarWrapper>
-            <Form>
-                {state.questions.map((item, index) => {
-                    return (
-                        <Form.Group className="mt-3" key={`question_${index}`}>
-                            <Form.Label style={FormLabelStyle}>Question {index + 1}:</Form.Label>
-                            <Form.Control type="text" value={item.question} name={index}
-                                          onChange={(element) => handleChangeQuestion(element, index)}/>
-                            <ButtonGroup className=" mt-1">
-                                {item.hasOwnProperty('answers') ?
-                                    <Button variant="outline-success" size="sm"
-                                            onClick={() => handleRemoveAnswers(index)}>Remove answers</Button>
-                                    :
-                                    <Button variant="success" size="sm"
-                                            onClick={() => handleAddAnswers(index)}>Add answers</Button>
 
-                                }
-                                <Button variant="danger" size="sm"
-                                        onClick={() => handleRemove(index)}>Delete</Button>
-                            </ButtonGroup>
-                            {item.hasOwnProperty('answers') &&
-                            <Form.Group className="mt-1">
-                                <AnswerTypeButtons index={index} select={item.type} action={handleAnswerType}/>
-                                <Form.Label>Possible answers:</Form.Label>
-                                <Form.Control as="textarea" rows={3} value={item.answers}
-                                              onChange={(element) => handleChangeAnswers(element, index)}/>
+            {state.questions.map((item, index) => {
+                return (
+                    <StyledQuestionWrapper>
+                        <div>
+                            Question {index + 1}:
+                            <Button color="red" size="small" variant="outline" text="delete question"
+                                    action={() => handleRemove(index)}>
+                            </Button>
+                        </div>
+                        <div>
+                            <StyledInput type="text" value={item.question} name={index}
+                                         onChange={(element) => handleChangeQuestion(element, index)}/>
 
-                            </Form.Group>
+
+                            {!item.hasOwnProperty('answers') &&
+                            <Button color="blue" text="Add answers" size="small" variant="outline"
+                                    action={() => handleAddAnswers(index)}/>
                             }
-                        </Form.Group>
-                    );
-                })
-                }
-            </Form>
-            <Button variant="primary" className="mt-3" onClick={handleAddQuestion}>Add +</Button>
-        </MainWrapper>
+                        </div>
+                        <div>
+                            {item.hasOwnProperty('answers') &&
+                            <>
+                                <StyledAnswersBar>
+                                    <AnswerTypeButtons index={index} select={item.type} action={handleAnswerType}/>
+
+                                    <Button color="red" size="small"
+                                            variant="outline"
+                                            action={() => handleRemoveAnswers(index)}
+                                            text="Remove answers"/>
+                                </StyledAnswersBar>
+
+                                {/*TODO: create styled textarea*/}
+                                <StyledTextarea type="textarea" value={item.answers}
+                                                onChange={(element) => handleChangeAnswers(element, index)}/>
+                            </>
+                            }
+                        </div>
+                    </StyledQuestionWrapper>
+                );
+            })
+            }
+            <Button color="green" text="Add+" variant="submit" action={handleAddQuestion}/>
+        </StyledWrapper>
     );
 };
 
-export default Index;
+export default EditSurvey;
