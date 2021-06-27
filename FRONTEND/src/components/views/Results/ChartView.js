@@ -6,7 +6,7 @@ import {
     ChartWrapper,
     AnswersWrapperChart,
     CounterWrapperChart,
-} from './styledComponents';
+} from './Desktop/styledComponents';
 
 
 const backgroundChartColors = [
@@ -56,7 +56,7 @@ const options = {
     },
 };
 
-const ChartDesktopView = ({ chartResults, counter }) => {
+const ChartView = ({ chartResults, counter }) => {
     ;
 
     return (
@@ -95,4 +95,4 @@ const ChartDesktopView = ({ chartResults, counter }) => {
 
 };
 
-export default ChartDesktopView;
+export default ChartView;

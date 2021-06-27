@@ -6,7 +6,7 @@ const StyledTitle = styled.div`
   border: none;  
   padding: 10px;
   font-size: 1.2em; 
-  word-break: break-all;  
+  word-break: break-word;  
   text-align: center;
   width: ${({ width }) => `${width}px`};
   margin-bottom: 20px;

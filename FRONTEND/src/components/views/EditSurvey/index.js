@@ -1,13 +1,14 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import editReducer from './editReducer';
 import AnswerTypeButtons from '../../Atoms/answerTypeButtons';
 import Button from '../../Atoms/Button';
 import StyledInput from '../../Atoms/StyledInput';
+import ConfirmSaveModal from './ConfirmSaveModal';
 import { sendQueryUsingTokens } from '../../../utils/jwt';
 import { useHistory, useParams } from 'react-router';
+import Spinner from '../../Atoms/Spinner';
 
-// TODO: ADD MODAL, SAVE AS NEW
 
 const StyledWrapper = styled.div`
       display: flex;
@@ -50,8 +51,7 @@ const StyledQuestionWrapper = styled.div`
   display: grid;
   grid-template-rows: 40px 40px fit-content;
   border: ${({ theme }) => `2px solid ${theme.lightGrey}`};
-  box-shadow: -1px 1px 5px black ;
-  box-shadow: 1px -1px 5px black ;
+  box-shadow: 0 0 5px black ; 
   border-radius: 5px;
   padding: 5px;
   margin-top: 5px;
@@ -79,13 +79,15 @@ const StyledTextarea = styled.textarea`
 
 const EditSurvey = () => {
     const [state, dispatch] = useReducer(editReducer, { title: '', questions: [] });
+    const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(true);
     const { id } = useParams();
 
     useEffect(() => {
-        console.log(id);
         sendQueryUsingTokens('edit_survey', { request: 'GET_SURVEY_DATA', survey_id: id })
             .then(data => {
                 dispatch({ type: 'UPDATE_DATA', payload: data });
+                setLoading(false);
             });
     }, []);
 
@@ -121,9 +123,10 @@ const EditSurvey = () => {
     };
 
     const handleSave = () => {
-        sendQueryUsingTokens('edit_survey', { request: 'SAVE_SURVEY', survey_id: id, data: state }).then(() => {
-            history.push('/');
-        }).catch(error => console.log(error));
+        sendQueryUsingTokens('edit_survey', { request: 'SAVE_SURVEY', survey_id: id, data: state })
+            .then(() => {
+                history.push('/');
+            }).catch(error => console.log(error));
     };
 
     const handleAnswerType = (index, type) => {
@@ -134,63 +137,68 @@ const EditSurvey = () => {
         dispatch({ type: 'CLEAR' });
     };
 
+    if (loading) {
+        return (
+            <Spinner/>
+        );
+    } else {
+        return (
+            <StyledWrapper>
+                <ConfirmSaveModal show={showModal} submitAction={handleSave} closeAction={() => setShowModal(false)}/>
+                <TopBarWrapper>
+                    <StyledInput onChange={(element) => handleChangeTitle(element)} value={state.title}
+                                 placeholder="Survey title..."/>
+                    <TopBarButtonsWrapper>
+                        <Button color="green" text="Save"
+                                action={() => setShowModal(true)}/>
+                        <Button color="yellow" text="Clear" action={handleClear}/>
+                    </TopBarButtonsWrapper>
+                </TopBarWrapper>
 
-    return (
-        <StyledWrapper>
-            <TopBarWrapper>
-                <StyledInput onChange={(element) => handleChangeTitle(element)} value={state.title}
-                             placeholder="Survey title..."/>
-                <TopBarButtonsWrapper>
-                    <Button color="green" text="Save"
-                            action={handleSave}/>
-                    <Button color="yellow" text="Clear" action={handleClear}/>
-                </TopBarButtonsWrapper>
-            </TopBarWrapper>
-
-            {state.questions.map((item, index) => {
-                return (
-                    <StyledQuestionWrapper>
-                        <div>
-                            Question {index + 1}:
-                            <Button color="red" size="small" variant="outline" text="delete question"
-                                    action={() => handleRemove(index)}>
-                            </Button>
-                        </div>
-                        <div>
-                            <StyledInput type="text" value={item.question} name={index}
-                                         onChange={(element) => handleChangeQuestion(element, index)}/>
+                {state.questions.map((item, index) => {
+                    return (
+                        <StyledQuestionWrapper>
+                            <div>
+                                Question {index + 1}:
+                                <Button color="red" size="small" variant="outline" text="delete question"
+                                        action={() => handleRemove(index)}>
+                                </Button>
+                            </div>
+                            <div>
+                                <StyledInput type="text" value={item.question} name={index}
+                                             onChange={(element) => handleChangeQuestion(element, index)}/>
 
 
-                            {!item.hasOwnProperty('answers') &&
-                            <Button color="blue" text="Add answers" size="small" variant="outline"
-                                    action={() => handleAddAnswers(index)}/>
-                            }
-                        </div>
-                        <div>
-                            {item.hasOwnProperty('answers') &&
-                            <>
-                                <StyledAnswersBar>
-                                    <AnswerTypeButtons index={index} select={item.type} action={handleAnswerType}/>
+                                {!item.hasOwnProperty('answers') &&
+                                <Button color="blue" text="Add answers" size="small" variant="outline"
+                                        action={() => handleAddAnswers(index)}/>
+                                }
+                            </div>
+                            <div>
+                                {item.hasOwnProperty('answers') &&
+                                <>
+                                    <StyledAnswersBar>
+                                        <AnswerTypeButtons index={index} select={item.type} action={handleAnswerType}/>
 
-                                    <Button color="red" size="small"
-                                            variant="outline"
-                                            action={() => handleRemoveAnswers(index)}
-                                            text="Remove answers"/>
-                                </StyledAnswersBar>
+                                        <Button color="red" size="small"
+                                                variant="outline"
+                                                action={() => handleRemoveAnswers(index)}
+                                                text="Remove answers"/>
+                                    </StyledAnswersBar>
 
-                                {/*TODO: create styled textarea*/}
-                                <StyledTextarea type="textarea" value={item.answers}
-                                                onChange={(element) => handleChangeAnswers(element, index)}/>
-                            </>
-                            }
-                        </div>
-                    </StyledQuestionWrapper>
-                );
-            })
-            }
-            <Button color="green" text="Add+" variant="submit" action={handleAddQuestion}/>
-        </StyledWrapper>
-    );
+                                    <StyledTextarea type="textarea" value={item.answers}
+                                                    onChange={(element) => handleChangeAnswers(element, index)}/>
+                                </>
+                                }
+                            </div>
+                        </StyledQuestionWrapper>
+                    );
+                })
+                }
+                <Button color="green" text="Add+" variant="submit" action={handleAddQuestion}/>
+            </StyledWrapper>
+        );
+    }
 };
 
 export default EditSurvey;

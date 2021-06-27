@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "amazing-react-charts": "^0.4.1",
-    "brazilian-values": "^0.10.1"
+    "brazilian-values": "^0.10.1",
+    "node-core-lib": "^0.11.11"
   }
 }

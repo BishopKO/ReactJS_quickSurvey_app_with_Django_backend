@@ -87,9 +87,7 @@ const Registration = () => {
 
                 </Form.Group>
             </Form>
-            <Button color="green" text="Sign Up" action={handleClick}>
-                Sign Up
-            </Button>
+            <Button color="green" text="Sign Up" action={handleClick}/>
         </StyledWrapper>
     );
 };

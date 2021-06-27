@@ -10,7 +10,7 @@ import {
     QuestionStyle,
 } from './stylesDesktop';
 
-import ChartDesktopView from './ChartDesktopView';
+import ChartView from '../ChartView';
 
 import Button from '../../../Atoms/Button';
 
@@ -78,7 +78,7 @@ const DesktopView = ({ textResults, chartResults }) => {
 
                     </>
                 </StyledTopbar>
-                <ChartDesktopView chartResults={chartResults} counter={textResults.length}/>
+                <ChartView chartResults={chartResults} counter={textResults.length}/>
             </>);
     }
 };

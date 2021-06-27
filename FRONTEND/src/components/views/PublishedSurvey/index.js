@@ -5,10 +5,11 @@ import InputTextareaWithText from '../../Atoms/InputTextareaWithText';
 import styled from 'styled-components';
 import StyledTitle from '../../Atoms/StyledTitle';
 import ConfirmSubmitModal from '../../Molecules/ConfirmSubmitModal';
+import ErrorPage from '../ErrorPage';
 import Spinner from '../../Atoms/Spinner';
 import { useHistory } from 'react-router';
 import { useParams } from 'react-router';
-import { savePublishedSurveyData, getPreviewSurveyData } from '../../../utils/jwt';
+import { savePublishedSurveyData, getPublishedSurvey } from '../../../utils/jwt';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -26,20 +27,26 @@ const InnerWrapper = styled.div`
   padding: 5px;
 `;
 
-const Survey = ({ preview }) => {
+const PublishedSurvey = ({ preview }) => {
     const { id } = useParams();
     const history = useHistory();
-    const [surveyData, setSurveyData] = useState({ 'questions': [] });
+    const [surveyData, setSurveyData] = useState({});
     const [surveyAnswers, setSurveyAnswers] = useState({});
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [readyToSubmit, setReadyToSubmit] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getPreviewSurveyData(id)
+        getPublishedSurvey(id)
             .then(response => {
-                setSurveyData(response.data);
-                setLoading(false);
+                const data = response.data;
+                if (!data.isActive) {
+                    history.push({ pathname: '/survey_not_found' });
+                } else {
+                    setSurveyData(response.data);
+                    setLoading(false);
+
+                }
             })
             .catch(error => console.log(error));
     }, [id]);
@@ -66,12 +73,11 @@ const Survey = ({ preview }) => {
         }
     };
 
-
     if (loading) {
-        return (
-            <Spinner/>
-        );
-    } else {
+        return (<Spinner/>);
+    }
+
+    if (!loading) {
         return (
             <>
                 <ConfirmSubmitModal show={showConfirmModal} closeAction={() => setShowConfirmModal(false)}
@@ -108,8 +114,15 @@ const Survey = ({ preview }) => {
                     <Button variant="submit" text="Please answer all questions." color="green"/>
                     }
                 </StyledWrapper>
+
             </>
+        );
+    } else {
+        return (
+            <div>
+                <ErrorPage error_message={'Sorry... survey not found or is not active...'}/>
+            </div>
         );
     }
 };
-export default Survey;
+export default PublishedSurvey;

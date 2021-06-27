@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Survey, Answers
 from surveys_app.utils.mixins import ExceptionCatchAndJsonResponseMixin
 from surveys_app.utils.prepare_results import prepare_text_results, prepare_chart_results
+from datetime import datetime
 import json
 import jwt
 
@@ -31,7 +32,7 @@ class CreateSurvey(ExceptionCatchAndJsonResponseMixin, APIView):
             user_id = decoded_token.get('user_id')
 
             data = json_data.get('data')
-            survey_title, survey_data, survey_questions = data.get('title'), data.get('data'), data.get('questions')
+            survey_title, survey_questions = data.get('title'), data.get('questions')
             user = User.objects.get(id=user_id)
             Survey.objects.create(owner=user, survey_title=survey_title, data=json.dumps(survey_questions))
             response = {'create_survey': 'SUCCESS'}
@@ -58,7 +59,7 @@ class SurveysList(ExceptionCatchAndJsonResponseMixin, APIView):
 
             for survey in surveys:
                 response.append({'id': survey.survey_id, 'active': survey.active, 'title': survey.survey_title,
-                                 'date': survey.date})
+                                 'date': survey.date.strftime('%Y-%m-%d %H:%M')})
 
             return JsonResponse({'surveys_list': response})
         except Exception as e:
@@ -86,18 +87,17 @@ class SurveyEdit(APIView):
 
         elif request_type == 'GET_SURVEY_DATA':
             survey = Survey.objects.get(owner=user, survey_id=survey_id)
-            survey_id, survey_title, survey_data = survey.survey_id, survey.survey_title, survey.data
+            survey_id, survey_title, survey_data, isActive = survey.survey_id, survey.survey_title, survey.data, survey.active
 
             return JsonResponse(
-                {'title': survey_title, 'id': survey_id, 'questions': json.loads(survey_data)})
+                {'isActive': isActive, 'title': survey_title, 'id': survey_id, 'questions': json.loads(survey_data)})
 
         elif request_type == 'SAVE_SURVEY':
+            current_datetime = datetime.now().strftime('%Y/%h/%d %H:%M')
             json_data = json.loads(request.body).get('data')
             questions, title = json_data.get('questions'), json_data.get('title')
-            survey = Survey.objects.get(owner=user_id, survey_id=survey_id)
-            survey.data = json.dumps(questions)
-            survey.survey_title = title
-            survey.save()
+            Survey.objects.create(owner=user, survey_title=title,
+                                  data=json.dumps(questions))
             return JsonResponse({'SAVE_SURVEY': 'SUCCESS'})
 
         elif request_type == 'DELETE_SURVEY':
@@ -148,19 +148,14 @@ class GetPublishedSurvey(ExceptionCatchAndJsonResponseMixin, View):
     def post(self, request):
         api_request = json.loads(request.body)
         request_type, survey_id = api_request.get('request'), api_request.get('survey_id')
-        if request_type == 'GET_PUBLISHED_SURVEY':
-            try:
-                survey = Survey.objects.get(survey_id=survey_id)
-                if survey.active:
-                    survey_id, survey_title, survey_data = survey.survey_id, survey.survey_title, survey.data
-                    return JsonResponse(
-                        {'title': survey_title, 'id': survey_id, 'questions': json.loads(survey_data)})
-                else:
-                    return JsonResponse({'GET_PUBLISHED_SURVEY': 'NOT_ACTIVE'})
-            except Exception as e:
-                self.return_exception(e)
-        else:
-            return JsonResponse({'GET_PUBLISHED_SURVEY': 'NO SURVEY'})
+        try:
+            survey = Survey.objects.get(survey_id=survey_id)
+            survey_id, survey_title, survey_data, is_active = survey.survey_id, survey.survey_title, survey.data, survey.active
+            return JsonResponse(
+                {'isActive': is_active, 'title': survey_title, 'id': survey_id, 'questions': json.loads(survey_data)})
+
+        except Exception as e:
+            self.return_exception(e)
 
 
 @method_decorator(csrf_exempt, name='dispatch')

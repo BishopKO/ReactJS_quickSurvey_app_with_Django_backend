@@ -1,5 +1,7 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import Button from '../../Atoms/Button';
+import { Modal } from 'react-bootstrap';
+
 
 const SurveyLinkModal = ({ show, closeAction, deleteAction, surveyId }) => {
     return (
@@ -13,8 +15,8 @@ const SurveyLinkModal = ({ show, closeAction, deleteAction, surveyId }) => {
                         <span>Are You sure You want to delete survey?</span>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={() => closeAction()} variant='success' size='sm'>Cancel</Button>
-                        <Button onClick={() => deleteAction(surveyId)} variant='danger' size='sm'>Delete</Button>
+                        <Button action={() => closeAction()} color="green" size="big">Cancel</Button>
+                        <Button action={() => deleteAction(surveyId)} color="red" size="big">Delete</Button>
                     </Modal.Footer>
                 </Modal.Dialog>
             </Modal>

@@ -87,7 +87,7 @@ const EditSurvey = () => {
     };
 
     const handleAddQuestion = () => {
-        setQuestions([...questions, [{ 'question': 'empty' }]]);
+        setQuestions([...questions, { 'question': '' }]);
     };
 
     const handleRemove = (number) => {
@@ -133,7 +133,7 @@ const EditSurvey = () => {
         setQuestions([]);
         setTitle('');
     };
-    
+
 
     return (
         <StyledWrapper>

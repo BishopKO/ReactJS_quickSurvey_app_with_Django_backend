@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SubmitSuccessPage from './SubmitSuccessPage';
 import SurveysList from './SurveysList';
 import CreateSurvey from './CreateSurvey';
 import EditSurvey from './EditSurvey';
 import Survey from './Survey';
+import PublishedSurvey from './PublishedSurvey';
 import ResultsMainView from './Results/ResultsMainView';
 import LoginPage from './LoginPage';
 import Registration from './Registration';
@@ -13,6 +14,8 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../../reducer/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ErrorPage from './ErrorPage';
+
 
 const Root = () => {
     const MainTemplateRoutesWrapper = ({ component: Component, ...params }) => {
@@ -59,8 +62,10 @@ const Root = () => {
                     <MainTemplateRoutesWrapper exact path="/login" component={LoginPage}/>
                     <MainTemplateRoutesWrapper exact path="/registration" component={Registration}/>
 
-                    <PublishedSurveyRoutesTemplateWrapper exact path="/survey/:id" component={Survey}/>
+                    <PublishedSurveyRoutesTemplateWrapper exact path="/survey/:id" component={PublishedSurvey}/>
                     <PublishedSurveyRoutesTemplateWrapper path="/survey_success" component={SubmitSuccessPage}/>
+                    <Route exact path={'/survey_not_found'}
+                           render={() => <ErrorPage error_message="Sorry... Survey not found..."/>}/>
                 </Switch>
 
             </BrowserRouter>

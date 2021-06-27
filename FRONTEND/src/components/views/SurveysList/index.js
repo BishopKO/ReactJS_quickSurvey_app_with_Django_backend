@@ -2,31 +2,28 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SurveyLinkModal from './SurveyLinkModal';
 import DeleteSurveyModal from './DeleteSurveyModal';
-
-import { sendQueryUsingTokens } from '../../../utils/jwt';
-import { useHistory } from 'react-router';
 import Button from '../../Atoms/Button';
-
-import { ListGroup, ButtonGroup, Form } from 'react-bootstrap';
+import { useHistory } from 'react-router';
+import { sendQueryUsingTokens } from '../../../utils/jwt';
+import { ListGroup, Form } from 'react-bootstrap';
 import { SurveyWrapper, TopWrapper, ButtonsWrapper } from './styledComponents';
 import { DateStyle } from './styles';
+import Spinner from '../../Atoms/Spinner';
 
 const StyledButtonsGroup = styled.div`
   display: flex;
-  width: fit-content;
-  //border: 1px solid grey;
-  
+  width: fit-content; 
   overflow: hidden;
   button{
     margin-right: 3px;
   }
-
 `;
 
 const SurveysList = () => {
     const [surveysList, setSurveysList] = useState([]);
     const [showModalLink, setShowModalLink] = useState({ show: false, link: '' });
     const [showModalDelete, setShowModalDelete] = useState({ show: false, id: '' });
+    const [loading, setLoading] = useState(true);
     const history = useHistory();
 
     useEffect(() => {
@@ -34,6 +31,7 @@ const SurveysList = () => {
             order: '-date',
         }).then(data => {
             setSurveysList(data['surveys_list']);
+            setLoading(false);
         }).catch(error => console.log(error));
     }, []);
 
@@ -77,7 +75,11 @@ const SurveysList = () => {
                 break;
         }
     };
-
+    if (loading) {
+        return (
+            <Spinner/>
+        );
+    }
 
     if (surveysList.length > 0) {
         return (
@@ -98,7 +100,9 @@ const SurveysList = () => {
                                 </TopWrapper>
                                 <ListGroup>
                                     <ListGroup.Item variant="secondary"
-                                                    style={{ fontWeight: 'bold' }}>{item.title}</ListGroup.Item>
+                                                    style={{ wordBreak: 'break-word', fontWeight: 'bold' }}>
+                                        {item.title}
+                                    </ListGroup.Item>
                                 </ListGroup>
                                 <ButtonsWrapper>
                                     <StyledButtonsGroup>
@@ -124,7 +128,7 @@ const SurveysList = () => {
     } else {
         return (
             <>
-                <Button onClick={() => history.push('/create_survey')} variant="success">Create new</Button>
+                <Button action={() => history.push('/create_survey')} color="green" variant="submit">Create new</Button>
             </>
         );
     }

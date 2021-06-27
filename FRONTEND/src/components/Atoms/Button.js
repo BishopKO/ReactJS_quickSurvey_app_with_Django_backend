@@ -22,6 +22,10 @@ const StyledButton = styled.button`
    ${({ size }) => size === 'small' && css`
     font-size: 0.8rem;
   `}
+   
+   ${({ size }) => size === 'big' && css`
+    font-size: 1.2rem;
+  `}
 
    
   ${({ variant }) => variant === 'outline' && css`   
