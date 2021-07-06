@@ -9,7 +9,7 @@ import ErrorPage from '../ErrorPage';
 import Spinner from '../../Atoms/Spinner';
 import { useHistory } from 'react-router';
 import { useParams } from 'react-router';
-import { savePublishedSurveyData, getPublishedSurvey } from '../../../utils/jwt';
+import { saveSurveyResults, getPublishedSurvey } from '../../../utils/jwt';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -37,39 +37,37 @@ const PublishedSurvey = ({ preview }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getPublishedSurvey(id)
-            .then(response => {
-                const data = response.data;
-                if (!data.isActive) {
-                    history.push({ pathname: '/survey_not_found' });
-                } else {
-                    setSurveyData(response.data);
-                    setLoading(false);
+        (async () => {
+            const survey = await getPublishedSurvey(id);
+            if (!survey.isActive) {
+                history.push({ pathname: '/survey_not_found' });
+            } else {
+                survey.data = JSON.parse(survey.data);
+                setSurveyData(survey);
+                setLoading(false);
+            }
+        })();
 
-                }
-            })
-            .catch(error => console.log(error));
     }, [id]);
 
     const handleGetState = (value) => {
         let tmpState = surveyAnswers;
         tmpState[value.number] = value.state;
         setSurveyAnswers(tmpState);
-        if (surveyData.questions.length === Object.keys(surveyAnswers).length) {
+        if (surveyData.data.length === Object.keys(surveyAnswers).length) {
             setReadyToSubmit(true);
         }
     };
 
-    const handleSubmitAnswers = () => {
+    const handleSubmitAnswers = async () => {
         if (preview) {
             console.log(surveyAnswers);
         } else {
-            savePublishedSurveyData(id, surveyAnswers)
-                .then(() => {
-                    setShowConfirmModal(false);
-                    history.push('/survey_success');
-                })
-                .catch(error => console.log(error));
+            const response = await saveSurveyResults(id, surveyAnswers);
+            if (response.statusText === 'Created') {
+                setShowConfirmModal(false);
+                history.push('/survey_success');
+            }
         }
     };
 
@@ -83,11 +81,11 @@ const PublishedSurvey = ({ preview }) => {
                 <ConfirmSubmitModal show={showConfirmModal} closeAction={() => setShowConfirmModal(false)}
                                     submitAction={handleSubmitAnswers}/>
                 <StyledWrapper>
-                    <StyledTitle>{surveyData.title}</StyledTitle>
+                    <StyledTitle>{surveyData.survey_title}</StyledTitle>
                     <InnerWrapper>
-                        {surveyData.questions.map((item, index) => {
+                        {surveyData.data.map((item, index) => {
                             return (
-                                <AnswersWrapper>
+                                <AnswersWrapper key={`answers_key_${index}`}>
                                     {item.hasOwnProperty('answers') &&
                                     <>
                                         <QuestionMultiAnswer key={`question__multi_${index}`} number={index}
@@ -98,7 +96,8 @@ const PublishedSurvey = ({ preview }) => {
                                     }
                                     {!item.hasOwnProperty('answers') &&
                                     <>
-                                        <InputTextareaWithText number={index} text={item.question}
+                                        <InputTextareaWithText key={`question__text_${index}`} number={index}
+                                                               text={item.question}
                                                                actionOnChange={handleGetState}/>
                                     </>
                                     }

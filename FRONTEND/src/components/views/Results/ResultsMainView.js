@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { sendQueryUsingTokens } from '../../../utils/jwt';
+// import { sendQueryUsingTokens } from '../../../utils/jwt';
 import DesktopView from './Desktop/DesktopView';
 import MobileView from './Mobile/MobileView';
 
@@ -14,12 +14,12 @@ const ResultsMainView = () => {
 
 
     useEffect(() => {
-        sendQueryUsingTokens('get_results', { survey_id: id })
-            .then(data => {
-                setTextAnswers(data['text_results']);
-                setChartAnswers(data['chart_results']);
-            })
-            .catch(() => setError(true));
+        // sendQueryUsingTokens('get_results', { survey_id: id })
+        //     .then(data => {
+        //         setTextAnswers(data['text_results']);
+        //         setChartAnswers(data['chart_results']);
+        //     })
+        //     .catch(() => setError(true));
     }, [id]);
 
     if (!error) {

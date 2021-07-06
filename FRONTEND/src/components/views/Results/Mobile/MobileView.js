@@ -8,10 +8,6 @@ import { AnswerStyle, QuestionStyle, CardHeaderStyle, CardStyle, CardBodyStyle }
 const MobileView = ({ textResults, chartResults }) => {
     const [view, setView] = useState('text');
 
-    window.show = function() {
-        console.log(chartResults);
-    };
-
     if (view === 'text') {
         return (
             <>

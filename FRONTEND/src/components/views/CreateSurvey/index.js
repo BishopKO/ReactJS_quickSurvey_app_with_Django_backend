@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AnswerTypeButtons from '../../Atoms/answerTypeButtons';
 import Button from '../../Atoms/Button';
 import StyledInput from '../../Atoms/StyledInput';
-import { sendQueryUsingTokens } from '../../../utils/jwt';
+import { createNewSurvey } from '../../../utils/jwt';
 import { useHistory, useParams } from 'react-router';
 
 
@@ -75,10 +75,9 @@ const StyledTextarea = styled.textarea`
 `;
 
 
-const EditSurvey = () => {
+const CreateSurvey = () => {
     const [questions, setQuestions] = useState([]);
     const [title, setTitle] = useState('');
-    const { id } = useParams();
     const history = useHistory();
 
     const handleChangeTitle = (event) => {
@@ -116,11 +115,12 @@ const EditSurvey = () => {
         setQuestions([...questions]);
     };
 
-    const handleSave = () => {
-        const data = { title: title, questions: questions };
-        sendQueryUsingTokens('create_survey', { request: 'SAVE_SURVEY', survey_id: id, data: data }).then(() => {
+    const handleSave = async () => {
+        const data = { survey_title: title, data: questions };
+        const response = await createNewSurvey(data);
+        if (response.statusText === 'Created') {
             history.push('/');
-        }).catch(error => console.log(error));
+        }
     };
 
     const handleAnswerType = (index, type) => {
@@ -191,4 +191,4 @@ const EditSurvey = () => {
     );
 };
 
-export default EditSurvey;
+export default CreateSurvey;

@@ -4,7 +4,7 @@ import SurveyLinkModal from './SurveyLinkModal';
 import DeleteSurveyModal from './DeleteSurveyModal';
 import Button from '../../Atoms/Button';
 import { useHistory } from 'react-router';
-import { sendQueryUsingTokens } from '../../../utils/jwt';
+import { getSurveysList, activateSurvey, deleteSurvey } from '../../../utils/jwt';
 import { ListGroup, Form } from 'react-bootstrap';
 import { SurveyWrapper, TopWrapper, ButtonsWrapper } from './styledComponents';
 import { DateStyle } from './styles';
@@ -22,28 +22,26 @@ const StyledButtonsGroup = styled.div`
 const SurveysList = () => {
     const [surveysList, setSurveysList] = useState([]);
     const [showModalLink, setShowModalLink] = useState({ show: false, link: '' });
-    const [showModalDelete, setShowModalDelete] = useState({ show: false, id: '' });
+    const [showModalDelete, setShowModalDelete] = useState({ show: false, survey_id: null });
     const [loading, setLoading] = useState(true);
     const history = useHistory();
 
     useEffect(() => {
-        sendQueryUsingTokens('surveys_list', {
-            order: '-date',
-        }).then(data => {
-            setSurveysList(data['surveys_list']);
+        (async () => {
+            const surveys = await getSurveysList();
+            setSurveysList(surveys);
             setLoading(false);
-        }).catch(error => console.log(error));
+        })();
     }, []);
 
-    const handleSetActive = (id) => {
-        sendQueryUsingTokens('edit_survey', { request: 'SET_ACTIVE', survey_id: id })
-            .then(() => window.location.reload());
+    const handleSetActive = async (id, isActive) => {
+        await activateSurvey(id, !isActive);
+        window.location.reload();
     };
 
-    const handleDeleteSurveyAction = (id) => {
-        sendQueryUsingTokens('edit_survey', { request: 'DELETE_SURVEY', survey_id: id }).then(() => {
-            window.location.reload();
-        });
+    const handleDeleteSurvey = async () => {
+        await deleteSurvey(showModalDelete.survey_id);
+        window.location.reload();
     };
 
     const showLinkModal = (id) => {
@@ -51,11 +49,11 @@ const SurveysList = () => {
     };
 
     const handleCloseLinkModal = () => {
-        setShowModalLink(showModalLink.show = false);
+        setShowModalLink(false);
     };
 
-    const handleShowDeleteModal = (id) => {
-        setShowModalDelete({ show: true, id: id });
+    const handleShowDeleteModal = (survey_id) => {
+        setShowModalDelete({ show: true, survey_id: survey_id });
     };
 
     const handleCloseDeleteModal = () => {
@@ -86,37 +84,41 @@ const SurveysList = () => {
             <>
                 <SurveyLinkModal show={showModalLink.show} link={showModalLink.link}
                                  closeAction={handleCloseLinkModal}/>
-                <DeleteSurveyModal show={showModalDelete.show} surveyId={showModalDelete.id}
+
+                <DeleteSurveyModal show={showModalDelete.show}
                                    closeAction={handleCloseDeleteModal}
-                                   deleteAction={() => handleDeleteSurveyAction(showModalDelete.id)}/>
+                                   deleteAction={handleDeleteSurvey}
+                />
                 <>
                     {surveysList.map((item, index) => {
                         return (
                             <SurveyWrapper key={`survey_${index}`}>
                                 <TopWrapper>
                                     <span style={DateStyle}>{item.date}</span>
-                                    <Form.Check type="checkbox" onChange={() => handleSetActive(item.id)}
-                                                label="active" checked={item.active}/>
+
+                                    <Form.Check type="checkbox"
+                                                onChange={() => handleSetActive(item.survey_id, item.isActive)}
+                                                label="active" checked={item.isActive}/>
                                 </TopWrapper>
                                 <ListGroup>
                                     <ListGroup.Item variant="secondary"
                                                     style={{ wordBreak: 'break-word', fontWeight: 'bold' }}>
-                                        {item.title}
+                                        {item.survey_title}
                                     </ListGroup.Item>
                                 </ListGroup>
                                 <ButtonsWrapper>
                                     <StyledButtonsGroup>
                                         <Button text="Results" color="green" type="outline"
-                                                action={() => handleRedirect('results', item.id)}/>
+                                                action={() => handleRedirect('results', item.survey_id)}/>
                                         <Button text="Preview" color="yellow" type="outline"
-                                                action={() => handleRedirect('preview', item.id)}/>
+                                                action={() => handleRedirect('preview', item.survey_id)}/>
                                         <Button text="Edit" color="blue" type="outline"
-                                                action={() => handleRedirect('edit', item.id)}/>
+                                                action={() => handleRedirect('edit', item.survey_id)}/>
                                         <Button text="Link" color="grey" type="outline"
-                                                action={() => showLinkModal(item.id)}/>
+                                                action={() => showLinkModal(item.survey_id)}/>
                                     </StyledButtonsGroup>
                                     <Button text="Delete" color="red" type="outline"
-                                            action={() => handleShowDeleteModal(item.id)}/>
+                                            action={() => handleShowDeleteModal(item.survey_id)}/>
 
                                 </ButtonsWrapper>
                             </SurveyWrapper>

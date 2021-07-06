@@ -1,11 +1,10 @@
-import React, { useReducer, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import editReducer from './editReducer';
 import AnswerTypeButtons from '../../Atoms/answerTypeButtons';
 import Button from '../../Atoms/Button';
 import StyledInput from '../../Atoms/StyledInput';
 import ConfirmSaveModal from './ConfirmSaveModal';
-import { sendQueryUsingTokens } from '../../../utils/jwt';
+import { getSurveyData, createNewSurvey } from '../../../utils/jwt';
 import { useHistory, useParams } from 'react-router';
 import Spinner from '../../Atoms/Spinner';
 
@@ -78,63 +77,84 @@ const StyledTextarea = styled.textarea`
 `;
 
 const EditSurvey = () => {
-    const [state, dispatch] = useReducer(editReducer, { title: '', questions: [] });
+    const [state, setState] = useState({ title: '', data: [] });
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
-
-    useEffect(() => {
-        sendQueryUsingTokens('edit_survey', { request: 'GET_SURVEY_DATA', survey_id: id })
-            .then(data => {
-                dispatch({ type: 'UPDATE_DATA', payload: data });
-                setLoading(false);
-            });
-    }, []);
-
     const history = useHistory();
 
+    useEffect(() => {
+        (async () => {
+            const survey = await getSurveyData(id);
+            survey.data = JSON.parse(survey.data);
+            setState(survey);
+            setLoading(false);
+        })();
+    }, [id]);
+
+
     const handleChangeTitle = (element) => {
-        const title = element.target.value;
-        dispatch({ type: 'UPDATE_TITLE', payload: title });
+        const { value } = element.target;
+        const tmpState = state;
+        tmpState.survey_title = value;
+        setState({ ...tmpState });
     };
 
     const handleAddQuestion = () => {
-        dispatch({ type: 'ADD_QUESTION' });
+        const tmpState = state;
+        tmpState.data.push({ 'question': '' });
+        setState({ ...tmpState });
     };
 
     const handleRemove = (number) => {
-        dispatch({ type: 'REMOVE_QUESTION', payload: number });
+        let tmpState = state;
+        tmpState.data = tmpState.data.filter((item, index) => index !== number);
+        setState({ ...tmpState });
     };
 
     const handleChangeQuestion = (element, index) => {
-        dispatch({ type: 'UPDATE_QUESTION', payload: [index, element.target.value] });
+        const { value } = element.target;
+        let tmpState = state;
+        tmpState.data[index].question = value;
+        setState({ ...tmpState });
     };
 
     const handleChangeAnswers = (element, index) => {
-        dispatch({ type: 'UPDATE_ANSWERS', payload: [index, element.target.value] });
+        const { value } = element.target;
+        let tmpState = state;
+        tmpState.data[index].answers = value;
+        setState({ ...tmpState });
     };
 
     const handleAddAnswers = (index) => {
-        dispatch({ type: 'ADD_ANSWERS', payload: index });
+        let tmpState = state;
+        tmpState.data[index].answers = '';
+        tmpState.data[index].type = 'single';
+        setState({ ...tmpState });
     };
 
     const handleRemoveAnswers = (index) => {
-        dispatch({ type: 'REMOVE_ANSWERS', payload: index });
+        let tmpState = state;
+        delete tmpState.data[index].answers;
+        delete tmpState.data[index].type;
+        setState({ ...tmpState });
     };
 
-    const handleSave = () => {
-        sendQueryUsingTokens('edit_survey', { request: 'SAVE_SURVEY', survey_id: id, data: state })
-            .then(() => {
-                history.push('/');
-            }).catch(error => console.log(error));
+    const handleSave = async () => {
+        const response = await createNewSurvey(state);
+        if (response === 'SUCCESS') {
+            history.push('/');
+        }
     };
 
     const handleAnswerType = (index, type) => {
-        dispatch({ type: 'SET_ANSWER_TYPE', payload: { index: index, type: type } });
+        let tmpState = state;
+        tmpState.data[index].type = type;
+        setState({ ...tmpState });
     };
 
     const handleClear = () => {
-        dispatch({ type: 'CLEAR' });
+        setState({ title: '', data: [] });
     };
 
     if (loading) {
@@ -146,7 +166,7 @@ const EditSurvey = () => {
             <StyledWrapper>
                 <ConfirmSaveModal show={showModal} submitAction={handleSave} closeAction={() => setShowModal(false)}/>
                 <TopBarWrapper>
-                    <StyledInput onChange={(element) => handleChangeTitle(element)} value={state.title}
+                    <StyledInput onChange={(element) => handleChangeTitle(element)} value={state.survey_title}
                                  placeholder="Survey title..."/>
                     <TopBarButtonsWrapper>
                         <Button color="green" text="Save"
@@ -155,7 +175,7 @@ const EditSurvey = () => {
                     </TopBarButtonsWrapper>
                 </TopBarWrapper>
 
-                {state.questions.map((item, index) => {
+                {state.data.map((item, index) => {
                     return (
                         <StyledQuestionWrapper>
                             <div>

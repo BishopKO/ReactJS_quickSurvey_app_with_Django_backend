@@ -8,7 +8,7 @@ import ConfirmSubmitModal from '../../Molecules/ConfirmSubmitModal';
 import Spinner from '../../Atoms/Spinner';
 import { useHistory } from 'react-router';
 import { useParams } from 'react-router';
-import { savePublishedSurveyData, getPreviewSurveyData } from '../../../utils/jwt';
+import { saveSurveyResults, getSurveyData } from '../../../utils/jwt';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -36,19 +36,20 @@ const Survey = ({ preview }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getPreviewSurveyData(id)
-            .then(response => {
-                setSurveyData(response.data);
-                setLoading(false);
-            })
-            .catch(error => console.log(error));
+        (async () => {
+            const survey = await getSurveyData(id);
+            survey.data = JSON.parse(survey.data);
+            setSurveyData(survey);
+            setLoading(false);
+        })();
+
     }, [id]);
 
     const handleGetState = (value) => {
         let tmpState = surveyAnswers;
         tmpState[value.number] = value.state;
         setSurveyAnswers(tmpState);
-        if (surveyData.questions.length === Object.keys(surveyAnswers).length) {
+        if (surveyData.data.length === Object.keys(surveyAnswers).length) {
             setReadyToSubmit(true);
         }
     };
@@ -57,7 +58,7 @@ const Survey = ({ preview }) => {
         if (preview) {
             console.log(surveyAnswers);
         } else {
-            savePublishedSurveyData(id, surveyAnswers)
+            saveSurveyResults(id, surveyAnswers)
                 .then(() => {
                     setShowConfirmModal(false);
                     history.push('/survey_success');
@@ -77,9 +78,9 @@ const Survey = ({ preview }) => {
                 <ConfirmSubmitModal show={showConfirmModal} closeAction={() => setShowConfirmModal(false)}
                                     submitAction={handleSubmitAnswers}/>
                 <StyledWrapper>
-                    <StyledTitle>{surveyData.title}</StyledTitle>
+                    <StyledTitle>{surveyData.survey_title}</StyledTitle>
                     <InnerWrapper>
-                        {surveyData.questions.map((item, index) => {
+                        {surveyData.data.map((item, index) => {
                             return (
                                 <AnswersWrapper>
                                     {item.hasOwnProperty('answers') &&

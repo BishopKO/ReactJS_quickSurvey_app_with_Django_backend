@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import CustomNavbar from '../components/Organisms/CustomNavbar';
 import GlobalStyle from '../GlobalStyles/GlobalStyle';

@@ -3,7 +3,7 @@ import Button from '../../Atoms/Button';
 import { Modal } from 'react-bootstrap';
 
 
-const SurveyLinkModal = ({ show, closeAction, deleteAction, surveyId }) => {
+const SurveyLinkModal = ({ show, closeAction, deleteAction }) => {
     return (
         <>
             <Modal show={show} onHide={() => closeAction()}>
@@ -16,7 +16,7 @@ const SurveyLinkModal = ({ show, closeAction, deleteAction, surveyId }) => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button action={() => closeAction()} color="green" size="big">Cancel</Button>
-                        <Button action={() => deleteAction(surveyId)} color="red" size="big">Delete</Button>
+                        <Button action={deleteAction} color="red" size="big">Delete</Button>
                     </Modal.Footer>
                 </Modal.Dialog>
             </Modal>

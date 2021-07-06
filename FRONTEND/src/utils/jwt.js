@@ -3,6 +3,12 @@ import jwt_decode from 'jwt-decode';
 
 const { REACT_APP_BACKEND_ADDRESS: host } = process.env;
 
+const returnHeaders = () => {
+    const accessToken = localStorage.getItem('access');
+    return { headers: { Authorization: `Bearer ${accessToken}` } };
+};
+
+
 const login = (username, password) => {
     return new Promise((resolve, reject) => {
         axios.post(`${host}/api/token/`, { username: username, password: password },
@@ -10,7 +16,6 @@ const login = (username, password) => {
                 resolve({ login: 'SUCCESS', tokens: response.data });
             },
         ).catch(error => {
-            console.log(error);
             if (error) {
                 reject({ login: 'FAILED' });
             }
@@ -18,107 +23,97 @@ const login = (username, password) => {
     });
 };
 
+
 const user_register = (username, password) => {
     return new Promise((resolve, reject) => {
         axios.post(`${host}/user_register`, {
             username: username,
             password: password,
         })
-            .then((response) => resolve(response.data))
-            .catch((error) => reject({ ERROR: error.message }));
-    });
-};
-
-const getAccessTokenLeftTime = (accessToken) => {
-    const expiry = jwt_decode(accessToken).exp;
-    return Math.floor(expiry - (Date.now() / 1000));
-};
-
-const getNewAccessToken = (refreshToken) => {
-    return new Promise(resolve => {
-        axios.post(`${host}/api/token/refresh/`, { refresh: refreshToken },
-        ).then(response => {
-            const { access } = response.data;
-            localStorage.setItem('access', access);
-            resolve(access);
-        });
-    });
-};
-
-const sendQuery = (accessToken, view, query, config = {}) => {
-    return new Promise((resolve, reject) => {
-        axios.post(`${host}/${view}`, query, config)
-            .then(response => {
-                    if (Object(response.data).hasOwnProperty('BACKEND_ERROR')) {
-                        reject({ ERROR: 'Query error...' });
+            .then((response) => {
+                    if (response.data.response === 'SUCCESS') {
+                        resolve('SUCCESS');
                     } else {
-                        resolve(response.data);
+                        resolve('FAIL');
                     }
                 },
-            ).catch(() => reject({ ERROR: 'Query error...' }));
-    });
-};
-
-const sendQueryUsingTokens = (view, query) => {
-    return new Promise(resolve => {
-        const { access, refresh } = localStorage;
-        if (getAccessTokenLeftTime(access) > 0) {
-            let config = { headers: { Authorization: `Bearer ${access}` } };
-            sendQuery(`${host}/${view}`, view, query, config).then(data => resolve(data));
-        } else {
-            getNewAccessToken(refresh).then(accessToken => {
-                const config = { headers: { Authorization: `Bearer ${accessToken}` } };
-                sendQuery(accessToken, view, query, config).then(data =>
-                    resolve(data),
-                );
-            });
-        }
+            )
+            .catch((error) => reject('BACKEND ERROR'));
     });
 };
 
 
-const getPublishedSurvey = (id) => {
-    const query = { survey_id: id };
-    return new Promise((resolve, reject) => {
-        axios.post(`${host}/get_published_survey`, query)
-            .then(data => resolve(data))
-            .catch(error => {
-                reject(error);
-            });
-    });
+const checkAccessToken = async () => {
+    const { access, refresh } = localStorage;
+    const { exp, user_id } = jwt_decode(access);
+
+    if (Math.floor(exp - (Date.now() / 1000)) <= 10) {
+        const response = await axios.post(`${host}/api/token/refresh/`, { refresh: refresh });
+        localStorage.setItem('access', response.data.access);
+    }
+    return user_id;
 };
 
-// TODO: Create separate view using jwt
-const getPreviewSurveyData = (id) => {
-    const query = { request: 'GET_PREVIEW_SURVEY', survey_id: id };
 
-    return new Promise((resolve, reject) => {
-        axios.post(`${host}/get_published_survey`, query)
-            .then(data => resolve(data))
-            .catch(error => {
-                reject(error);
-            });
-    });
+const getSurveysList = async () => {
+    await checkAccessToken();
+    const config = { headers: { Authorization: `Bearer ${localStorage.getItem('access')}` } };
+    const response = await axios.get(`${host}/api/survey`, config);
+    return response.data;
 };
 
-const savePublishedSurveyData = (id, data) => {
-    const query = { request: 'SAVE_PUBLISHED_SURVEY', survey_id: id, survey_data: data };
 
-    return new Promise((resolve, reject) => {
-        axios.post(`${host}/save_published_survey`, query)
-            .then(data => resolve(data))
-            .catch(error => {
-                reject(error);
-            });
-    });
+const createNewSurvey = async ({ survey_title, data }) => {
+    const userId = await checkAccessToken();
+    const postData = { survey_title: survey_title || 'Default title', data: JSON.stringify(data), owner: userId };
+    return await axios.post(`${host}/api/survey/`, postData, returnHeaders());
 };
 
+
+const activateSurvey = async (id, isActive) => {
+    const userId = await checkAccessToken();
+    const patchData = { user_id: userId, isActive: isActive };
+    return await axios.patch(`${host}/api/survey/${id}/`, patchData, returnHeaders());
+};
+
+
+const deleteSurvey = async (id) => {
+    const userId = await checkAccessToken();
+    return await axios.delete(`${host}/api/survey/${id}/`, returnHeaders());
+};
+
+
+const getSurveyData = async (id) => {
+    const { data } = await axios.get(`${host}/api/survey/${id}`, returnHeaders());
+    return data;
+};
+
+
+const getSurveyResults = async () => {
+    const results = await axios.get(`${host}/survey_results`);
+};
+
+
+const getPublishedSurvey = async (id) => {
+    const { data } = await axios.get(`${host}/api/published/${id}`);
+    return data;
+};
+
+
+const saveSurveyResults = async (id, data) => {
+    const postData = { survey_id: id, data: JSON.stringify(data) };
+    return await axios.post(`${host}/api/answers/`, postData);
+};
 
 export {
     login,
     user_register,
-    sendQueryUsingTokens,
-    savePublishedSurveyData,
-    getPreviewSurveyData,
+    activateSurvey,
+    saveSurveyResults,
+    getSurveyData,
     getPublishedSurvey,
+    createNewSurvey,
+    checkAccessToken,
+    getSurveysList,
+    deleteSurvey,
 };

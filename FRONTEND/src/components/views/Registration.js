@@ -41,7 +41,7 @@ const Registration = () => {
         setRegistrationDetails(currentDetails);
     };
 
-    const handleClick = () => {
+    const handleClick = async () => {
         const { username, password1, password2 } = registrationDetails;
 
         if (!email_validator.validate(username)) {
@@ -52,16 +52,22 @@ const Registration = () => {
             setRegistrationError('Password does not match.');
         } else {
             setRegistrationError(false);
-            user_register(username, password1).then(response => {
-                console.log(response);
-                if (response.REGISTRATION === 'SUCCESS') {
+            const response = await user_register(username, password1);
+            switch (response) {
+                case 'SUCCESS':
                     history.push('/login');
-                } else if (response.ERROR === 'INTEGRITY_ERROR') {
-                    setRegistrationError('User already registered.');
-                }
-            }).catch(error => console.log(error));
+                    break;
+                case 'FAIL':
+                    setRegistrationError('User already exists.');
+                    break;
+                case 'BACKEND ERROR':
+                    break;
+                default:
+                    console.log(response);
+            }
         }
     };
+    
 
     return (
         <StyledWrapper>

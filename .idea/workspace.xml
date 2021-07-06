@@ -2,7 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bcd7ca7-9b60-4599-8144-2fc0e657f49d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Surveys.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Surveys.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Bishop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Bishop.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/Atoms/StyledInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/components/Atoms/StyledInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/views/CreateSurvey/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/components/views/CreateSurvey/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/editReducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/views/PublishedSurvey/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/components/views/PublishedSurvey/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/views/Registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/components/views/Registration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/views/Results/Mobile/MobileView.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/components/views/Results/Mobile/MobileView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/views/Results/ResultsMainView.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/components/views/Results/ResultsMainView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/views/Survey/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/components/views/Survey/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/DeleteSurveyModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/DeleteSurveyModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/templates/MainTemplate.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/templates/MainTemplate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/utils/jwt.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/utils/jwt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/src/utils/jwt.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/src/utils/jwt.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Surveys/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Surveys/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/surveys_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/surveys_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/surveys_app/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/surveys_app/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/surveys_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/surveys_app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/surveys_app/utils/mixins.py" beforeDir="false" afterPath="$PROJECT_DIR$/surveys_app/utils/mixins.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/surveys_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/surveys_app/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -122,11 +145,92 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/surveys_app/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+            <state relative-caret-position="377">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FRONTEND/src/utils/jwt.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
+              <folding>
+                <element signature="e#151#278#0" />
+                <element signature="e#319#730#0" />
+                <element signature="e#365#726#0" />
+                <element signature="e#479#564#0" />
+                <element signature="e#591#718#0" />
+                <element signature="e#648#708#0" />
+                <element signature="e#779#1280#0" />
+                <element signature="e#825#1276#0" />
+                <element signature="e#871#946#0" />
+                <element signature="e#980#1199#0" />
+                <element signature="e#1044#1111#0" />
+                <element signature="e#1117#1181#0" />
+                <element signature="e#1320#1657#0" />
+                <element signature="e#1471#1635#0" />
+                <element signature="e#1695#1917#0" />
+                <element signature="e#1978#2203#0" />
+                <element signature="e#2257#2265#0" />
+                <element signature="e#2532#2540#0" />
+                <element signature="e#2363#2466#0" />
+                <element signature="e#2506#2572#0" />
+                <element signature="e#2616#2705#0" />
+                <element signature="e#2748#2923#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="494">
+              <caret line="81" column="33" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+                <element signature="e#1041#1205#0" />
+                <element signature="e#1064#1195#0" />
+                <element signature="e#1249#1399#0" />
+                <element signature="e#1652#1711#0" />
+                <element signature="e#1753#1814#0" />
+                <element signature="e#1962#2004#0" />
+                <element signature="e#2048#2380#0" />
+                <element signature="e#2058#2374#0" />
+                <element signature="e#2086#2172#0" />
+                <element signature="e#2185#2271#0" />
+                <element signature="e#2284#2364#0" />
+                <element signature="e#2399#2457#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/FRONTEND/src/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/surveys_app/serializers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="52" lean-forward="true" selection-start-line="4" selection-start-column="52" selection-end-line="4" selection-end-column="52" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -144,10 +248,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>session_co</find>
-      <find>AUTH_USER</find>
-      <find>s</find>
-      <find>CSRF_COOKIE_NAM</find>
       <find>csrf</find>
       <find>jwt</find>
       <find>test_</find>
@@ -174,13 +274,17 @@
       <find>.data</find>
       <find>SAVE_s</find>
       <find>write</find>
+      <find>title</find>
+      <find>.title</find>
+      <find>console.lo</find>
+      <find>console.log</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\Bishop\PycharmProjects\Surveys</dir>
       <dir>C:\Users\Bishop\PycharmProjects\Surveys\surveys_app</dir>
+      <dir>C:\Users\Bishop\PycharmProjects\Surveys\FRONTEND\src\components</dir>
       <dir>C:\Users\Bishop\PycharmProjects\Surveys\FRONTEND</dir>
       <dir>C:\Users\Bishop\PycharmProjects\Surveys\FRONTEND\src</dir>
-      <dir>C:\Users\Bishop\PycharmProjects\Surveys\FRONTEND\src\components</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -189,13 +293,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/Atoms/stories/Button.stories.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/public/index.html" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/styledComponents.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Results/Desktop/DesktopView.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Results/Desktop/ChartDesktopView.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/themes/theme.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/templates/MainTemplate.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/templates/PublishedTemplate.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/editReducer.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/editSurvey.stories.js" />
@@ -209,37 +309,41 @@
         <option value="$PROJECT_DIR$/FRONTEND/src/components/Molecules/stories/CustomModal.stories.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/Molecules/CustomModal.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/GlobalStyles/GlobalStyle.js" />
-        <option value="$PROJECT_DIR$/surveys_app/utils/mixins.py" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Results/ResultsMainView.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/CreateSurvey/index.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/SurveyNotFound.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/Atoms/Button.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/DeleteSurveyModal.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/ConfirmSaveModal.js" />
-        <option value="$PROJECT_DIR$/surveys_app/views.py" />
-        <option value="$PROJECT_DIR$/surveys_app/models.py" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/Molecules/ConfirmSubmitModal.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Registration.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/Atoms/StyledInput.js" />
-        <option value="$PROJECT_DIR$/Surveys/settings.py" />
         <option value="$PROJECT_DIR$/FRONTEND/src/.env" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/root.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/utils/jwt.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Results/Desktop/styledComponents.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Results/ChartDesktopView.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Results/ChartView.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Results/Mobile/MobileView.js" />
         <option value="$PROJECT_DIR$/FRONTEND/.env" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/SurveyLinkModal.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/Atoms/stories/Spinner.stories.js" />
         <option value="$PROJECT_DIR$/FRONTEND/.storybook/preview-head.html" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/PublishedSurvey/index.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/Atoms/Spinner.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Survey/index.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/index.js" />
-        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/index.js" />
         <option value="$PROJECT_DIR$/FRONTEND/src/components/Atoms/StyledTitle.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/surveys_app/utils/mixins.py" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Registration.js" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/templates/MainTemplate.js" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/components/Atoms/StyledInput.js" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/utils/jwt.test.js" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Results/ResultsMainView.js" />
+        <option value="$PROJECT_DIR$/surveys_app/urls.py" />
+        <option value="$PROJECT_DIR$/Surveys/settings.py" />
+        <option value="$PROJECT_DIR$/surveys_app/serializers.py" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/CreateSurvey/index.js" />
+        <option value="$PROJECT_DIR$/surveys_app/models.py" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/PublishedSurvey/index.js" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/DeleteSurveyModal.js" />
+        <option value="$PROJECT_DIR$/surveys_app/views.py" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/utils/jwt.js" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/index.js" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Results/Mobile/MobileView.js" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/Survey/index.js" />
+        <option value="$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/index.js" />
       </list>
     </option>
   </component>
@@ -256,6 +360,32 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
+              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
+              <item name="surveys_app" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Default Changelist'; set:Default Changelist; class com.intellij.packageDependencies.ChangeListScope">
           <expand>
@@ -388,51 +518,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
-              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
-              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
-              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
-              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Atoms" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Surveys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Surveys" type="462c0819:PsiDirectoryNode" />
-              <item name="FRONTEND" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Molecules" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -450,8 +535,18 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PyCharm 2019.1.4\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="Surveys" sdk-home="C:\Users\Bishop\PycharmProjects\Surveys\venv3-7\Scripts\python.exe">
+        <option name="mySdkHome" value="C:\Users\Bishop\PycharmProjects\Surveys\venv3-7\Scripts\python.exe" />
+        <option name="myModuleName" value="Surveys" />
+        <option name="myAddContentRoots" value="false" />
+        <option name="myAddSourceRoots" value="false" />
+      </console-settings>
+    </option>
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -481,7 +576,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Django server.Surveys">
+  <component name="RunManager" selected="npm.start">
     <configuration name="Surveys" type="Python.DjangoServer" factoryName="Django server">
       <module name="Surveys" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -622,11 +717,21 @@
       <workItem from="1624782029976" duration="17219000" />
       <workItem from="1624811406749" duration="393000" />
       <workItem from="1624811814361" duration="6413000" />
+      <workItem from="1624922942526" duration="23000" />
+      <workItem from="1625268569824" duration="644000" />
+      <workItem from="1625339748715" duration="27000" />
+      <workItem from="1625339790923" duration="29000" />
+      <workItem from="1625378372883" duration="11678000" />
+      <workItem from="1625419585423" duration="1751000" />
+      <workItem from="1625434523803" duration="809000" />
+      <workItem from="1625481575211" duration="504000" />
+      <workItem from="1625482097745" duration="8682000" />
+      <workItem from="1625494292966" duration="21462000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="490586000" />
+    <option name="totallyTimeSpent" value="537596000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -638,23 +743,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-5" y="0" width="1380" height="1165" extended-state="0" />
+    <frame x="-7" y="0" width="1379" height="1407" extended-state="0" />
     <layout>
       <window_info anchor="top" auto_hide="true" id="Favorites" order="0" sideWeight="0.5135975" side_tool="true" weight="0.29082048" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.85862786" side_tool="true" visible="true" weight="0.22844176" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.85862786" side_tool="true" visible="true" weight="0.2672218" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" x="28" y="492" width="1309" height="422" id="Find" order="1" weight="0.32737613" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29019213" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3119415" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.39967507" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.2997563" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3116883" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32972974" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32954547" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" weight="0.32972974" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32955405" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.25379172" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32818848" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.28188464" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32711038" />
       <window_info anchor="bottom" id="TypeScript" order="13" show_stripe_button="false" weight="0.32895753" />
       <window_info anchor="bottom" x="695" y="53" width="588" height="1295" id="Structure" order="14" sideWeight="0.14137214" weight="0.23070674" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -665,20 +770,20 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="top" auto_hide="true" id="Favorites" order="0" sideWeight="0.5135975" side_tool="true" weight="0.29082048" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.85862786" side_tool="true" visible="true" weight="0.21801665" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.85862786" side_tool="true" visible="true" weight="0.24753974" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" x="28" y="492" width="1309" height="422" id="Find" order="1" weight="0.32737613" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29000813" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="5" visible="true" weight="0.38180342" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3119415" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32972974" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" weight="0.32972974" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32955405" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.25588953" />
-      <window_info anchor="bottom" id="Python Console" order="12" show_stripe_button="false" weight="0.32895753" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.20506535" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32761437" />
       <window_info anchor="bottom" id="TypeScript" order="13" show_stripe_button="false" weight="0.32895753" />
       <window_info anchor="bottom" x="695" y="53" width="588" height="1295" id="Structure" order="14" sideWeight="0.14137214" weight="0.23070674" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -698,25 +803,18 @@
       <path value="$PROJECT_DIR$/" />
     </ignored-roots>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/FRONTEND/src/components/views/Results/ResultsMainView.js</url>
+          <line>3</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/editSurvey.stories.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/styledComponents.js" />
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/Atoms/answerTypeButtons.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/Organisms/CustomNavbar/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/CreateSurvey/styledComponents.js" />
     <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/CreateSurvey/createReducer.js" />
     <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/Molecules/TickAnswer.js">
@@ -735,16 +833,6 @@
           <caret line="4" column="63" selection-start-line="4" selection-start-column="63" selection-end-line="4" selection-end-column="63" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/Organisms/QuestionMultiAnswer/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="53" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -783,30 +871,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/utils/jwt.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="54" lean-forward="true" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/surveys_app/utils/mixins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/editReducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="49" column="32" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/SurveyNotFound.js" />
     <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/ErrorPage.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -838,32 +902,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/surveys_app/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/Molecules/ConfirmSubmitModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="34" lean-forward="true" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/Registration.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="59" column="45" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -878,100 +922,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/Atoms/StyledInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/CreateSurvey/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="146" column="10" selection-start-line="146" selection-start-column="10" selection-end-line="146" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/surveys_app/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-          <folding>
-            <element signature="e#696#736#0" />
-            <element signature="e#808#1659#0" />
-            <element signature="e#898#1659#0" />
-            <element signature="e#961#1533#0" />
-            <element signature="e#1577#1659#0" />
-            <element signature="e#1730#2575#0" />
-            <element signature="e#1808#2575#0" />
-            <element signature="e#2048#2500#0" />
-            <element signature="e#2262#2439#0" />
-            <element signature="e#2278#2438#0" />
-            <element signature="e#2609#4493#0" />
-            <element signature="e#2699#4493#0" />
-            <element signature="e#3122#3345#0" />
-            <element signature="e#3407#3746#0" />
-            <element signature="e#3804#4195#0" />
-            <element signature="e#4255#4443#0" />
-            <element signature="e#4566#5475#0" />
-            <element signature="e#4644#5475#0" />
-            <element signature="e#4872#5379#0" />
-            <element signature="e#5423#5475#0" />
-            <element signature="e#5592#6031#0" />
-            <element signature="e#5625#6031#0" />
-            <element signature="e#5642#5956#0" />
-            <element signature="e#6154#6739#0" />
-            <element signature="e#6187#6739#0" />
-            <element signature="e#6342#6670#0" />
-            <element signature="e#6864#7394#0" />
-            <element signature="e#6909#7394#0" />
-            <element signature="e#6995#7108#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/surveys_app/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/LoginPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="51" column="24" selection-start-line="51" selection-start-column="24" selection-end-line="53" selection-end-column="65" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Surveys/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="68" lean-forward="true" selection-start-line="34" selection-start-column="68" selection-end-line="34" selection-end-column="68" />
-          <folding>
-            <element signature="e#308#332#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/DeleteSurveyModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -986,37 +942,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/utils/jwt.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/Results/Desktop/styledComponents.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-77">
           <caret line="17" column="2" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/Results/ResultsMainView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/Results/Desktop/DesktopView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1037,13 +966,6 @@
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -1094,60 +1016,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/Survey/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="159" column="39" lean-forward="true" selection-start-line="159" selection-start-column="39" selection-end-line="159" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="102" column="83" selection-start-line="102" selection-start-column="83" selection-end-line="102" selection-end-column="83" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-            <element signature="e#4#104#0" />
-            <element signature="e#74#102#0" />
-            <element signature="e#954#1190#0" />
-            <element signature="e#1001#1040#0" />
-            <element signature="e#1055#1147#0" />
-            <element signature="e#1234#1378#0" />
-            <element signature="e#1426#1585#0" />
-            <element signature="e#1528#1577#0" />
-            <element signature="e#1622#1681#0" />
-            <element signature="e#1723#1784#0" />
-            <element signature="e#1829#1888#0" />
-            <element signature="e#1932#1974#0" />
-            <element signature="e#2018#2350#0" />
-            <element signature="e#2028#2344#0" />
-            <element signature="e#2056#2142#0" />
-            <element signature="e#2155#2241#0" />
-            <element signature="e#2254#2334#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/PublishedSurvey/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="85" column="27" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/Atoms/StyledTitle.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1159,6 +1027,287 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/surveys_app/utils/mixins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/Registration.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/templates/MainTemplate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/Atoms/StyledInput.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/Results/Desktop/DesktopView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/utils/jwt.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Surveys/urls.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/Organisms/QuestionMultiAnswer/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/Results/ResultsMainView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#156#204#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Surveys/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
+          <folding>
+            <element signature="e#308#332#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/surveys_app/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/Survey/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/editReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="49" column="32" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/EditSurvey/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="224" column="26" lean-forward="true" selection-start-line="224" selection-start-column="26" selection-end-line="224" selection-end-column="26" />
+          <folding>
+            <element signature="e#4#243#0" />
+            <element signature="e#207#238#0" />
+            <element signature="e#4#202#0" />
+            <element signature="e#4#146#0" />
+            <element signature="e#103#139#0" />
+            <element signature="e#4#100#0" />
+            <element signature="e#4#366#0" />
+            <element signature="e#228#362#0" />
+            <element signature="e#4#124#0" />
+            <element signature="e#95#119#0" />
+            <element signature="e#1958#7286#0" />
+            <element signature="e#2305#2531#0" />
+            <element signature="e#2328#2521#0" />
+            <element signature="e#2512#2736#0" />
+            <element signature="e#2711#2786#0" />
+            <element signature="e#2852#2923#0" />
+            <element signature="e#2979#3073#0" />
+            <element signature="e#3128#3221#0" />
+            <element signature="e#3501#3630#0" />
+            <element signature="e#3376#3445#0" />
+            <element signature="e#3477#3708#0" />
+            <element signature="e#4012#4036#0" />
+            <element signature="e#3757#3850#0" />
+            <element signature="e#3883#3927#0" />
+            <element signature="e#3947#4005#0" />
+            <element signature="e#4011#6973#0" />
+            <element signature="e#4042#6956#0" />
+            <element signature="e#4193#4706#0" />
+            <element signature="e#4229#4377#0" />
+            <element signature="e#4398#4673#0" />
+            <element signature="e#4445#4546#0" />
+            <element signature="e#4726#6776#0" />
+            <element signature="e#4781#6735#0" />
+            <element signature="e#4833#5151#0" />
+            <element signature="e#4925#5116#0" />
+            <element signature="e#5180#5708#0" />
+            <element signature="e#5218#5385#0" />
+            <element signature="e#5524#5675#0" />
+            <element signature="e#5737#6686#0" />
+            <element signature="e#5878#6653#0" />
+            <element signature="e#5917#6413#0" />
+            <element signature="e#6097#6357#0" />
+            <element signature="e#6451#6617#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/surveys_app/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="61" lean-forward="true" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/CreateSurvey/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="113" column="40" lean-forward="true" selection-start-line="113" selection-start-column="40" selection-end-line="113" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/PublishedSurvey/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="61" column="45" lean-forward="true" selection-start-line="61" selection-start-column="45" selection-end-line="61" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/surveys_app/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="52" lean-forward="true" selection-start-line="4" selection-start-column="52" selection-end-line="4" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/DeleteSurveyModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/utils/jwt.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
+          <folding>
+            <element signature="e#151#278#0" />
+            <element signature="e#319#730#0" />
+            <element signature="e#365#726#0" />
+            <element signature="e#479#564#0" />
+            <element signature="e#591#718#0" />
+            <element signature="e#648#708#0" />
+            <element signature="e#779#1280#0" />
+            <element signature="e#825#1276#0" />
+            <element signature="e#871#946#0" />
+            <element signature="e#980#1199#0" />
+            <element signature="e#1044#1111#0" />
+            <element signature="e#1117#1181#0" />
+            <element signature="e#1320#1657#0" />
+            <element signature="e#1471#1635#0" />
+            <element signature="e#1695#1917#0" />
+            <element signature="e#1978#2203#0" />
+            <element signature="e#2257#2265#0" />
+            <element signature="e#2532#2540#0" />
+            <element signature="e#2363#2466#0" />
+            <element signature="e#2506#2572#0" />
+            <element signature="e#2616#2705#0" />
+            <element signature="e#2748#2923#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/surveys_app/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/components/views/SurveysList/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="81" column="33" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#1041#1205#0" />
+            <element signature="e#1064#1195#0" />
+            <element signature="e#1249#1399#0" />
+            <element signature="e#1652#1711#0" />
+            <element signature="e#1753#1814#0" />
+            <element signature="e#1962#2004#0" />
+            <element signature="e#2048#2380#0" />
+            <element signature="e#2058#2374#0" />
+            <element signature="e#2086#2172#0" />
+            <element signature="e#2185#2271#0" />
+            <element signature="e#2284#2364#0" />
+            <element signature="e#2399#2457#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FRONTEND/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
