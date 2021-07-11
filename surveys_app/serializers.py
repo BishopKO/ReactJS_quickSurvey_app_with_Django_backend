@@ -3,6 +3,8 @@ from surveys_app.models import Survey, Answers
 
 
 class SurveySerializer(serializers.ModelSerializer):
+    date = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S")
+
     class Meta:
         model = Survey
         fields = ('survey_id', 'survey_title', 'data', 'isActive', 'date', 'owner')

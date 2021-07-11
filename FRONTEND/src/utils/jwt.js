@@ -38,7 +38,7 @@ const user_register = (username, password) => {
                     }
                 },
             )
-            .catch((error) => reject('BACKEND ERROR'));
+            .catch(() => reject('BACKEND ERROR'));
     });
 };
 
@@ -78,7 +78,6 @@ const activateSurvey = async (id, isActive) => {
 
 
 const deleteSurvey = async (id) => {
-    const userId = await checkAccessToken();
     return await axios.delete(`${host}/api/survey/${id}/`, returnHeaders());
 };
 
@@ -89,8 +88,12 @@ const getSurveyData = async (id) => {
 };
 
 
-const getSurveyResults = async () => {
-    const results = await axios.get(`${host}/survey_results`);
+const getSurveyResults = async (id) => {
+    try {
+        return await axios.get(`${host}/api/results/${id}`, returnHeaders());
+    } catch (error) {
+        return error.response;
+    }
 };
 
 
@@ -111,6 +114,7 @@ export {
     activateSurvey,
     saveSurveyResults,
     getSurveyData,
+    getSurveyResults,
     getPublishedSurvey,
     createNewSurvey,
     checkAccessToken,

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import AnswerTypeButtons from '../../Atoms/answerTypeButtons';
 import Button from '../../Atoms/Button';
 import StyledInput from '../../Atoms/StyledInput';
 import { createNewSurvey } from '../../../utils/jwt';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 
 
 const StyledWrapper = styled.div`
@@ -46,7 +46,7 @@ const StyledAnswersBar = styled.div`
 
 const StyledQuestionWrapper = styled.div`
   display: grid;
-  grid-template-rows: 40px 40px fit-content;
+  grid-template-rows: 40px 40px fit-content();
   border: ${({ theme }) => `2px solid ${theme.lightGrey}`};
   box-shadow: ${({ theme }) => `0 0 3px ${theme.green}`} ;
 

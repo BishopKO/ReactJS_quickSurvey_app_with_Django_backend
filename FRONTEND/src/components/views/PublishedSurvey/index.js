@@ -31,7 +31,7 @@ const PublishedSurvey = ({ preview }) => {
     const { id } = useParams();
     const history = useHistory();
     const [surveyData, setSurveyData] = useState({});
-    const [surveyAnswers, setSurveyAnswers] = useState({});
+    const [surveyAnswers, setSurveyAnswers] = useState([]);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [readyToSubmit, setReadyToSubmit] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -48,7 +48,7 @@ const PublishedSurvey = ({ preview }) => {
             }
         })();
 
-    }, [id]);
+    }, [id, history]);
 
     const handleGetState = (value) => {
         let tmpState = surveyAnswers;

@@ -142,7 +142,7 @@ const EditSurvey = () => {
 
     const handleSave = async () => {
         const response = await createNewSurvey(state);
-        if (response === 'SUCCESS') {
+        if (response.statusText === 'Created') {
             history.push('/');
         }
     };

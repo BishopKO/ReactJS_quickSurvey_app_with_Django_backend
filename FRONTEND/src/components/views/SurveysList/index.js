@@ -71,6 +71,8 @@ const SurveysList = () => {
             case 'edit':
                 history.push(`/edit/${id}`);
                 break;
+            default:
+                break;
         }
     };
     if (loading) {

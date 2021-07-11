@@ -9,7 +9,8 @@ router.register(r'api/answers', AnswersViewset, basename="answers")
 router.register(r'api/published', PublishedSurveyViewset, basename="published")
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('api/results/<survey_id>', SurveyResultsApiView.as_view(), name="results"),
 ]
 
 urlpatterns += [
